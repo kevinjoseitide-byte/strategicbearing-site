@@ -90,6 +90,21 @@ footer .foot-links { display:flex; gap:22px; }
 footer .foot-links a { font-family:var(--font-mono); font-size:11.5px; color:rgba(255,255,255,.55); }
 footer .foot-links a:hover { color:var(--mint); }
 footer small { font-family:var(--font-mono); font-size:11px; }
+
+.feed-post .post-head{cursor:pointer;text-decoration:none;color:inherit;display:grid}
+.feed-post .pd-chevron{transform:none !important;color:var(--text-muted);font-size:13px}
+.feed-post:hover .pd-chevron{color:var(--teal)}
+.feed-src{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.09em;
+ text-transform:uppercase;color:var(--teal);display:block;margin-top:6px}
+.sub-cta{border:1px solid var(--line-dark);border-radius:10px;padding:24px 26px;
+ margin:34px 0 0;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;flex-wrap:wrap}
+.sub-cta p{font-size:14.5px;color:var(--text-muted);margin:0;max-width:430px}
+.sub-cta b{color:var(--text-dark);font-weight:600}
+.sub-cta a{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;
+ text-transform:uppercase;background:var(--teal);color:#fff;padding:12px 20px;
+ border-radius:6px;text-decoration:none;white-space:nowrap}
+.sub-cta a:hover{background:var(--mint)}
 </style>
 </head>
 <body>
@@ -150,7 +165,7 @@ footer small { font-family:var(--font-mono); font-size:11px; }
         <div class="post-body">
           <div class="post-body-inner">
             <p><strong>467 of Saudi Arabia's 582 aircraft on order are Airbus. That's 80%.</strong></p>
-            <img src="images/airbus-dominance.png" alt="Chart showing Airbus holds 80% of Saudi Arabia's aircraft order book with zero Boeing narrowbodies">
+            <img src="images/airbus-dominance.png" onerror="this.remove()" alt="Chart showing Airbus holds 80% of Saudi Arabia's aircraft order book with zero Boeing narrowbodies">
             <p>Boeing's entire position is 115 aircraft. Every one of them a widebody. Not a single Boeing narrowbody on order, anywhere in the Kingdom. Not at Saudia, not flyadeal, not flynas, not Riyadh Air.</p>
             <p>On the aircraft type that will carry the bulk of Saudi Arabia's domestic and regional growth, Boeing isn't a competitor. It isn't in the conversation.</p>
             <p>flyadeal's order book: 100% Airbus. flynas's order book — the largest in the Kingdom, 219 aircraft — 100% Airbus. Saudia's narrowbody replacement: A321s, full stop. Three of four carriers, one supplier, no exceptions.</p>
@@ -225,8 +240,13 @@ footer small { font-family:var(--font-mono); font-size:11px; }
           <div class="pd-chevron">·</div>
         </div>
       </div>
-
     </div>
+
+      <div class="sub-cta">
+        <p><b>Strategic Bearing arrives by email.</b> Analysis on aviation,
+        strategy and capital — written for people who make decisions with it.</p>
+        <a href="https://strategicbearing.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      </div>
   </div>
 </section>
 
@@ -243,15 +263,81 @@ footer small { font-family:var(--font-mono); font-size:11px; }
 
 <script>
 const tabs = document.querySelectorAll('.tab-btn');
-const posts = document.querySelectorAll('.post');
+let activeCat = 'all';
+function applyFilter(){
+  document.querySelectorAll('.post').forEach(p => {
+    p.style.display = (activeCat === 'all' || p.dataset.cat === activeCat) ? '' : 'none';
+  });
+}
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     tabs.forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
-    const cat = tab.dataset.cat;
-    posts.forEach(p => { p.style.display = (cat === 'all' || p.dataset.cat === cat) ? '' : 'none'; });
+    activeCat = tab.dataset.cat;
+    applyFilter();
   });
 });
+
+/* Latest pieces from the Substack feed, via the Netlify function.
+   Fails silently: if the feed is empty or unreachable, the page is unchanged. */
+const PILLARS = ['flightpath','boardroom','capital','wisdom'];
+const esc = s => String(s).replace(/[&<>"]/g, c =>
+  ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+(async () => {
+  let data;
+  try {
+    const r = await fetch('/.netlify/functions/feed');
+    if (!r.ok) return;
+    data = await r.json();
+  } catch (e) { return; }
+  if (!data || !Array.isArray(data.items) || !data.items.length) return;
+
+  const list = document.getElementById('postList');
+  const header = list.querySelector('.post-head.head');
+  const existing = new Set(
+    [...list.querySelectorAll('.pd-title')].map(
+      e => e.childNodes[0].textContent.trim().toLowerCase()));
+
+  const frag = document.createDocumentFragment();
+  data.items.forEach(item => {
+    if (existing.has(item.title.trim().toLowerCase())) return;
+    const cat = (item.categories || [])
+      .map(c => c.toLowerCase())
+      .find(c => PILLARS.includes(c)) || 'flightpath';
+    const d = new Date(item.date);
+    const MON = ['JAN','FEB','MAR','APR','MAY','JUN',
+                 'JUL','AUG','SEP','OCT','NOV','DEC'];
+    const when = isNaN(d) ? '' : MON[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
+
+    const el = document.createElement('div');
+    el.className = 'post feed-post';
+    el.dataset.cat = cat;
+    el.innerHTML =
+      '<a class="post-head" href="' + esc(item.link) + '" target="_blank" rel="noopener">' +
+        '<div class="pd-date">' + esc(when) + '</div>' +
+        '<div class="pd-title">' + esc(item.title) +
+          (item.blurb ? '<span class="sub">' + esc(item.blurb) + '</span>' : '') +
+          '<span class="feed-src">Strategic Bearing · Newsletter</span>' +
+        '</div>' +
+        '<div class="pd-tag">' + esc(cat[0].toUpperCase() + cat.slice(1)) + '</div>' +
+        '<div class="pd-chevron">\u2197</div>' +
+      '</a>';
+    frag.appendChild(el);
+  });
+
+  if (!frag.childElementCount) return;
+  /* read before insertion: appending a fragment empties it */
+  const shown = new Set([...frag.children].map(e => e.dataset.cat));
+  header ? header.after(frag) : list.prepend(frag);
+
+  /* a pillar with a real piece no longer needs its 'boarding soon' placeholder */
+  shown.forEach(cat => {
+    list.querySelectorAll('.placeholder-post[data-cat="' + cat + '"]')
+        .forEach(ph => ph.remove());
+  });
+  applyFilter();
+})();
 document.querySelectorAll('.post:not(.placeholder-post) .post-head').forEach(head => {
   head.addEventListener('click', () => head.closest('.post').classList.toggle('open'));
 });
