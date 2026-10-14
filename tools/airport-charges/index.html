@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Airport Charges &amp; Route Economics Calculator | Strategic Bearing</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <meta name="description" content="Calculate regulated airport charges at both ends of a sector from published AERA tariff orders, then build trip cost and cash breakeven load factor. Free tool by Kevin Jose.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Kevin Jose">
@@ -30,15 +30,15 @@
 "publisher":{"@type":"Organization","name":"Strategic Bearing","url":"https://strategicbearing.in/"}}
 </script>
 <style>
-:root{--navy:#0B2A4A;--blue:#0D81BB;--accent:#0047BD;--bg:#F3F6FA;--card:#FFF;--line:#E2E7EE;
---mute:#73808F;--body:#44474C;--red:#C02828;--amber:#B0761E;--green:#0F6E5C;--chip:#EEF3FA;
+:root{--navy:#16254F;--blue:#0E6FA8;--accent:#0047BD;--bg:#F1F5FA;--card:#FFF;--line:#E1E8F1;
+--mute:#5F7392;--body:#38486A;--red:#C02828;--amber:#B0761E;--green:#0F6E5C;--chip:#EDF3FA;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11161D;--card:#192029;--line:#2A3542;--body:#D4D9E0;--mute:#8C98A6;--chip:#1E2833;--navy:#D7E3F0}}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--body);font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5}
+body{font-variant-numeric:tabular-nums;margin:0;background:var(--bg);color:var(--body);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5}
 .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
 .hero{padding:24px 0 10px}
-.eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;color:#4D5F7D;text-transform:uppercase}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;color:#4D5F7D;}
 h1{margin:8px 0 6px;font-size:29px;line-height:1.14;color:var(--blue);letter-spacing:-.015em}
 .lede{font-size:15px;max-width:900px}.lede b{color:var(--navy)}
 .tabs{display:flex;gap:8px;margin:14px 0 18px;border-bottom:1px solid var(--line)}
@@ -49,10 +49,10 @@ h1{margin:8px 0 6px;font-size:29px;line-height:1.14;color:var(--blue);letter-spa
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:760px){.two{grid-template-columns:1fr}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:14px}
-.card h2{margin:0;padding:11px 16px;font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--navy);border-bottom:1px solid var(--line)}
+.card h2{margin:0;padding:11px 16px;font-size:11px;font-weight:800;letter-spacing:.11em;color:var(--navy);border-bottom:1px solid var(--line)}
 .card h2 .sm{float:right;font-weight:700;color:var(--mute);letter-spacing:.04em;text-transform:none}
 .card .bd{padding:13px 16px}
-label{display:block;font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em;margin:0 0 4px}
+label{display:block;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.05em;margin:0 0 4px}
 .fld{margin-bottom:12px}
 select,input[type=number],input[type=text]{width:100%;padding:7px 9px;font-size:14px;font-family:inherit;color:var(--body);background:var(--card);border:1px solid var(--line);border-radius:6px}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -66,20 +66,20 @@ select,input[type=number],input[type=text]{width:100%;padding:7px 9px;font-size:
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:14px}
 @media(max-width:760px){.kpis{grid-template-columns:1fr 1fr}}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-.kpi .k{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.kpi .k{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--mute)}
 .kpi .v{font-size:22px;font-weight:800;color:var(--navy);margin-top:4px;line-height:1.1}
 .kpi .n{font-size:11px;color:var(--mute);margin-top:2px}
 .kpi.lead .v{color:var(--blue)}.kpi.good .v{color:var(--green)}.kpi.warn .v{color:var(--red)}
 table{width:100%;border-collapse:collapse;font-size:13.5px}
-th{text-align:left;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute);font-weight:800;padding:0 10px 6px;border-bottom:1.5px solid var(--navy)}
+th{text-align:left;font-size:10px;letter-spacing:.07em;color:var(--mute);font-weight:800;padding:0 10px 6px;border-bottom:1.5px solid var(--navy)}
 th.r,td.r{text-align:right}
 td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-tr.grp td{background:var(--chip);font-weight:800;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--navy);padding:5px 10px}
+tr.grp td{background:var(--chip);font-weight:800;font-size:10.5px;letter-spacing:.07em;color:var(--navy);padding:5px 10px}
 td.amt{font-weight:700;color:var(--navy);white-space:nowrap}
 .basis{font-size:11px;color:var(--mute);margin-top:1px}
 tr.tot td{border-top:2px solid var(--navy);border-bottom:0;padding-top:9px;font-weight:800;font-size:14.5px;color:var(--navy)}
 tr.waive td.amt{color:var(--green)}
-.tag{display:inline-block;font-size:9px;font-weight:800;padding:1px 6px;border-radius:9px;margin-left:5px;text-transform:uppercase}
+.tag{display:inline-block;font-size:9px;font-weight:800;padding:1px 6px;border-radius:9px;margin-left:5px;}
 .tag.ok{background:rgba(15,110,79,.12);color:var(--green)}
 .tag.ex{background:rgba(13,129,187,.12);color:var(--blue)}
 .tag.bm{background:rgba(176,118,30,.14);color:var(--amber)}
@@ -99,15 +99,31 @@ footer{border-top:1px solid var(--line);padding:15px 0 34px;font-size:11px;color
 footer p{margin:0 0 6px}
 .hidden{display:none}
 
-.sbnav{position:sticky;top:0;z-index:100;background:#1B2A5B;border-bottom:1px solid rgba(255,255,255,.14)}
-.sbnav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.sbnav{position:sticky;top:0;z-index:100;background:rgba(11,20,48,.94);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(255,255,255,.13)}
+.sbnav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:18px}
 .sbmark{display:flex;align-items:center;text-decoration:none}
-.sbmark img{height:34px;width:auto;display:block}
-.sblinks{display:flex;gap:30px;list-style:none;margin:0;padding:0}
-.sblinks a{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.07em;
- text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none}
-.sblinks a:hover,.sblinks a.active{color:#14C7A5}
-@media(max-width:640px){.sblinks{display:none}.sbnav .wrap{height:58px}}
+.sbmark img{height:32px;width:auto;display:block}
+.sblinks{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.sblinks a{font-family:inherit;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.66);
+ text-decoration:none;transition:color .15s ease}
+.sblinks a:hover,.sblinks a.active{color:#23D6A6}
+.sblinks a:focus-visible{outline:2px solid #23D6A6;outline-offset:4px;border-radius:3px}
+.sitefoot{background:#0B1430;color:rgba(255,255,255,.5);padding:36px 0;font-size:14px;margin-top:44px}
+.sitefoot .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.sitefoot a{color:rgba(255,255,255,.62);text-decoration:none}
+.sitefoot a:hover{color:#23D6A6}
+.sitefoot .fl{display:flex;gap:22px}
+.sbfoot{background:none;color:var(--mute);font-size:13.5px;line-height:1.6;
+ border-top:1px solid var(--line);padding:20px 0 0;margin-top:34px}
+.sbfoot a{color:var(--blue);text-decoration:none}
+.sbfoot a:hover{text-decoration:underline}
+@media(max-width:560px){
+ .sbnav .wrap{flex-direction:column;height:auto;gap:0;padding-top:12px;padding-bottom:4px}
+ .sblinks{width:100%;gap:18px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none}
+ .sblinks::-webkit-scrollbar{display:none}
+ .sblinks a{white-space:nowrap}
+}
 .crumb{font-size:11.5px;color:var(--mute);margin:12px 0 0}
 .crumb a{color:var(--mute);text-decoration:none}
 .crumb a:hover{color:var(--blue)}
@@ -117,7 +133,7 @@ footer p{margin:0 0 6px}
 @media(max-width:620px){.sbnav .wrap{height:auto;padding-top:10px;padding-bottom:10px}}
 </style></head><body>
 <nav class="sbnav"><div class="wrap">
-<a class="sbmark" href="/index.html"><img src="/logo.png" alt="Strategic Bearing"></a>
+<a class="sbmark" href="/index.html"><img src="/logo.png" alt="Strategic Bearing" width="140" height="32"></a>
 <ul class="sblinks">
 <li><a href="/index.html#about">About</a></li>
 <li><a href="/index.html#experience">Experience</a></li>
@@ -233,10 +249,14 @@ footer p{margin:0 0 6px}
 </div></div>
 <div class="card"><h2>Annual</h2><div class="bd"><table><tbody id="aRows"></tbody></table></div></div>
 </div></div></div>
-<footer>
-<p><b>Module 1.</b> AERA Order No. 14/2026-27, Tariff Rate Card Annexure I, Bangalore International Airport, effective 1 Sep 2026 to 31 Mar 2031. Airports marked <b>Assumed</b> use Bengaluru rates as a placeholder pending their own rate card.</p>
-<p><b>Module 2.</b> Per-block-hour figures are editable benchmarks, not published rates. Block time is stage length ÷ cruise speed plus 0.6 hr, editable. <b>Cash breakeven</b> is escapable fixed cost less cargo, divided by contribution per passenger. <b>Full breakeven</b> adds ownership, lease and insurance. Figures are per one-way sector.</p>
-</footer></div>
+<footer class="sitefoot"><div class="wrap">
+<small>&copy; 2026 Strategic Bearing &middot; Kevin Jose</small>
+<div class="fl">
+<a href="https://www.linkedin.com/in/kevinjv" target="_blank" rel="noopener">LinkedIn</a>
+<a href="https://strategicbearing.substack.com" target="_blank" rel="noopener">Newsletter</a>
+<a href="/index.html">Home</a>
+</div>
+</div></footer></div>
 <script>
 const AIRPORTS={BLR:{n:"Bengaluru (BLR)",v:true},LHR:{n:"London Heathrow (LHR)",v:false},
  DEL:{n:"Delhi (DEL)",v:false},BOM:{n:"Mumbai (BOM)",v:false},HYD:{n:"Hyderabad (HYD)",v:false},DXB:{n:"Dubai (DXB)",v:false}};

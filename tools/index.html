@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Aviation Tools | Strategic Bearing</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <meta name="description" content="Free calculators and datasets for aviation professionals: airport charges from published tariff orders, route economics and cash breakeven. Built by Kevin Jose.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Kevin Jose">
@@ -27,35 +27,51 @@
 "author":{"@type":"Person","name":"Kevin Jose","url":"https://www.linkedin.com/in/kevinjv"}}
 </script>
 <style>
-:root{--navy:#0B2A4A;--blue:#0D81BB;--teal:#00A8B5;--bg:#F3F6FA;--card:#FFF;--line:#E2E7EE;
---mute:#73808F;--body:#44474C;--amber:#B0761E;
+:root{--navy:#16254F;--blue:#0E6FA8;--teal:#0E9FA6;--bg:#F1F5FA;--card:#FFF;--line:#E1E8F1;
+--mute:#5F7392;--body:#38486A;--amber:#B0761E;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11161D;--card:#192029;--line:#2A3542;--body:#D4D9E0;--mute:#8C98A6;--navy:#D7E3F0}}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--body);
- font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.55}
+body{font-variant-numeric:tabular-nums;margin:0;background:var(--bg);color:var(--body);
+ font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.55}
 .wrap{max-width:900px;margin:0 auto;padding:0 20px}
-.sbnav{position:sticky;top:0;z-index:100;background:#1B2A5B;border-bottom:1px solid rgba(255,255,255,.14)}
-.sbnav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.sbnav{position:sticky;top:0;z-index:100;background:rgba(11,20,48,.94);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(255,255,255,.13)}
+.sbnav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:18px}
 .sbmark{display:flex;align-items:center;text-decoration:none}
-.sbmark img{height:34px;width:auto;display:block}
-.sblinks{display:flex;gap:30px;list-style:none;margin:0;padding:0}
-.sblinks a{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.07em;
- text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none}
-.sblinks a:hover,.sblinks a.active{color:#14C7A5}
-@media(max-width:640px){.sblinks{display:none}.sbnav .wrap{height:58px}}
+.sbmark img{height:32px;width:auto;display:block}
+.sblinks{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.sblinks a{font-family:inherit;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.66);
+ text-decoration:none;transition:color .15s ease}
+.sblinks a:hover,.sblinks a.active{color:#23D6A6}
+.sblinks a:focus-visible{outline:2px solid #23D6A6;outline-offset:4px;border-radius:3px}
+.sitefoot{background:#0B1430;color:rgba(255,255,255,.5);padding:36px 0;font-size:14px;margin-top:44px}
+.sitefoot .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.sitefoot a{color:rgba(255,255,255,.62);text-decoration:none}
+.sitefoot a:hover{color:#23D6A6}
+.sitefoot .fl{display:flex;gap:22px}
+.sbfoot{background:none;color:var(--mute);font-size:13.5px;line-height:1.6;
+ border-top:1px solid var(--line);padding:20px 0 0;margin-top:34px}
+.sbfoot a{color:var(--blue);text-decoration:none}
+.sbfoot a:hover{text-decoration:underline}
+@media(max-width:560px){
+ .sbnav .wrap{flex-direction:column;height:auto;gap:0;padding-top:12px;padding-bottom:4px}
+ .sblinks{width:100%;gap:18px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none}
+ .sblinks::-webkit-scrollbar{display:none}
+ .sblinks a{white-space:nowrap}
+}
 .crumb{font-size:11.5px;color:var(--mute);margin:12px 0 0}
 .crumb a{color:var(--mute);text-decoration:none}.crumb a:hover{color:var(--blue)}
 .crumb span{margin:0 6px;opacity:.5}
 .hero{padding:26px 0 6px}
-.eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;color:#4D5F7D;text-transform:uppercase}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;color:#4D5F7D;}
 h1{margin:10px 0 8px;font-size:32px;line-height:1.14;color:var(--blue);letter-spacing:-.015em}
 .lede{font-size:16px;max-width:680px;margin:0}
 .lede b{color:var(--navy)}
 .card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;
  padding:22px 24px;margin:22px 0 0;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
 .card:hover{border-color:var(--teal);transform:translateY(-1px)}
-.tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+.tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;
  padding:3px 9px;border-radius:10px;background:rgba(0,168,181,.13);color:#00808a}
 .card h2{margin:12px 0 7px;font-size:21px;color:var(--navy);letter-spacing:-.01em}
 .card p{margin:0 0 14px;font-size:14.5px;color:var(--body)}
@@ -64,14 +80,14 @@ h1{margin:10px 0 8px;font-size:32px;line-height:1.14;color:var(--blue);letter-sp
  border:1px solid var(--line);border-radius:20px;padding:3px 11px}
 .go{display:inline-block;margin-top:15px;font-size:13.5px;font-weight:700;color:var(--blue)}
 .soon{margin:26px 0 0;padding:18px 22px;border:1px dashed var(--line);border-radius:12px;background:transparent}
-.soon h3{margin:0 0 7px;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+.soon h3{margin:0 0 7px;font-size:12px;font-weight:800;letter-spacing:.09em;color:var(--mute)}
 .soon p{margin:0;font-size:14px;color:var(--mute)}
 .sbfoot{border-top:1px solid var(--line);margin-top:34px;padding:18px 0 44px;font-size:12.5px;color:var(--mute)}
 .sbfoot a{color:var(--blue);text-decoration:none;font-weight:600}
 @media(max-width:620px){.sbnav .wrap{height:auto;padding-top:10px;padding-bottom:10px}h1{font-size:26px}}
 </style></head><body>
 <nav class="sbnav"><div class="wrap">
-<a class="sbmark" href="/index.html"><img src="/logo.png" alt="Strategic Bearing"></a>
+<a class="sbmark" href="/index.html"><img src="/logo.png" alt="Strategic Bearing" width="140" height="32"></a>
 <ul class="sblinks">
 <li><a href="/index.html#about">About</a></li>
 <li><a href="/index.html#experience">Experience</a></li>
@@ -99,7 +115,7 @@ avoid by not operating from the cost you carry either way.</p>
 <span class="chip">AERA tariff orders</span><span class="chip">Per-block-hour levers</span>
 <span class="chip">Cash vs full breakeven</span><span class="chip">No sign-up</span>
 </div>
-<span class="go">Open the calculator &rarr;</span>
+<span class="go">Open the calculator</span>
 </a>
 
 <div class="soon">
@@ -111,4 +127,12 @@ and a GCC–India connectivity index tracking bilateral entitlement against dias
 <div class="sbfoot">Built by <a href="https://www.linkedin.com/in/kevinjv" rel="noopener">Kevin Jose</a>
 &nbsp;·&nbsp; <a href="/">Strategic Bearing</a><br>
 Built from public regulatory documents in a personal capacity. Not affiliated with any airport operator or regulator.</div>
-</div></body></html>
+</div><footer class="sitefoot"><div class="wrap">
+<small>&copy; 2026 Strategic Bearing &middot; Kevin Jose</small>
+<div class="fl">
+<a href="https://www.linkedin.com/in/kevinjv" target="_blank" rel="noopener">LinkedIn</a>
+<a href="https://strategicbearing.substack.com" target="_blank" rel="noopener">Newsletter</a>
+<a href="/index.html">Home</a>
+</div>
+</div></footer>
+</body></html>
