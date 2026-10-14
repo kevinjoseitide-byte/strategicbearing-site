@@ -30,8 +30,8 @@
 "publisher":{"@type":"Organization","name":"Strategic Bearing","url":"https://strategicbearing.in/"}}
 </script>
 <style>
-:root{--navy:#16254F;--blue:#0E6FA8;--accent:#0047BD;--bg:#F1F5FA;--card:#FFF;--line:#E1E8F1;
---mute:#5F7392;--body:#38486A;--red:#C02828;--amber:#B0761E;--green:#0F6E5C;--chip:#EDF3FA;
+:root{--navy:#0B3A77;--blue:#0F5FC0;--accent:#0A3C88;--bg:#EEF4FD;--card:#FFF;--line:#DCE7F5;
+--mute:#53688A;--body:#2C4166;--red:#C02828;--amber:#8A5A10;--green:#0F6E5C;--chip:#E6F0FC;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11161D;--card:#192029;--line:#2A3542;--body:#D4D9E0;--mute:#8C98A6;--chip:#1E2833;--navy:#D7E3F0}}
 *,*::before,*::after{box-sizing:inherit}
@@ -92,27 +92,27 @@ tr.waive td.amt{color:var(--green)}
 .band .bt{font-size:10.5px;font-weight:800;letter-spacing:.11em;text-align:center}
 .band p{margin:0;font-size:12.5px;color:#CFCFCF;line-height:1.45}.band b{color:#fff}
 .be{height:34px;background:var(--chip);border-radius:6px;position:relative;overflow:hidden;margin:6px 0}
-.be .fill{height:100%;background:linear-gradient(90deg,#0D81BB,#15D1BB)}
+.be .fill{height:100%;background:linear-gradient(90deg,#0F5FC0,#15D1BB)}
 .be .mark{position:absolute;top:0;bottom:0;width:2px}
 .be .lbl{position:absolute;top:50%;transform:translateY(-50%);font-size:11px;font-weight:800;color:#fff;left:9px}
 footer{border-top:1px solid var(--line);padding:15px 0 34px;font-size:11px;color:var(--mute)}
 footer p{margin:0 0 6px}
 .hidden{display:none}
 
-.sbnav{position:sticky;top:0;z-index:100;background:rgba(11,20,48,.94);
+.sbnav{position:sticky;top:0;z-index:100;background:rgba(8,46,99,.94);
  backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(255,255,255,.13)}
 .sbnav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:18px}
 .sbmark{display:flex;align-items:center;text-decoration:none}
 .sbmark img{height:32px;width:auto;display:block}
 .sblinks{display:flex;gap:28px;list-style:none;margin:0;padding:0}
-.sblinks a{font-family:inherit;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.66);
+.sblinks a{font-family:inherit;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.78);
  text-decoration:none;transition:color .15s ease}
-.sblinks a:hover,.sblinks a.active{color:#23D6A6}
-.sblinks a:focus-visible{outline:2px solid #23D6A6;outline-offset:4px;border-radius:3px}
-.sitefoot{background:#0B1430;color:rgba(255,255,255,.5);padding:36px 0;font-size:14px;margin-top:44px}
+.sblinks a:hover,.sblinks a.active{color:#6FF0D2}
+.sblinks a:focus-visible{outline:2px solid #6FF0D2;outline-offset:4px;border-radius:3px}
+.sitefoot{background:#082E63;color:rgba(255,255,255,.62);padding:36px 0;font-size:14px;margin-top:44px}
 .sitefoot .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
-.sitefoot a{color:rgba(255,255,255,.62);text-decoration:none}
-.sitefoot a:hover{color:#23D6A6}
+.sitefoot a{color:rgba(255,255,255,.78);text-decoration:none}
+.sitefoot a:hover{color:#6FF0D2}
 .sitefoot .fl{display:flex;gap:22px}
 .sbfoot{background:none;color:var(--mute);font-size:13.5px;line-height:1.6;
  border-top:1px solid var(--line);padding:20px 0 0;margin-top:34px}
@@ -239,7 +239,7 @@ footer p{margin:0 0 6px}
 <div class="legend" style="margin-bottom:9px">
 <span><i style="background:#C02828"></i>Cash breakeven <b id="lgC" style="color:var(--navy);margin-left:3px"></b></span>
 <span><i style="background:#B0761E"></i>Full breakeven <b id="lgF" style="color:var(--navy);margin-left:3px"></b></span>
-<span><i style="background:#0D81BB"></i>Planned load</span></div>
+<span><i style="background:#0F5FC0"></i>Planned load</span></div>
 <p id="beNote" style="margin:0;font-size:13px"></p>
 <table style="margin-top:12px"><tbody id="cRows"></tbody></table>
 </div></div>
@@ -281,7 +281,7 @@ const VTP=[{id:"none",n:"None — rack rate",f:[1,1,1]},
 {id:"na_dom",n:"New airline, domestic",f:[0,0,1]},
 {id:"na_lh",n:"New airline, int'l long-haul",f:[0,0,0]},
 {id:"na_sh",n:"New airline, int'l short-haul",f:[0,0.5,0.75]}];
-const C1=["#0B2A4A","#0D81BB","#15D1BB"],C2=["#0B2A4A","#0D81BB","#15D1BB","#B0761E"];
+const C1=["#0B3A77","#0F5FC0","#15D1BB"],C2=["#0B3A77","#0F5FC0","#15D1BB","#B0761E"];
 let S={apO:"BLR",apD:"LHR",ac:"b789",sector:"int",per:0,seats:290,lf:82,occ:2.5,vtp:"none",vtpy:1,fx:95.9,udfMode:"cost",arr:"yes"};
 let AP={fixed:0,perPax:0,total:0,pax:0};
 const $=i=>document.getElementById(i),inr=v=>"₹"+Math.round(v).toLocaleString("en-IN"),usd=v=>(v<0?"-$":"$")+Math.abs(Math.round(v)).toLocaleString("en-US");
