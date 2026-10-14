@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aviation Tools | Strategic Bearing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="Free calculators and datasets for aviation professionals: airport charges from published tariff orders, route economics and cash breakeven. Built by Kevin Jose.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Kevin Jose">
+<link rel="canonical" href="https://strategicbearing.in/tools/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Strategic Bearing">
+<meta property="og:title" content="Aviation Tools | Strategic Bearing">
+<meta property="og:description" content="Calculators and datasets for aviation professionals, built from public regulatory documents.">
+<meta property="og:url" content="https://strategicbearing.in/tools/">
+<meta property="og:image" content="https://strategicbearing.in/og-tools.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aviation Tools | Strategic Bearing">
+<meta name="twitter:description" content="Calculators and datasets for aviation professionals.">
+<meta name="twitter:image" content="https://strategicbearing.in/og-tools.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage",
+"name":"Aviation Tools","url":"https://strategicbearing.in/tools/",
+"description":"Calculators and datasets for aviation professionals, built from public regulatory documents.",
+"author":{"@type":"Person","name":"Kevin Jose","url":"https://www.linkedin.com/in/kevinjv"}}
+</script>
+<style>
+:root{--navy:#0B2A4A;--blue:#0D81BB;--teal:#00A8B5;--bg:#F3F6FA;--card:#FFF;--line:#E2E7EE;
+--mute:#73808F;--body:#44474C;--amber:#B0761E;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11161D;--card:#192029;--line:#2A3542;--body:#D4D9E0;--mute:#8C98A6;--navy:#D7E3F0}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--body);
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+.sbnav{position:sticky;top:0;z-index:100;background:#1B2A5B;border-bottom:1px solid rgba(255,255,255,.14)}
+.sbnav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.sbmark{display:flex;align-items:center;text-decoration:none}
+.sbmark img{height:34px;width:auto;display:block}
+.sblinks{display:flex;gap:30px;list-style:none;margin:0;padding:0}
+.sblinks a{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.07em;
+ text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none}
+.sblinks a:hover,.sblinks a.active{color:#14C7A5}
+@media(max-width:640px){.sblinks{display:none}.sbnav .wrap{height:58px}}
+.crumb{font-size:11.5px;color:var(--mute);margin:12px 0 0}
+.crumb a{color:var(--mute);text-decoration:none}.crumb a:hover{color:var(--blue)}
+.crumb span{margin:0 6px;opacity:.5}
+.hero{padding:26px 0 6px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;color:#4D5F7D;text-transform:uppercase}
+h1{margin:10px 0 8px;font-size:32px;line-height:1.14;color:var(--blue);letter-spacing:-.015em}
+.lede{font-size:16px;max-width:680px;margin:0}
+.lede b{color:var(--navy)}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;
+ padding:22px 24px;margin:22px 0 0;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--teal);transform:translateY(-1px)}
+.tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+ padding:3px 9px;border-radius:10px;background:rgba(0,168,181,.13);color:#00808a}
+.card h2{margin:12px 0 7px;font-size:21px;color:var(--navy);letter-spacing:-.01em}
+.card p{margin:0 0 14px;font-size:14.5px;color:var(--body)}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:11.5px;font-weight:600;color:var(--mute);background:var(--bg);
+ border:1px solid var(--line);border-radius:20px;padding:3px 11px}
+.go{display:inline-block;margin-top:15px;font-size:13.5px;font-weight:700;color:var(--blue)}
+.soon{margin:26px 0 0;padding:18px 22px;border:1px dashed var(--line);border-radius:12px;background:transparent}
+.soon h3{margin:0 0 7px;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+.soon p{margin:0;font-size:14px;color:var(--mute)}
+.sbfoot{border-top:1px solid var(--line);margin-top:34px;padding:18px 0 44px;font-size:12.5px;color:var(--mute)}
+.sbfoot a{color:var(--blue);text-decoration:none;font-weight:600}
+@media(max-width:620px){.sbnav .wrap{height:auto;padding-top:10px;padding-bottom:10px}h1{font-size:26px}}
+</style></head><body>
+<nav class="sbnav"><div class="wrap">
+<a class="sbmark" href="/index.html"><img src="/logo.png" alt="Strategic Bearing"></a>
+<ul class="sblinks">
+<li><a href="/index.html#about">About</a></li>
+<li><a href="/index.html#experience">Experience</a></li>
+<li><a href="/strategic-bearing.html">Writing</a></li>
+<li><a href="/tools/" class="active">Tools</a></li>
+<li><a href="/index.html#contact">Contact</a></li>
+</ul>
+</div></nav>
+<div class="wrap">
+<p class="crumb"><a href="/">Home</a> <span>/</span> Tools</p>
+<div class="hero">
+<div class="eyebrow">Aviation tools</div>
+<h1>Calculators built from public documents</h1>
+<p class="lede">Working tools for aviation professionals. Every number traces to a published source,
+and every assumption is <b>editable rather than buried</b> in the calculation.</p>
+</div>
+
+<a class="card" href="/tools/airport-charges/">
+<span class="tag">Live</span>
+<h2>Airport charges &amp; route economics</h2>
+<p>Regulated airport charges at both ends of a sector, computed from published tariff orders —
+then trip cost, CASK and the cash breakeven load factor built on top. Separates the cost you would
+avoid by not operating from the cost you carry either way.</p>
+<div class="meta">
+<span class="chip">AERA tariff orders</span><span class="chip">Per-block-hour levers</span>
+<span class="chip">Cash vs full breakeven</span><span class="chip">No sign-up</span>
+</div>
+<span class="go">Open the calculator &rarr;</span>
+</a>
+
+<div class="soon">
+<h3>In development</h3>
+<p>An India airport tariff tracker consolidating every AERA order by airport, segment and cabin;
+and a GCC–India connectivity index tracking bilateral entitlement against diaspora population.</p>
+</div>
+
+<div class="sbfoot">Built by <a href="https://www.linkedin.com/in/kevinjv" rel="noopener">Kevin Jose</a>
+&nbsp;·&nbsp; <a href="/">Strategic Bearing</a><br>
+Built from public regulatory documents in a personal capacity. Not affiliated with any airport operator or regulator.</div>
+</div></body></html>

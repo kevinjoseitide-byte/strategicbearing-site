@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Airport Charges &amp; Route Economics Calculator | Strategic Bearing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="Calculate regulated airport charges at both ends of a sector from published AERA tariff orders, then build trip cost and cash breakeven load factor. Free tool by Kevin Jose.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Kevin Jose">
+<link rel="canonical" href="https://strategicbearing.in/tools/airport-charges/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Strategic Bearing">
+<meta property="og:title" content="Airport Charges &amp; Route Economics Calculator">
+<meta property="og:description" content="Regulated airport charges from published tariff orders, plus trip cost and cash breakeven load factor. Every rate shows its basis.">
+<meta property="og:url" content="https://strategicbearing.in/tools/airport-charges/">
+<meta property="og:image" content="https://strategicbearing.in/og-tools-airport-charges.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Airport Charges &amp; Route Economics Calculator">
+<meta name="twitter:description" content="Regulated airport charges from published tariff orders, plus trip cost and cash breakeven.">
+<meta name="twitter:image" content="https://strategicbearing.in/og-tools-airport-charges.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication",
+"name":"Airport Charges & Route Economics Calculator",
+"applicationCategory":"BusinessApplication","operatingSystem":"Any",
+"url":"https://strategicbearing.in/tools/airport-charges/",
+"description":"Computes regulated airport charges at both ends of a sector from published tariff orders, then builds trip cost and cash breakeven load factor.",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+"author":{"@type":"Person","name":"Kevin Jose","url":"https://www.linkedin.com/in/kevinjv"},
+"publisher":{"@type":"Organization","name":"Strategic Bearing","url":"https://strategicbearing.in/"}}
+</script>
+<style>
+:root{--navy:#0B2A4A;--blue:#0D81BB;--accent:#0047BD;--bg:#F3F6FA;--card:#FFF;--line:#E2E7EE;
+--mute:#73808F;--body:#44474C;--red:#C02828;--amber:#B0761E;--green:#0F6E5C;--chip:#EEF3FA;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11161D;--card:#192029;--line:#2A3542;--body:#D4D9E0;--mute:#8C98A6;--chip:#1E2833;--navy:#D7E3F0}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--body);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:15px;line-height:1.5}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.hero{padding:24px 0 10px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;color:#4D5F7D;text-transform:uppercase}
+h1{margin:8px 0 6px;font-size:29px;line-height:1.14;color:var(--blue);letter-spacing:-.015em}
+.lede{font-size:15px;max-width:900px}.lede b{color:var(--navy)}
+.tabs{display:flex;gap:8px;margin:14px 0 18px;border-bottom:1px solid var(--line)}
+.tabs button{font:inherit;font-size:13px;font-weight:700;padding:10px 16px;background:none;border:0;border-bottom:3px solid transparent;color:var(--mute);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--blue);border-bottom-color:var(--blue)}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:18px;align-items:start;padding-bottom:24px}
+@media(max-width:920px){.grid{grid-template-columns:1fr}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:14px}
+.card h2{margin:0;padding:11px 16px;font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--navy);border-bottom:1px solid var(--line)}
+.card h2 .sm{float:right;font-weight:700;color:var(--mute);letter-spacing:.04em;text-transform:none}
+.card .bd{padding:13px 16px}
+label{display:block;font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em;margin:0 0 4px}
+.fld{margin-bottom:12px}
+select,input[type=number],input[type=text]{width:100%;padding:7px 9px;font-size:14px;font-family:inherit;color:var(--body);background:var(--card);border:1px solid var(--line);border-radius:6px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{flex:1;padding:7px 4px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;background:var(--card);color:var(--mute);border:0;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.hint{font-size:11px;color:var(--mute);margin:-7px 0 11px}
+.rng{display:flex;align-items:center;gap:9px}.rng input[type=range]{flex:1;accent-color:var(--accent)}
+.rng output{min-width:44px;text-align:right;font-weight:700;font-size:13px;color:var(--navy)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:14px}
+@media(max-width:760px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi .k{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.kpi .v{font-size:22px;font-weight:800;color:var(--navy);margin-top:4px;line-height:1.1}
+.kpi .n{font-size:11px;color:var(--mute);margin-top:2px}
+.kpi.lead .v{color:var(--blue)}.kpi.good .v{color:var(--green)}.kpi.warn .v{color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute);font-weight:800;padding:0 10px 6px;border-bottom:1.5px solid var(--navy)}
+th.r,td.r{text-align:right}
+td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr.grp td{background:var(--chip);font-weight:800;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--navy);padding:5px 10px}
+td.amt{font-weight:700;color:var(--navy);white-space:nowrap}
+.basis{font-size:11px;color:var(--mute);margin-top:1px}
+tr.tot td{border-top:2px solid var(--navy);border-bottom:0;padding-top:9px;font-weight:800;font-size:14.5px;color:var(--navy)}
+tr.waive td.amt{color:var(--green)}
+.tag{display:inline-block;font-size:9px;font-weight:800;padding:1px 6px;border-radius:9px;margin-left:5px;text-transform:uppercase}
+.tag.ok{background:rgba(15,110,79,.12);color:var(--green)}
+.tag.ex{background:rgba(13,129,187,.12);color:var(--blue)}
+.tag.bm{background:rgba(176,118,30,.14);color:var(--amber)}
+.tag.as{background:rgba(192,40,40,.12);color:var(--red)}
+.compo{display:flex;height:24px;border-radius:5px;overflow:hidden;margin:3px 0 9px}
+.legend{display:flex;flex-wrap:wrap;gap:11px;font-size:11px;color:var(--mute)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}
+.band{background:#0A0A0A;color:#fff;border-radius:10px;padding:13px 18px;margin:14px 0 8px;display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center}
+@media(max-width:620px){.band{grid-template-columns:1fr}}
+.band .bt{font-size:10.5px;font-weight:800;letter-spacing:.11em;text-align:center}
+.band p{margin:0;font-size:12.5px;color:#CFCFCF;line-height:1.45}.band b{color:#fff}
+.be{height:34px;background:var(--chip);border-radius:6px;position:relative;overflow:hidden;margin:6px 0}
+.be .fill{height:100%;background:linear-gradient(90deg,#0D81BB,#15D1BB)}
+.be .mark{position:absolute;top:0;bottom:0;width:2px}
+.be .lbl{position:absolute;top:50%;transform:translateY(-50%);font-size:11px;font-weight:800;color:#fff;left:9px}
+footer{border-top:1px solid var(--line);padding:15px 0 34px;font-size:11px;color:var(--mute)}
+footer p{margin:0 0 6px}
+.hidden{display:none}
+
+.sbnav{position:sticky;top:0;z-index:100;background:#1B2A5B;border-bottom:1px solid rgba(255,255,255,.14)}
+.sbnav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.sbmark{display:flex;align-items:center;text-decoration:none}
+.sbmark img{height:34px;width:auto;display:block}
+.sblinks{display:flex;gap:30px;list-style:none;margin:0;padding:0}
+.sblinks a{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.07em;
+ text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none}
+.sblinks a:hover,.sblinks a.active{color:#14C7A5}
+@media(max-width:640px){.sblinks{display:none}.sbnav .wrap{height:58px}}
+.crumb{font-size:11.5px;color:var(--mute);margin:12px 0 0}
+.crumb a{color:var(--mute);text-decoration:none}
+.crumb a:hover{color:var(--blue)}
+.crumb span{margin:0 6px;opacity:.5}
+.sbfoot{border-top:1px solid var(--line);margin-top:8px;padding:18px 0 40px;font-size:12.5px;color:var(--mute)}
+.sbfoot a{color:var(--blue);text-decoration:none;font-weight:600}
+@media(max-width:620px){.sbnav .wrap{height:auto;padding-top:10px;padding-bottom:10px}}
+</style></head><body>
+<nav class="sbnav"><div class="wrap">
+<a class="sbmark" href="/index.html"><img src="/logo.png" alt="Strategic Bearing"></a>
+<ul class="sblinks">
+<li><a href="/index.html#about">About</a></li>
+<li><a href="/index.html#experience">Experience</a></li>
+<li><a href="/strategic-bearing.html">Writing</a></li>
+<li><a href="/tools/" class="active">Tools</a></li>
+<li><a href="/index.html#contact">Contact</a></li>
+</ul>
+</div></nav>
+<div class="wrap"><p class="crumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> Airport charges &amp; route economics</p></div></div>
+<div class="wrap">
+<div class="hero"><div class="eyebrow">Airport charges &amp; route economics</div>
+<h1>What does it cost to operate this flight?</h1>
+<p class="lede"><b>Module 1</b> computes regulated airport charges at both ends of the sector from published tariff orders. <b>Module 2</b> builds the trip cost on top and separates <b>escapable</b> from <b>non-escapable</b> cost, so you can see whether the sector covers cash before asking whether it covers everything.</p></div>
+<div class="tabs" role="tablist">
+<button role="tab" id="t1" aria-selected="true">1 · Airport charges</button>
+<button role="tab" id="t2" aria-selected="false">2 · Route economics</button></div>
+
+<div id="m1"><div class="grid">
+<div><div class="card"><h2>Sector</h2><div class="bd">
+<div class="r2">
+<div class="fld"><label for="apO">Origin</label><select id="apO"></select></div>
+<div class="fld"><label for="apD">Destination</label><select id="apD"></select></div></div>
+<div class="fld"><label for="ac">Aircraft</label><select id="ac"></select></div>
+<div class="fld"><label>Sector type</label><div class="seg" id="sector">
+<button type="button" data-v="dom" aria-pressed="false">Domestic</button>
+<button type="button" data-v="int" aria-pressed="true">International</button></div></div>
+<div class="fld"><label for="per">Tariff period</label><select id="per"></select></div>
+<div class="r2"><div class="fld"><label for="seats">Seats</label><input type="number" id="seats" min="20" max="600"></div>
+<div class="fld"><label for="occ">Stand hours, origin</label><input type="number" id="occ" min="0.5" max="24" step="0.25" value="2.5"></div></div>
+<div class="fld"><label for="lf">Load factor</label><div class="rng"><input type="range" id="lf" min="40" max="100" value="82"><output id="lfo">82%</output></div></div>
+<div class="fld"><label for="vtp">Variable Tariff Plan — landing</label><select id="vtp"></select></div>
+<div class="fld" id="vtpYearFld"><label>VTP year</label><div class="seg" id="vtpy">
+<button type="button" data-v="1" aria-pressed="true">Yr 1</button>
+<button type="button" data-v="2" aria-pressed="false">Yr 2</button>
+<button type="button" data-v="3" aria-pressed="false">Yr 3</button></div></div>
+<div class="r2"><div class="fld"><label>Charge arrivals</label><div class="seg" id="arr">
+<button type="button" data-v="yes" aria-pressed="true">Yes</button>
+<button type="button" data-v="no" aria-pressed="false">No</button></div></div>
+<div class="fld"><label for="fx">USD / INR</label><input type="number" id="fx" step="0.01" value="95.90"></div></div>
+<p class="hint">Transit and transfer passengers within 24 hours are exempt, as are infants under two, diplomats and operating crew.</p>
+</div></div></div>
+<div>
+<div class="kpis">
+<div class="kpi lead"><div class="k">Airport cost, sector</div><div class="v" id="kTot">—</div><div class="n" id="kTotN">—</div></div>
+<div class="kpi"><div class="k">Per departing pax</div><div class="v" id="kPax">—</div><div class="n" id="kPaxN">—</div></div>
+<div class="kpi"><div class="k">Per available seat</div><div class="v" id="kSeat">—</div><div class="n">cost per seat offered</div></div>
+<div class="kpi"><div class="k">Passenger-based share</div><div class="v" id="kShare">—</div><div class="n">UDF and CUTE vs landing and parking</div></div>
+</div>
+<div class="card"><h2>Sector composition</h2><div class="bd">
+<div class="compo" id="compo"></div><div class="legend" id="legend"></div></div></div>
+<div class="two">
+<div class="card"><h2>Origin <span class="sm" id="hO"></span></h2><div class="bd">
+<table><tbody id="rowsO"></tbody></table></div></div>
+<div class="card"><h2>Destination <span class="sm" id="hD"></span></h2><div class="bd">
+<table><tbody id="rowsD"></tbody></table></div></div>
+</div>
+<div class="band"><div class="bt">BASIS</div><p>Charges are applied where they are actually incurred: <b>parking and departing-passenger charges at the origin; landing and arriving-passenger charges at the destination.</b> Bengaluru rates are from AERA Order 14/2026-27. Any other airport shown is currently using Bengaluru rates as a placeholder and is marked <b>Assumed</b>. Excludes GST, security fee, ground handling, fuel into-plane and navigation.</p></div>
+</div></div></div>
+
+<div id="m2" class="hidden"><div class="grid">
+<div>
+<div class="card"><h2>Route</h2><div class="bd">
+<div class="fld"><label for="stage">Stage length (km)</label><input type="number" id="stage" value="8053" step="10"></div>
+<div class="fld"><label for="blk">Block time (hours)</label><input type="number" id="blk" step="0.01"><p class="hint" id="blkHint"></p></div>
+<div class="fld"><label for="rot">Sectors per year, one-way</label><input type="number" id="rot" value="365" step="1"><p class="hint">730 for a daily service in both directions.</p></div>
+</div></div>
+<div class="card"><h2>Cost levers — per block hour</h2><div class="bd">
+<div class="fld"><label for="burn">Fuel burn (kg / block hr)</label><input type="number" id="burn" step="10"></div>
+<div class="fld"><label for="fuelp">Jet fuel (USD / tonne)</label><input type="number" id="fuelp" value="1442" step="1"><p class="hint">≈ USD 183/bbl at 7.88 bbl per tonne.</p></div>
+<div class="fld"><label for="crew">Crew (USD / block hr)</label><input type="number" id="crew" step="10"></div>
+<div class="fld"><label for="maint">Maintenance (USD / block hr)</label><input type="number" id="maint" step="10"></div>
+<div class="fld"><label for="own">Ownership / lease (USD / block hr)</label><input type="number" id="own" step="10"></div>
+<div class="fld"><label for="ins">Insurance &amp; other (USD / block hr)</label><input type="number" id="ins" step="5"></div>
+<div class="r2">
+<div class="fld"><label for="crewEsc">Crew escapable %</label><input type="number" id="crewEsc" value="100" min="0" max="100" step="5"></div>
+<div class="fld"><label for="maintEsc">Maint escapable %</label><input type="number" id="maintEsc" value="100" min="0" max="100" step="5"></div></div>
+<p class="hint">Ownership, lease and insurance are non-escapable: incurred whether or not the sector operates.</p>
+</div></div>
+<div class="card"><h2>Sector &amp; passenger</h2><div class="bd">
+<div class="fld"><label for="nav">Navigation &amp; overflight (USD / sector)</label><input type="number" id="nav" value="1200" step="50"></div>
+<div class="fld"><label for="gh">Ground handling (USD / sector)</label><input type="number" id="gh" value="1800" step="50"><p class="hint">Set in separate AERA orders to handlers, or commercially. Not an airport charge.</p></div>
+<div class="fld"><label for="cat">Catering (USD / pax)</label><input type="number" id="cat" value="7" step="0.5"></div>
+<div class="fld"><label for="psc">Passenger service (USD / pax)</label><input type="number" id="psc" value="3" step="0.5"></div>
+<div class="fld"><label for="dist">Distribution (% of fare)</label><input type="number" id="dist" value="6" step="0.5"></div>
+<div class="fld"><label>Treat UDF as</label><div class="seg" id="udfMode">
+<button type="button" data-v="pass" aria-pressed="false">Pass-through</button>
+<button type="button" data-v="cost" aria-pressed="true">Airline cost</button></div></div>
+</div></div>
+<div class="card"><h2>Revenue</h2><div class="bd">
+<div class="fld"><label for="fare">Average fare (USD / pax)</label><input type="number" id="fare" value="500" step="1"></div>
+<div class="fld"><label for="anc">Ancillary (USD / pax)</label><input type="number" id="anc" value="22" step="1"></div>
+<div class="fld"><label for="cgo">Cargo &amp; mail (USD / sector)</label><input type="number" id="cgo" value="2500" step="100"></div>
+</div></div></div>
+<div>
+<div class="kpis">
+<div class="kpi lead"><div class="k">Trip cost, one-way</div><div class="v" id="rTrip">—</div><div class="n" id="rTripN">—</div></div>
+<div class="kpi"><div class="k">CASK</div><div class="v" id="rCask">—</div><div class="n" id="rBH">—</div></div>
+<div class="kpi" id="cashCard"><div class="k">Cash breakeven LF</div><div class="v" id="rBeCash">—</div><div class="n">covers escapable cost</div></div>
+<div class="kpi" id="beCard"><div class="k">Full breakeven LF</div><div class="v" id="rBe">—</div><div class="n" id="rBeN">—</div></div>
+</div>
+<div class="card"><h2>Does it cover cash?<span class="sm" id="verdictSm"></span></h2><div class="bd">
+<div class="be"><div class="fill" id="beFill"></div><div class="mark" id="beMarkC"></div><div class="mark" id="beMark"></div><div class="lbl" id="beLbl"></div></div>
+<div class="legend" style="margin-bottom:9px">
+<span><i style="background:#C02828"></i>Cash breakeven <b id="lgC" style="color:var(--navy);margin-left:3px"></b></span>
+<span><i style="background:#B0761E"></i>Full breakeven <b id="lgF" style="color:var(--navy);margin-left:3px"></b></span>
+<span><i style="background:#0D81BB"></i>Planned load</span></div>
+<p id="beNote" style="margin:0;font-size:13px"></p>
+<table style="margin-top:12px"><tbody id="cRows"></tbody></table>
+</div></div>
+<div class="card"><h2>Trip cost build-up</h2><div class="bd">
+<div class="compo" id="rCompo"></div><div class="legend" id="rLegend"></div>
+<table style="margin-top:12px"><thead><tr><th>Line</th><th class="r">USD</th></tr></thead><tbody id="rRows"></tbody></table>
+</div></div>
+<div class="card"><h2>Annual</h2><div class="bd"><table><tbody id="aRows"></tbody></table></div></div>
+</div></div></div>
+<footer>
+<p><b>Module 1.</b> AERA Order No. 14/2026-27, Tariff Rate Card Annexure I, Bangalore International Airport, effective 1 Sep 2026 to 31 Mar 2031. Airports marked <b>Assumed</b> use Bengaluru rates as a placeholder pending their own rate card.</p>
+<p><b>Module 2.</b> Per-block-hour figures are editable benchmarks, not published rates. Block time is stage length ÷ cruise speed plus 0.6 hr, editable. <b>Cash breakeven</b> is escapable fixed cost less cargo, divided by contribution per passenger. <b>Full breakeven</b> adds ownership, lease and insurance. Figures are per one-way sector.</p>
+</footer></div>
+<script>
+const AIRPORTS={BLR:{n:"Bengaluru (BLR)",v:true},LHR:{n:"London Heathrow (LHR)",v:false},
+ DEL:{n:"Delhi (DEL)",v:false},BOM:{n:"Mumbai (BOM)",v:false},HYD:{n:"Hyderabad (HYD)",v:false},DXB:{n:"Dubai (DXB)",v:false}};
+const FLEET=[
+{id:"a20n",n:"Airbus A320neo",mtow:79.0,seats:180,spd:830,burn:2400,crew:900,maint:800,own:1100,ins:60},
+{id:"a21n",n:"Airbus A321neo",mtow:97.0,seats:222,spd:830,burn:2700,crew:950,maint:900,own:1250,ins:70},
+{id:"b789",n:"Boeing 787-9",mtow:254.0,seats:290,spd:900,burn:5400,crew:2200,maint:2400,own:3200,ins:180},
+{id:"a359",n:"Airbus A350-900",mtow:280.0,seats:325,spd:900,burn:5800,crew:2400,maint:2600,own:3500,ins:200},
+{id:"b38m",n:"Boeing 737 MAX 8",mtow:82.2,seats:189,spd:830,burn:2450,crew:900,maint:820,own:1120,ins:60},
+{id:"at76",n:"ATR 72-600",mtow:23.0,seats:78,spd:480,burn:650,crew:420,maint:380,own:330,ins:25}];
+const PERIODS=[
+{l:"1 Sep 2026 – 31 Mar 2027",land:{dom:442,int:652},p1:18,p2:29,udf:{dom:{d:300,a:125},int:{d:997,a:426}}},
+{l:"1 Apr 2027 – 31 Mar 2028",land:{dom:442,int:652},p1:19,p2:31,udf:{dom:{d:300,a:125},int:{d:997,a:426}}},
+{l:"1 Apr 2028 – 31 Mar 2029",land:{dom:442,int:652},p1:20,p2:32,udf:{dom:{d:300,a:125},int:{d:997,a:426}}},
+{l:"1 Apr 2029 – 31 Mar 2030",land:{dom:442,int:652},p1:21,p2:34,udf:{dom:{d:300,a:125},int:{d:997,a:426}}},
+{l:"1 Apr 2030 – 30 Apr 2030",land:{dom:442,int:652},p1:22,p2:34,udf:{dom:{d:300,a:125},int:{d:997,a:426}}},
+{l:"1 May 2030 – 31 Mar 2031",land:{dom:295,int:374},p1:22,p2:34,udf:{dom:{d:160,a:65},int:{d:854,a:366}}}];
+const CUTE={dom:75,intUSD:1};
+const VTP=[{id:"none",n:"None — rack rate",f:[1,1,1]},
+{id:"nir_lh",n:"New int'l route, long-haul (≥4,500 km)",f:[0,0,0]},
+{id:"nir_sh",n:"New int'l route, short-haul (<4,500 km)",f:[0,0.5,0.75]},
+{id:"na_dom",n:"New airline, domestic",f:[0,0,1]},
+{id:"na_lh",n:"New airline, int'l long-haul",f:[0,0,0]},
+{id:"na_sh",n:"New airline, int'l short-haul",f:[0,0.5,0.75]}];
+const C1=["#0B2A4A","#0D81BB","#15D1BB"],C2=["#0B2A4A","#0D81BB","#15D1BB","#B0761E"];
+let S={apO:"BLR",apD:"LHR",ac:"b789",sector:"int",per:0,seats:290,lf:82,occ:2.5,vtp:"none",vtpy:1,fx:95.9,udfMode:"cost",arr:"yes"};
+let AP={fixed:0,perPax:0,total:0,pax:0};
+const $=i=>document.getElementById(i),inr=v=>"₹"+Math.round(v).toLocaleString("en-IN"),usd=v=>(v<0?"-$":"$")+Math.abs(Math.round(v)).toLocaleString("en-US");
+Object.keys(AIRPORTS).forEach(k=>{["apO","apD"].forEach(s=>{const o=document.createElement("option");o.value=k;o.textContent=AIRPORTS[k].n;$(s).appendChild(o);});});
+FLEET.forEach(f=>{const o=document.createElement("option");o.value=f.id;o.textContent=f.n;$("ac").appendChild(o);});
+PERIODS.forEach((p,i)=>{const o=document.createElement("option");o.value=i;o.textContent=p.l;$("per").appendChild(o);});
+VTP.forEach(v=>{const o=document.createElement("option");o.value=v.id;o.textContent=v.n;$("vtp").appendChild(o);});
+function seg(id,key,num){$(id).addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+[...$(id).children].forEach(x=>x.setAttribute("aria-pressed",x===b));S[key]=num?+b.dataset.v:b.dataset.v;all();});}
+seg("sector","sector");seg("vtpy","vtpy",true);seg("udfMode","udfMode");seg("arr","arr");
+$("t1").onclick=()=>{$("t1").setAttribute("aria-selected","true");$("t2").setAttribute("aria-selected","false");$("m1").classList.remove("hidden");$("m2").classList.add("hidden");};
+$("t2").onclick=()=>{$("t2").setAttribute("aria-selected","true");$("t1").setAttribute("aria-selected","false");$("m2").classList.remove("hidden");$("m1").classList.add("hidden");};
+function loadAc(){const f=FLEET.find(x=>x.id===S.ac);S.seats=f.seats;$("seats").value=f.seats;
+$("burn").value=f.burn;$("crew").value=f.crew;$("maint").value=f.maint;$("own").value=f.own;$("ins").value=f.ins;$("blk").value="";}
+["apO","apD","per","vtp"].forEach(id=>$(id).addEventListener("change",e=>{S[id]=id==="per"?+e.target.value:e.target.value;all();}));
+$("ac").addEventListener("change",e=>{S.ac=e.target.value;loadAc();all();});
+$("seats").addEventListener("input",e=>{S.seats=+e.target.value||0;all();});
+$("lf").addEventListener("input",e=>{S.lf=+e.target.value;$("lfo").textContent=S.lf+"%";all();});
+$("occ").addEventListener("input",e=>{S.occ=+e.target.value||0;all();});
+$("fx").addEventListener("input",e=>{S.fx=+e.target.value||1;all();});
+["stage","blk","rot","burn","fuelp","crew","maint","own","ins","nav","gh","cat","psc","dist","fare","anc","cgo","crewEsc","maintEsc"]
+.forEach(id=>$(id).addEventListener("input",()=>{if(id==="stage")$("blk").value="";all();}));
+function m1(){
+ const f=FLEET.find(x=>x.id===S.ac),P=PERIODS[S.per],sec=S.sector,mt=Math.round(f.mtow);
+ const pax=Math.round(S.seats*S.lf/100),u=P.udf[sec];
+ const vfSel=VTP.find(v=>v.id===S.vtp),vf=vfSel.f[S.vtpy-1];
+ $("vtpYearFld").style.display=S.vtp==="none"?"none":"block";
+ const ex=(sec==="dom"&&S.seats<80);
+ const chg=Math.max(0,Math.ceil(S.occ-0.5-2)),t1=Math.min(chg,2),t2=Math.max(0,chg-2);
+ const park=t1*P.p1*mt+t2*P.p2*mt;
+ const cute=(sec==="dom"?CUTE.dom:CUTE.intUSD*S.fx);
+ const land=ex?0:P.land[sec]*mt*vf;
+ const O=[{n:"Parking",b:chg===0?"Within free period":(t1?t1+" hr × "+inr(P.p1):"")+(t2?" + "+t2+" hr × "+inr(P.p2):"")+"/t/hr × "+mt+" t",a:park,w:chg===0,fix:true},
+  {n:"UDF — embarking",b:inr(u.d)+" × "+pax+" pax",a:u.d*pax},
+  {n:"CUTE / CUSS / BRS",b:(sec==="dom"?"₹75":"USD 1 at "+S.fx.toFixed(2))+" × "+pax+" pax",a:cute*pax}];
+ const D=[{n:"Landing",b:ex?"Exempt — under 80 seats, domestic scheduled":inr(P.land[sec])+"/t × "+mt+" t"+(vf<1?" × "+vf+" (VTP yr "+S.vtpy+")":""),a:land,w:ex||vf===0,fix:true,t:ex?"Exempt":(vf<1?"VTP":null)}];
+ if(S.arr==="yes") D.push({n:"UDF — disembarking",b:inr(u.a)+" × "+pax+" pax",a:u.a*pax});
+ else D.push({n:"UDF — disembarking",b:"Not charged",a:0,w:true});
+ const tO=O.reduce((s,x)=>s+x.a,0),tD=D.reduce((s,x)=>s+x.a,0),tot=tO+tD;
+ const fixed=park+land, perPax=u.d+cute+(S.arr==="yes"?u.a:0);
+ AP={fixed:fixed,perPax:perPax,total:tot,pax:pax};
+ const asO=AIRPORTS[S.apO].v?"":'<span class="tag as">Assumed</span>',asD=AIRPORTS[S.apD].v?"":'<span class="tag as">Assumed</span>';
+ $("hO").innerHTML=AIRPORTS[S.apO].n+" · "+inr(tO)+asO; $("hD").innerHTML=AIRPORTS[S.apD].n+" · "+inr(tD)+asD;
+ const row=x=>'<tr class="'+(x.w?"waive":"")+'"><td>'+x.n+(x.t?'<span class="tag '+(x.t==="Exempt"?"ex":"ok")+'">'+x.t+'</span>':"")+'<div class="basis">'+x.b+"</div></td><td class='r amt'>"+inr(x.a)+"</td></tr>";
+ $("rowsO").innerHTML=O.map(row).join("")+'<tr class="tot"><td>Origin total</td><td class="r">'+inr(tO)+"</td></tr>";
+ $("rowsD").innerHTML=D.map(row).join("")+'<tr class="tot"><td>Destination total</td><td class="r">'+inr(tD)+"</td></tr>";
+ $("kTot").textContent=inr(tot);$("kTotN").textContent=S.apO+"–"+S.apD+" · "+f.n;
+ $("kPax").textContent=inr(pax?tot/pax:0);$("kPaxN").textContent=pax+" pax at "+S.lf+"% load";
+ $("kSeat").textContent=inr(S.seats?tot/S.seats:0);
+ const paxBased=perPax*pax;
+ $("kShare").textContent=tot?Math.round(paxBased/tot*100)+"%":"—";
+ const comp=[["Landing and parking",fixed],["Passenger charges",paxBased]];
+ $("compo").innerHTML=comp.map((c,i)=>'<div style="width:'+(tot?c[1]/tot*100:0)+'%;background:'+C1[i]+'"></div>').join("");
+ $("legend").innerHTML=comp.map((c,i)=>'<span><i style="background:'+C1[i]+'"></i>'+c[0]+" "+inr(c[1])+" ("+(tot?Math.round(c[1]/tot*100):0)+"%)</span>").join("");
+}
+function m2(){
+ const f=FLEET.find(x=>x.id===S.ac),stage=+$("stage").value||0,fx=S.fx,pax=AP.pax,seats=S.seats;
+ let blk=+$("blk").value; if(!blk){blk=+(stage/f.spd+0.6).toFixed(2);$("blk").value=blk;}
+ $("blkHint").textContent="Derived: "+stage+" km ÷ "+f.spd+" km/h + 0.6 hr. Edit to override.";
+ const bh={Fuel:(+$("burn").value||0)/1000*(+$("fuelp").value||0),Crew:+$("crew").value||0,
+  Maintenance:+$("maint").value||0,"Ownership / lease":+$("own").value||0,"Insurance & other":+$("ins").value||0};
+ const cE=(+$("crewEsc").value||0)/100,mE=(+$("maintEsc").value||0)/100;
+ const escMap={Fuel:1,Crew:cE,Maintenance:mE,"Ownership / lease":0,"Insurance & other":0};
+ const fare=+$("fare").value||0,anc=+$("anc").value||0,dp=(+$("dist").value||0)/100,cargo=+$("cgo").value||0;
+ const apPerPaxUSD=(S.udfMode==="cost"?AP.perPax:(S.sector==="dom"?CUTE.dom:CUTE.intUSD*fx))/fx;
+ const L=[];
+ Object.keys(bh).forEach(k=>L.push({g:"Block-hour",n:k,b:(k==="Fuel"?(+$("burn").value)+" kg/hr":usd(bh[k])+"/hr")+" × "+blk+" hr",a:bh[k]*blk,e:escMap[k]}));
+ L.push({g:"Sector",n:"Airport charges — fixed",b:"parking at origin, landing at destination",a:AP.fixed/fx,e:1,p:true});
+ L.push({g:"Sector",n:"Navigation & overflight",b:"per sector",a:+$("nav").value||0,e:1});
+ L.push({g:"Sector",n:"Ground handling",b:"not an airport charge",a:+$("gh").value||0,e:1});
+ L.push({g:"Passenger",n:"Catering",b:"$"+(+$("cat").value)+" × "+pax,a:(+$("cat").value||0)*pax,e:1});
+ L.push({g:"Passenger",n:"Passenger service",b:"$"+(+$("psc").value)+" × "+pax,a:(+$("psc").value||0)*pax,e:1});
+ L.push({g:"Passenger",n:"Airport charges — per pax",b:S.udfMode==="cost"?"UDF both ends plus CUTE":"CUTE only; UDF passed through",a:apPerPaxUSD*pax,e:1,p:true});
+ L.push({g:"Passenger",n:"Distribution",b:(+$("dist").value)+"% of fare × "+pax,a:fare*dp*pax,e:1});
+ const trip=L.reduce((s,x)=>s+x.a,0);
+ const fixedCash=L.filter(x=>x.g!=="Passenger").reduce((s,x)=>s+x.a*x.e,0);
+ const fixedFull=L.filter(x=>x.g!=="Passenger").reduce((s,x)=>s+x.a,0);
+ const nonEsc=fixedFull-fixedCash;
+ const varPax=(+$("cat").value||0)+(+$("psc").value||0)+apPerPaxUSD+fare*dp;
+ const contrib=fare+anc-varPax;
+ const beC=contrib>0&&seats?Math.max(0,(fixedCash-cargo)/contrib/seats*100):Infinity;
+ const beF=contrib>0&&seats?Math.max(0,(fixedFull-cargo)/contrib/seats*100):Infinity;
+ const cash=contrib*pax+cargo-fixedCash, full=contrib*pax+cargo-fixedFull;
+ const ask=seats*stage;
+ $("rTrip").textContent=usd(trip);$("rTripN").textContent=S.apO+"–"+S.apD+" · "+f.n+" · "+blk+" blk hr";
+ $("rBH").textContent=usd(blk?trip/blk:0)+" per block hour";
+ $("rCask").textContent=ask?((trip/ask)*100).toFixed(2)+"¢":"—";
+ $("rBeCash").textContent=isFinite(beC)?beC.toFixed(1)+"%":"n/a";
+ $("rBe").textContent=isFinite(beF)?beF.toFixed(1)+"%":"n/a";
+ $("rBeN").textContent="against "+S.lf+"% planned";
+ $("cashCard").className="kpi "+(cash>=0?"good":"warn");
+ $("beCard").className="kpi "+(full>=0?"good":"warn");
+ $("beFill").style.width=Math.min(100,S.lf)+"%";
+ $("beMarkC").style.left=Math.min(100,isFinite(beC)?beC:100)+"%";$("beMarkC").style.background="#C02828";
+ $("beMark").style.left=Math.min(100,isFinite(beF)?beF:100)+"%";$("beMark").style.background="#B0761E";
+ $("beLbl").textContent="Planned "+S.lf+"%";
+ $("lgC").textContent=isFinite(beC)?beC.toFixed(1)+"%":"n/a";$("lgF").textContent=isFinite(beF)?beF.toFixed(1)+"%":"n/a";
+ let verdict,note;
+ if(!isFinite(beC)){verdict="Fare below variable cost";note="Contribution per passenger is negative. Every additional passenger loses money.";}
+ else if(cash<0){verdict="Does not cover cash";note="At "+S.lf+"% the sector loses <b>"+usd(cash)+"</b> of cash per flight. It does not cover the costs you would avoid by not operating it. Needs "+beC.toFixed(1)+"% load, or a fare of about $"+Math.round(((fixedCash-cargo)/pax+varPax-fare*dp)/(1-dp)-anc)+".";}
+ else if(full<0){verdict="Covers cash, not full cost";note="At "+S.lf+"% the sector generates <b>"+usd(cash)+"</b> toward non-escapable cost of "+usd(nonEsc)+" per flight. Worth operating if the aircraft has no better use; not if it does. Full breakeven needs "+beF.toFixed(1)+"%.";}
+ else {verdict="Fully profitable";note="At "+S.lf+"% the sector covers escapable and allocated cost, with <b>"+usd(full)+"</b> per flight remaining and "+(S.lf-beF).toFixed(1)+" points of headroom.";}
+ $("verdictSm").textContent=verdict;$("beNote").innerHTML=note;
+ $("cRows").innerHTML=[["Contribution per passenger",usd(contrib)],["Escapable cost per sector",usd(fixedCash+varPax*pax)],
+  ["Non-escapable cost per sector",usd(nonEsc)],["Cash result at "+S.lf+"%",usd(cash)],["Result after fixed cost",usd(full)]]
+  .map(r=>'<tr><td>'+r[0]+"</td><td class='r amt'>"+r[1]+"</td></tr>").join("");
+ const g={};L.forEach(x=>g[x.g]=(g[x.g]||0)+x.a);const gk=Object.keys(g);
+ $("rCompo").innerHTML=gk.map((k,i)=>'<div style="width:'+(trip?g[k]/trip*100:0)+'%;background:'+C2[i]+'"></div>').join("");
+ $("rLegend").innerHTML=gk.map((k,i)=>'<span><i style="background:'+C2[i]+'"></i>'+k+" "+(trip?Math.round(g[k]/trip*100):0)+"%</span>").join("");
+ let h="",cur="";L.forEach(x=>{if(x.g!==cur){cur=x.g;h+='<tr class="grp"><td colspan="2">'+cur+"</td></tr>";}
+  const et=x.e===1?'<span class="tag ok">Escapable</span>':(x.e===0?'<span class="tag bm">Fixed</span>':'<span class="tag bm">'+Math.round(x.e*100)+'% esc</span>');
+  h+='<tr><td>'+x.n+et+(x.p?'<span class="tag ex">Published</span>':"")+'<div class="basis">'+x.b+"</div></td><td class='r amt'>"+usd(x.a)+"</td></tr>";});
+ h+='<tr class="tot"><td>Total trip cost</td><td class="r">'+usd(trip)+"</td></tr>";
+ $("rRows").innerHTML=h;
+ const rot=+$("rot").value||0,rev=(fare+anc)*pax+cargo;
+ $("aRows").innerHTML=[["Sectors per year",rot.toLocaleString()],["Revenue per sector",usd(rev)],
+  ["Annual cash contribution",usd(cash*rot)],["Annual result after fixed cost",usd(full*rot)],
+  ["Airport charges share of trip cost",trip?((AP.total/fx)/trip*100).toFixed(1)+"%":"—"]]
+  .map(r=>'<tr><td>'+r[0]+"</td><td class='r amt'>"+r[1]+"</td></tr>").join("");
+}
+function all(){m1();m2();}
+$("apO").value=S.apO;$("apD").value=S.apD;$("ac").value=S.ac;loadAc();all();
+</script><div class="sbfoot">Built by <a href="https://www.linkedin.com/in/kevinjv" rel="noopener">Kevin Jose</a> &nbsp;·&nbsp;
+<a href="/tools/">More tools</a> &nbsp;·&nbsp; <a href="/">Strategic Bearing</a><br>
+Built from public regulatory documents in a personal capacity. Not affiliated with any airport operator or regulator.</div>
+</body></html>
