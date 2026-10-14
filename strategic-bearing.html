@@ -26,8 +26,9 @@
   --ink:#082E63; --navy:#0F55B0; --navy-lift:#2171D6;
   --royal:#2171D6; --royal-deep:#0A3C88;
   --teal:#0F5FC0;            /* accent text on light surfaces */
-  --mint:#23D6A6;            /* fills, rules, the compass — never text on blue */
-  --mint-text:#6FF0D2;       /* the accent when it must be read on blue */
+  /* gold: marks, rules and fills only. Nothing saturated reaches 4.5:1 on this
+     blue, so text on blue is white or a pale tint, never the accent. */
+  --accent:#F0B429; --accent-soft:#FFD166;
   --paper:#EEF4FD; --white:#FFFFFF;
   --text:#102A52; --muted:#53688A;
   --line:#DCE7F5; --line-on-dark:rgba(255,255,255,.16);
@@ -62,7 +63,7 @@ p{margin:0 0 18px}
 .marker{display:flex; align-items:center; gap:10px; margin-bottom:14px;
   font-size:13px; font-weight:600; color:var(--muted); letter-spacing:0}
 .marker::before{content:""; width:18px; height:2px; border-radius:2px;
-  background:var(--teal); flex:none}
+  background:var(--accent); flex:none}
 .band--dark .marker{color:#A9C8EC}
 .lede{font-size:18px; color:var(--muted); margin:14px 0 0; max-width:60ch}
 
@@ -72,13 +73,13 @@ p{margin:0 0 18px}
   padding:13px 22px; border-radius:9px; text-decoration:none;
   border:1px solid transparent; cursor:pointer;
   transition:background-color .16s ease, border-color .16s ease, color .16s ease}
-.btn--solid{background:var(--mint); color:#04291F}
-.btn--solid:hover{background:#4FE5BC}
+.btn--solid{background:var(--accent); color:#17244A}
+.btn--solid:hover{background:#FFC94F}
 .btn--ghost{border-color:rgba(255,255,255,.3); color:#fff}
-.btn--ghost:hover{border-color:var(--mint-text); color:var(--mint-text)}
+.btn--ghost:hover{border-color:var(--accent-soft); color:var(--accent-soft)}
 .btn--dark{background:var(--navy); color:#fff}
 .btn--dark:hover{background:var(--navy-lift)}
-.btn:focus-visible{outline:2px solid var(--mint-text); outline-offset:3px}
+.btn:focus-visible{outline:2px solid var(--accent-soft); outline-offset:3px}
 
 /* nav */
 .nav{position:sticky; top:0; z-index:100; background:rgba(14,74,156,.95);
@@ -89,8 +90,8 @@ p{margin:0 0 18px}
 .nav-links{display:flex; gap:28px; list-style:none; margin:0; padding:0}
 .nav-links a{font-size:14.5px; font-weight:500; color:rgba(255,255,255,.78);
   text-decoration:none; transition:color .15s ease}
-.nav-links a:hover,.nav-links a[aria-current]{color:var(--mint-text)}
-.nav-links a:focus-visible{outline:2px solid var(--mint-text); outline-offset:4px; border-radius:3px}
+.nav-links a:hover,.nav-links a[aria-current]{color:var(--accent-soft)}
+.nav-links a:focus-visible{outline:2px solid var(--accent-soft); outline-offset:4px; border-radius:3px}
 
 /* footer */
 footer{background:var(--ink); color:rgba(255,255,255,.62); padding:40px 0; font-size:14px}
@@ -98,7 +99,7 @@ footer .wrap{display:flex; justify-content:space-between; align-items:center;
   flex-wrap:wrap; gap:14px}
 .foot-links{display:flex; gap:24px}
 footer a{color:rgba(255,255,255,.78); text-decoration:none}
-footer a:hover{color:var(--mint-text)}
+footer a:hover{color:var(--accent-soft)}
 
 @media (max-width:760px){
   .band{padding:60px 0}
@@ -123,20 +124,21 @@ footer a:hover{color:var(--mint-text)}
 .hero{position:relative; overflow:hidden; color:#fff;
   background:linear-gradient(145deg,#1861C2 0%,#0F55B0 42%,#0A3C88 100%)}
 .hero .wrap{position:relative; z-index:2; padding-top:72px; padding-bottom:40px}
-.hero-eyebrow{font-size:14px; font-weight:600; color:#8CF5DD; margin-bottom:12px}
+.hero-eyebrow{font-size:14px; font-weight:600; color:var(--accent-soft); margin-bottom:12px}
 .hero h1{color:#fff; font-size:clamp(30px,4.2vw,46px); max-width:17ch; margin-bottom:16px}
 .hero-sub{color:#E3EEFB; font-size:17px; max-width:60ch; margin-bottom:26px}
-.arcs{position:absolute; right:-120px; top:50%; transform:translateY(-50%);
-  width:420px; height:420px; z-index:1; opacity:.55; pointer-events:none}
+.terminal{position:absolute; left:0; right:0; bottom:0; width:100%; height:104px;
+  z-index:1; pointer-events:none;
+  background:url('/terminal.png') center bottom / cover no-repeat}
 
 /* ---------- pillar filter ---------- */
 .tabs{display:flex; gap:8px; flex-wrap:wrap; padding-bottom:4px}
 .tab-btn{font-family:inherit; font-size:14px; font-weight:500; color:#E3EEFB;
   background:transparent; border:1px solid rgba(255,255,255,.2); border-radius:999px;
   padding:8px 16px; cursor:pointer; transition:all .15s ease}
-.tab-btn:hover{border-color:var(--mint-text); color:#fff}
-.tab-btn.active{background:var(--mint); border-color:var(--mint); color:#04291F; font-weight:600}
-.tab-btn:focus-visible{outline:2px solid var(--mint-text); outline-offset:3px}
+.tab-btn:hover{border-color:var(--accent-soft); color:#fff}
+.tab-btn.active{background:var(--accent); border-color:var(--accent); color:#17244A; font-weight:600}
+.tab-btn:focus-visible{outline:2px solid var(--accent-soft); outline-offset:3px}
 
 /* ---------- the list ---------- */
 .board-list{margin:0}
@@ -192,7 +194,7 @@ footer a:hover{color:var(--mint-text)}
 @media (max-width:560px){
   .post-head{grid-template-columns:1fr 20px; gap:12px}
   .pd-date{grid-row:2; grid-column:1; padding-top:0}
-  .arcs{display:none}
+  .terminal{height:74px}
 }
 </style>
 </head>
@@ -213,14 +215,7 @@ footer a:hover{color:var(--mint-text)}
 </nav>
 
 <header class="hero">
-  <svg class="arcs" viewBox="0 0 420 420" aria-hidden="true">
-<g fill="none" stroke="#23D6A6">
-<circle cx="210" cy="210" r="200" stroke-width="1" opacity=".3"/>
-<circle cx="210" cy="210" r="152" stroke-width="1" opacity=".2" stroke-dasharray="2 7"/>
-<circle cx="210" cy="210" r="104" stroke-width="1" opacity=".14"/>
-<path d="M210 10 A200 200 0 0 1 351 69" stroke-width="2" opacity=".75"/>
-</g>
-</svg>
+  <div class="terminal"></div>
   <div class="wrap">
     <div class="hero-eyebrow">Analysis and reflection</div>
     <h1>Clarity of direction in aviation, strategy, and capital.</h1>
