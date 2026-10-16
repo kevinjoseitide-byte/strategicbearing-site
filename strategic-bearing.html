@@ -25,10 +25,16 @@
   /* royal blue, taken from the Strategic Bearing deck */
   --ink:#082E63; --navy:#0F55B0; --navy-lift:#2171D6;
   --royal:#2171D6; --royal-deep:#0A3C88;
-  --teal:#0F5FC0;            /* accent text on light surfaces */
-  /* gold: marks, rules and fills only. Nothing saturated reaches 4.5:1 on this
-     blue, so text on blue is white or a pale tint, never the accent. */
-  --accent:#F0B429; --accent-soft:#FFD166;
+  /* mint, sampled from the deck's own accent (#15D1BB). Three steps, because
+     one mint cannot serve both a navy nav bar and white paper:
+       --mint       marks and fills on blue        3.1:1 on royal — rules, not text
+       --mint-soft  text and hover on dark         4.6:1 on the lightest point
+                                                   of the hero gradient, 6.5:1
+                                                   on the nav, 10.2:1 on ink
+       --mint-deep  marks and text on light paper  5.1:1 on paper, 5.7:1 on white */
+  --mint:#15D1BB; --mint-soft:#45FBE6; --mint-deep:#0C7468;
+  --teal:var(--mint-deep);   /* accent text on light surfaces */
+  --accent:var(--mint); --accent-soft:var(--mint-soft);
   --paper:#EEF4FD; --white:#FFFFFF;
   --text:#102A52; --muted:#53688A;
   --line:#DCE7F5; --line-on-dark:rgba(255,255,255,.16);
@@ -63,8 +69,9 @@ p{margin:0 0 18px}
 .marker{display:flex; align-items:center; gap:10px; margin-bottom:14px;
   font-size:13px; font-weight:600; color:var(--muted); letter-spacing:0}
 .marker::before{content:""; width:18px; height:2px; border-radius:2px;
-  background:var(--accent); flex:none}
+  background:var(--mint-deep); flex:none}
 .band--dark .marker{color:#A9C8EC}
+.band--dark .marker::before{background:var(--mint)}
 .lede{font-size:18px; color:var(--muted); margin:14px 0 0; max-width:60ch}
 
 /* buttons — label says what happens, no arrow glyph */
@@ -74,7 +81,7 @@ p{margin:0 0 18px}
   border:1px solid transparent; cursor:pointer;
   transition:background-color .16s ease, border-color .16s ease, color .16s ease}
 .btn--solid{background:var(--accent); color:#17244A}
-.btn--solid:hover{background:#FFC94F}
+.btn--solid:hover{background:var(--mint-soft)}
 .btn--ghost{border-color:rgba(255,255,255,.3); color:#fff}
 .btn--ghost:hover{border-color:var(--accent-soft); color:var(--accent-soft)}
 .btn--dark{background:var(--navy); color:#fff}
