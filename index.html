@@ -47,6 +47,17 @@
   --line:#DCE7F5; --line-on-dark:rgba(255,255,255,.16);
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
   --wrap:1080px;
+
+  /* Hero field. The colour axis sits at 124deg, measured perpendicular to a
+     luminous seam running 33.7deg off vertical. Mint occupies the last 15%,
+     where nothing reaches 4.5:1 against white, so no text may sit there. */
+  --grad-hero:linear-gradient(124deg,
+     #082E63 0%, #0A3C88 30%, #0F55B0 58%, #1861C2 74%,
+     #5FEADB 85%, #B9FFF6 88.5%, #45FBE6 92%, #15D1BB 100%);
+  /* Narrow viewports: the seam moves off to the right so copy never meets it. */
+  --grad-hero-narrow:linear-gradient(124deg,
+     #082E63 0%, #0A3C88 38%, #0F55B0 66%, #1861C2 84%,
+     #5FEADB 94%, #9DF4E8 100%);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -135,16 +146,21 @@ footer a:hover{color:var(--accent-soft)}
 }
 
 /* ---------- hero ---------- */
-.hero{position:relative; color:#fff;
-  background:linear-gradient(145deg,#1861C2 0%,#0F55B0 40%,#0A3C88 100%)}
-.hero-main{position:relative; overflow:hidden}
+/* The gradient lives on .hero-main, not .hero: the facts rail below spans the
+   full width, and its right-hand column would otherwise land on the mint stops,
+   which sit at 1.3:1 and 1.9:1 against white. The rail gets the flat ink base. */
+.hero{position:relative; color:#fff; background:var(--ink)}
+.hero-main{position:relative; overflow:hidden; background:var(--grad-hero)}
 .hero .wrap{position:relative; z-index:2; padding-top:100px; padding-bottom:196px; max-width:var(--wrap)}
 .hero-copy{max-width:640px}
 .hero h1{color:#fff; margin-bottom:16px}
 .hero-role{font-size:19.5px; font-weight:500; color:#FFFFFF; margin-bottom:18px; opacity:.92}
 .hero-sub{font-size:17.5px; line-height:1.68; color:#E3EEFB; max-width:58ch; margin-bottom:0}
-.departure{position:absolute; top:50%; right:10px; transform:translateY(-52%);
-  width:620px; height:600px; z-index:1; pointer-events:none}
+/* The copy runs to roughly 820px and the gradient seam starts at 85% of the
+   viewport, which leaves under 400px between them. The mark is sized to that
+   gap and positioned in percentage terms so it holds on a wider screen. */
+.departure{position:absolute; top:50%; right:18%; transform:translateY(-52%);
+  width:380px; height:368px; z-index:1; pointer-events:none}
 /* terminal roofline, drawn as vector so it stays exact at any width or DPI */
 .roofline{position:absolute; left:0; right:0; bottom:0; width:100%; height:176px;
   z-index:1; pointer-events:none; display:block}
@@ -212,14 +228,23 @@ footer a:hover{color:var(--accent-soft)}
 .contact .marker{justify-content:center}
 .contact p{color:var(--muted); margin:14px auto 26px; max-width:46ch}
 
+/* Below 1280px there is no longer room for copy, mark and seam side by side:
+   the route arcs start crossing the sub copy. The seam carries the right side
+   on its own from here down. */
+@media (max-width:1279px){
+  .departure{display:none}
+}
 @media (max-width:980px){
   .about-grid{grid-template-columns:1fr; gap:32px}
   .lenses{grid-template-columns:repeat(2,1fr)}
-  .departure{right:-170px; opacity:.65}
+}
+/* The desktop seam sits at 85% of the viewport, which the copy reaches once the
+   hero drops below about 810px. Switch to the narrow field well before that. */
+@media (max-width:1023px){
+  .hero-main{background:var(--grad-hero-narrow)}
 }
 @media (max-width:760px){
   .hero .wrap{padding-top:68px; padding-bottom:132px}
-  .departure{display:none}
   .roofline{height:116px}
   .facts .wrap{grid-template-columns:1fr; gap:14px}
   .stop{grid-template-columns:1fr; gap:6px}

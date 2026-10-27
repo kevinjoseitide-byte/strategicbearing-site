@@ -40,6 +40,17 @@
   --line:#DCE7F5; --line-on-dark:rgba(255,255,255,.16);
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
   --wrap:1080px;
+
+  /* Hero field. The colour axis sits at 124deg, measured perpendicular to a
+     luminous seam running 33.7deg off vertical. Mint occupies the last 15%,
+     where nothing reaches 4.5:1 against white, so no text may sit there. */
+  --grad-hero:linear-gradient(124deg,
+     #082E63 0%, #0A3C88 30%, #0F55B0 58%, #1861C2 74%,
+     #5FEADB 85%, #B9FFF6 88.5%, #45FBE6 92%, #15D1BB 100%);
+  /* Narrow viewports: the seam moves off to the right so copy never meets it. */
+  --grad-hero-narrow:linear-gradient(124deg,
+     #082E63 0%, #0A3C88 38%, #0F55B0 66%, #1861C2 84%,
+     #5FEADB 94%, #9DF4E8 100%);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -129,7 +140,7 @@ footer a:hover{color:var(--accent-soft)}
 
 /* ---------- masthead ---------- */
 .hero{position:relative; overflow:hidden; color:#fff;
-  background:linear-gradient(145deg,#1861C2 0%,#0F55B0 42%,#0A3C88 100%)}
+  background:var(--grad-hero)}
 .hero .wrap{position:relative; z-index:2; padding-top:72px; padding-bottom:40px}
 .hero-eyebrow{font-size:14px; font-weight:600; color:var(--accent-soft); margin-bottom:12px}
 .hero h1{color:#fff; font-size:clamp(30px,4.2vw,46px); max-width:17ch; margin-bottom:16px}
@@ -202,6 +213,9 @@ footer a:hover{color:var(--accent-soft)}
   .post-head{grid-template-columns:1fr 20px; gap:12px}
   .pd-date{grid-row:2; grid-column:1; padding-top:0}
   .terminal{height:74px}
+}
+@media (max-width:1023px){
+  .hero{background:var(--grad-hero-narrow)}
 }
 </style>
 </head>
