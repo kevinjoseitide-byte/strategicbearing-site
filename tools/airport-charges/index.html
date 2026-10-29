@@ -26,16 +26,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0B3A77;--blue:#0F5FC0;--accent:#0A3C88;--bg:#EEF4FD;--card:#FFF;
+:root{--navy:#0B3A77;--blue:#0F5FC0;--ink:#082E63;--bg:#EEF4FD;--card:#FFF;
  --line:#DCE7F5;--mute:#53688A;--body:#2C4166;--red:#C02828;--amber:#8A5A10;
- --green:#0F6E5C;--chip:#E6F0FC;--mint:#15D1BB;--mint-deep:#0C7468}
+ --green:#0F6E5C;--chip:#E6F0FC;--mint:#15D1BB;--mint-deep:#0C7468;
+ --g-ac:#1E63C4;--g-px:#0C7468;--g-ot:#7C8DA6}
 *,*::before,*::after{box-sizing:border-box}
 body{font-variant-numeric:tabular-nums;margin:0;background:var(--bg);color:var(--body);
  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto}
 a{color:inherit}
-.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+.wrap{max-width:940px;margin:0 auto;padding:0 20px}
 .sbnav{position:sticky;top:0;z-index:100;background:rgba(14,74,156,.95);
  backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(255,255,255,.13)}
 .sbnav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:18px}
@@ -62,66 +63,107 @@ h1{font-size:clamp(28px,4.2vw,40px);line-height:1.12;letter-spacing:-.026em;colo
 .lede{font-size:16.5px;color:var(--body);max-width:68ch;margin:0 0 6px}
 .lede b{color:var(--navy)}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:18px 0;overflow:hidden}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:18px 0;overflow:hidden}
 .card>h2{font-size:15px;font-weight:700;color:var(--navy);margin:0;padding:15px 20px;
- border-bottom:1px solid var(--line);letter-spacing:-.008em}
+ border-bottom:1px solid var(--line);letter-spacing:-.008em;
+ display:flex;align-items:baseline;gap:10px}
+.card>h2 .n{font-size:11.5px;font-weight:700;color:#fff;background:var(--blue);
+ width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;
+ justify-content:center;flex:none;align-self:center}
 .bd{padding:18px 20px}
-.grid{display:grid;gap:14px 18px}
+.grid{display:grid;gap:15px 18px}
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
-.fld{display:flex;flex-direction:column;gap:5px;min-width:0}
-.lbl{font-size:12.5px;font-weight:600;color:var(--mute)}
+.fld{display:flex;flex-direction:column;gap:5px;min-width:0;border:0;padding:0;margin:0}
+.lbl{font-size:12.5px;font-weight:600;color:var(--mute);padding:0}
 input,select{font-family:inherit;font-size:15px;color:var(--body);background:#fff;
  border:1px solid var(--line);border-radius:8px;padding:9px 10px;width:100%;min-width:0}
 input:focus,select:focus{outline:2px solid var(--mint);outline-offset:-1px;border-color:var(--mint)}
 .hint{font-size:11.5px;color:var(--mute);line-height:1.4}
-.ro{background:var(--bg);color:var(--mute)}
 
 table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+caption{text-align:left;font-size:12.5px;color:var(--mute);padding:0 20px 10px}
+th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
 th:first-child,td:first-child{text-align:left;white-space:normal}
-thead th{font-size:12px;font-weight:700;color:var(--mute);border-bottom:1px solid var(--line)}
+thead th{font-size:11.5px;font-weight:700;color:var(--mute);border-bottom:1px solid var(--line);
+ text-transform:uppercase;letter-spacing:.04em}
 tbody tr:last-child td{border-bottom:none}
-tr.tot td{font-weight:700;color:var(--navy);border-top:1px solid var(--line)}
-.scroll{overflow-x:auto}
+tr.tot td{font-weight:700;color:var(--navy);border-top:2px solid var(--navy);
+ border-bottom:none;font-size:15px;padding-top:12px;padding-bottom:14px}
+tr.sub td{font-weight:600;color:var(--navy);background:#F7FAFE;font-size:13.5px}
+tr.grp td{background:var(--navy);color:#fff;font-size:11px;font-weight:700;
+ text-transform:uppercase;letter-spacing:.08em;padding:7px 12px;border:none}
+tr.grp td .dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:8px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 td.src,th.src{font-size:12px;color:var(--mute);font-weight:500}
 td.bas,th.bas{font-size:13px;color:var(--mute);white-space:normal}
+td .pg{display:none;font-size:11.5px;color:var(--mute);font-weight:500}
+tr.me td{background:#F2FBFA}
 tr.me td:first-child{color:var(--mint-deep);font-weight:700}
+tr.zero td{color:var(--mute)}
+.flag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.05em;
+ text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:8px;
+ background:#FDF2DE;color:var(--amber);vertical-align:1px}
+.flag.ex{background:#E3F6F1;color:var(--green)}
 
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
-.kpi{background:#fff;padding:14px 16px}
+.kpi{background:#fff;padding:15px 18px}
 .kpi .k{font-size:11.5px;font-weight:600;color:var(--mute);display:block;margin-bottom:3px}
-.kpi .v{font-size:21px;font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.kpi .v{font-size:23px;font-weight:700;color:var(--navy);letter-spacing:-.025em;display:block}
 .kpi .sm{font-size:11.5px;color:var(--mute);display:block;margin-top:2px}
-.kpi.lead .v{color:var(--mint-deep)}
+.kpi.lead{background:linear-gradient(135deg,#0B3A77,#1559B5);}
+.kpi.lead .k{color:#BBD4F2}
+.kpi.lead .v{color:#fff;font-size:27px}
+.kpi.lead .sm{color:#BBD4F2}
+
+.split{padding:14px 20px 16px;border-bottom:1px solid var(--line)}
+.sbar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--line)}
+.sbar span{display:block;height:100%}
+.skey{display:flex;flex-wrap:wrap;gap:16px;margin-top:9px;font-size:12px;color:var(--mute)}
+.skey i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px}
+.skey b{color:var(--navy);font-weight:600}
+
+.cmpbar{position:relative}
+.cmpbar i{position:absolute;left:0;top:50%;transform:translateY(-50%);height:22px;
+ background:rgba(30,99,196,.13);border-radius:3px;z-index:0}
+.cmpbar span{position:relative;z-index:1}
 
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.seg button{font-family:inherit;font-size:13.5px;font-weight:600;padding:8px 14px;border:0;
+.seg button{font-family:inherit;font-size:13.5px;font-weight:600;padding:9px 15px;border:0;
  background:#fff;color:var(--mute);cursor:pointer}
-.seg button.active{background:var(--navy);color:#fff}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--mint);outline-offset:-2px}
 .chk{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--body);line-height:1.45}
 .chk input{width:auto;min-width:0;margin:3px 0 0;flex:none}
 .chk b{color:var(--navy);font-weight:600}
 .chk .sp{display:block;font-size:11.5px;color:var(--mute);margin-top:2px}
-.note{font-size:12.5px;color:var(--mute);padding:0 20px 16px;line-height:1.5}
-.pnote{font-size:12.5px;color:var(--mute);padding:12px 20px;background:#F7FBFF;
- border-top:1px solid var(--line);line-height:1.5}
+.note{font-size:12.5px;color:var(--mute);padding:14px 20px 16px;line-height:1.55;
+ border-top:1px solid var(--line);background:#F7FAFE;margin:0}
+.note b{color:var(--navy)}
+.pnote{font-size:12.5px;color:var(--mute);padding:12px 20px;background:#F7FAFE;
+ border-top:1px solid var(--line);line-height:1.5;margin:0}
 .pnote b{color:var(--navy)}
 .pnote a{color:var(--blue);text-decoration:none;font-weight:600}
 .pnote a:hover{text-decoration:underline}
-.disc{font-size:12.5px;color:var(--mute);border:1px dashed var(--line);border-radius:10px;
- padding:16px 18px;margin:22px 0 0;line-height:1.6}
+.disc{font-size:12.5px;color:var(--mute);background:#fff;border:1px solid var(--line);
+ border-radius:14px;padding:20px 22px;margin:22px 0 0;line-height:1.6}
 .disc b{color:var(--navy)}
-.disc ul{margin:9px 0 0;padding-left:20px}
-.disc li{margin-bottom:6px}
+.disc h3{font-size:13px;color:var(--navy);margin:0 0 10px;letter-spacing:-.005em}
+.disc h3+p{margin-top:0}
+.disc ul{margin:9px 0 18px;padding-left:20px}
+.disc li{margin-bottom:7px}
+.disc ul:last-child{margin-bottom:0}
 .disc a{color:var(--blue);text-decoration:none}
 .disc a:hover{text-decoration:underline}
 .hd{display:none}
 
-@media(max-width:760px){
+@media(max-width:860px){
  .g3,.g4{grid-template-columns:repeat(2,1fr)}
  .kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+ .sbnav{position:static}
  .sbnav .wrap{flex-direction:column;height:auto;gap:0;padding-top:12px;padding-bottom:4px}
  .sblinks{width:100%;gap:18px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none}
  .sblinks::-webkit-scrollbar{display:none}
@@ -129,9 +171,18 @@ tr.me td:first-child{color:var(--mint-deep);font-weight:700}
 }
 @media(max-width:560px){
  .g2{grid-template-columns:1fr}
- /* the basis column restates inputs the reader can already see, so it goes
-    first on a phone rather than forcing a sideways scroll */
- td.bas,th.bas{display:none}
+ th,td{padding:9px 8px}
+ /* the basis restates inputs already on screen, and the order page moves
+    under the charge name, so the build-up fits without sideways scrolling */
+ td.bas,th.bas,td.src,th.src{display:none}
+ td .pg{display:block}
+ /* the comparison keeps the three columns that answer the question */
+ .cmp th:nth-child(2),.cmp td:nth-child(2),
+ .cmp th:nth-child(3),.cmp td:nth-child(3),
+ .cmp th:nth-child(4),.cmp td:nth-child(4),
+ .cmp th:nth-child(5),.cmp td:nth-child(5){display:none}
+ .kpi .v{font-size:20px}
+ .kpi.lead .v{font-size:24px}
 }
 </style>
 </head>
@@ -148,36 +199,38 @@ tr.me td:first-child{color:var(--mint-deep);font-weight:700}
 </div></nav>
 
 <div class="wrap">
-<nav class="crumb"><a href="/">Home</a> &rsaquo; <a href="/tools/">Tools</a> &rsaquo; Airport charges</nav>
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/tools/">Tools</a> &rsaquo; Airport charges</nav>
 
 <header class="hero">
 <p class="eyebrow">Aviation tools</p>
 <h1>What does one turnaround cost at an Indian metro airport?</h1>
 <p class="lede">Pick the airport, the aircraft and the shape of the turn. The tool builds up the
 aeronautical charges line by line from the <b>AERA 4th Control Period tariff orders</b> for Delhi,
-Mumbai, Bengaluru and Hyderabad. Every rate shows the order page it came from.</p>
+Mumbai, Bengaluru and Hyderabad &mdash; applying the orders' own calculation rules on rounding,
+parking bands and exemptions, not just their rate tables. Every line shows the order page it
+came from.</p>
 </header>
 
 <section class="card">
-<h2>Airport and tariff period</h2>
+<h2><span class="n">1</span> Airport and tariff period</h2>
 <div class="bd grid g2">
 <label class="fld"><span class="lbl">Airport</span>
 <select id="ap"></select></label>
-<label class="fld"><span class="lbl">Tariff period in force</span>
+<label class="fld"><span class="lbl">Tariff period</span>
 <select id="pd"></select></label>
 </div>
 <p class="pnote" id="apnote"></p>
 </section>
 
 <section class="card">
-<h2>Aircraft</h2>
+<h2><span class="n">2</span> Aircraft</h2>
 <div class="bd grid g4">
 <label class="fld" style="grid-column:span 2"><span class="lbl">Type</span>
 <select id="ac"></select></label>
-<label class="fld"><span class="lbl">MTOW (metric tonnes)</span>
+<label class="fld"><span class="lbl">MTOW (tonnes)</span>
 <input id="mtow" type="number" min="1" max="700" step="0.1" value="79">
-<span class="hint">Landing charge is levied on MTOW.</span></label>
-<label class="fld"><span class="lbl">ICAO code letter</span>
+<span class="hint" id="mtowhint"></span></label>
+<label class="fld"><span class="lbl">Body type</span>
 <select id="body">
 <option value="C">Narrow body (A/B/C)</option>
 <option value="E">Wide body (D/E/F)</option>
@@ -187,15 +240,16 @@ Mumbai, Bengaluru and Hyderabad. Every rate shows the order page it came from.</
 </section>
 
 <section class="card">
-<h2>Sector and passengers</h2>
+<h2><span class="n">3</span> Sector and passengers</h2>
 <div class="bd">
 <div class="grid g2" style="margin-bottom:16px">
-<div class="fld"><span class="lbl">Sector</span>
+<div class="fld" role="group" aria-labelledby="lblSector"><span class="lbl" id="lblSector">Sector</span>
 <div class="seg" id="sector">
-<button data-v="dom" class="active">Domestic</button><button data-v="intl">International</button>
+<button type="button" data-v="dom" aria-pressed="true">Domestic</button><button type="button" data-v="intl" aria-pressed="false">International</button>
 </div></div>
 <label class="fld"><span class="lbl">Seats on the aircraft</span>
-<input id="seats" type="number" min="1" max="900" step="1" value="186"></label>
+<input id="seats" type="number" min="1" max="900" step="1" value="186">
+<span class="hint">Used as a stand-in for maximum certified capacity.</span></label>
 </div>
 <div class="grid g4">
 <label class="fld"><span class="lbl">Departing load factor (%)</span>
@@ -205,9 +259,12 @@ Mumbai, Bengaluru and Hyderabad. Every rate shows the order page it came from.</
 <label class="fld hd" id="wBiz"><span class="lbl">Premium cabin share (%)</span>
 <input id="biz" type="number" min="0" max="100" step="1" value="0">
 <span class="hint">Charged the Business UDF rate.</span></label>
+<label class="fld"><span class="lbl">UDF-exempt passengers (%)</span>
+<input id="exempt" type="number" min="0" max="100" step="1" value="0">
+<span class="hint">Transit under 24 h, infants, crew on duty.</span></label>
 <label class="fld hd" id="wFx"><span class="lbl">USD / INR</span>
 <input id="fx" type="number" min="1" max="200" step="0.01" value="88.50">
-<span class="hint">Some charges are set in dollars and converted at the RBI reference rate.</span></label>
+<span class="hint" id="fxhint"></span></label>
 </div>
 <div style="margin-top:16px">
 <label class="chk"><input type="checkbox" id="arrival">
@@ -218,66 +275,76 @@ Mumbai, Bengaluru and Hyderabad. Every rate shows the order page it came from.</
 </section>
 
 <section class="card">
-<h2>Turnaround and stand</h2>
+<h2><span class="n">4</span> Turnaround and stand</h2>
 <div class="bd">
 <div class="grid g3">
-<label class="fld"><span class="lbl">Time on stand (hours)</span>
+<label class="fld"><span class="lbl">On-block to off-block (hours)</span>
 <input id="tat" type="number" min="0" max="72" step="0.25" value="1"></label>
 <label class="fld"><span class="lbl">Free parking allowance (hours)</span>
-<input id="free" type="number" min="0" max="12" step="0.25" value="2">
+<input id="free" type="number" min="0" max="12" step="0.25" value="2.5">
 <span class="hint" id="freehint"></span></label>
-<div class="fld" id="wStand"><span class="lbl">Stand</span>
+<div class="fld" id="wStand" role="group" aria-labelledby="lblStand"><span class="lbl" id="lblStand">Stand</span>
 <div class="seg" id="stand">
-<button data-v="contact" class="active">Contact</button><button data-v="remote">Remote</button>
+<button type="button" data-v="contact" aria-pressed="true">Contact</button><button type="button" data-v="remote" aria-pressed="false">Remote</button>
 </div></div>
 </div>
 <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px">
-<label class="chk"><input type="checkbox" id="roundUp">
-<span><b>Bill part-hours as whole hours</b>
-<span class="sp">The orders' rounding convention is not in this transcription. Off bills pro rata.</span></span></label>
+<label class="chk"><input type="checkbox" id="sched" checked>
+<span><b>Domestic scheduled operator</b>
+<span class="sp">Landing is not payable for aircraft under 80 seats on domestic scheduled services.</span></span></label>
 <label class="chk hd" id="wBme"><input type="checkbox" id="bme">
 <span><b>Use airport bridge-mounted equipment (GPU/FEGP and PCA)</b>
 <span class="sp">Hyderabad only, contact stand. Flat for the first hour, then per 30 minutes.</span></span></label>
 </div>
-<div class="grid g2 hd" id="wFuel" style="margin-top:16px">
-<label class="fld"><span class="lbl">Fuel uplift (KL)</span>
+<div class="grid g2 hd" id="wHydExtra" style="margin-top:16px">
+<label class="fld hd" id="wBmeHrs"><span class="lbl">Bridge-equipment usage (hours)</span>
+<input id="bmeHrs" type="number" min="0" max="72" step="0.25" value="1">
+<span class="hint">Defaults to time on stand; set lower if the aircraft is off the bridge sooner.</span></label>
+<label class="fld hd" id="wFuel"><span class="lbl">Fuel uplift (KL)</span>
 <input id="fuelKl" type="number" min="0" max="500" step="1" value="0">
-<span class="hint">Hyderabad levies a fuel infrastructure charge per kilolitre. Leave at zero to exclude it.</span></label>
+<span class="hint">Hyderabad levies an infrastructure charge per kilolitre. Zero excludes it.</span></label>
 </div>
 </div>
 </section>
 
 <section class="card">
-<h2>Charge build-up</h2>
+<h2><span class="n">5</span> Charge build-up</h2>
 <div class="kpis">
-<div class="kpi lead"><span class="k">Total per turnaround</span><span class="v" id="kTot">&mdash;</span><span class="sm" id="kTotS"></span></div>
+<div class="kpi lead"><span class="k">Total per turnaround</span><span class="v" id="kTot" aria-live="polite">&mdash;</span><span class="sm" id="kTotS"></span></div>
 <div class="kpi"><span class="k">Per departing passenger</span><span class="v" id="kPax">&mdash;</span><span class="sm" id="kPaxS"></span></div>
 <div class="kpi"><span class="k">Per seat</span><span class="v" id="kSeat">&mdash;</span><span class="sm">At the seat count entered</span></div>
-<div class="kpi"><span class="k">Passenger charges</span><span class="v" id="kShare">&mdash;</span><span class="sm">Share of the total that moves with load</span></div>
+<div class="kpi"><span class="k">Moves with load</span><span class="v" id="kShare">&mdash;</span><span class="sm">Passenger share of the total</span></div>
 </div>
-<div class="scroll"><table>
-<thead><tr><th>Charge</th><th>Rate</th><th class="bas">Basis</th><th>Amount</th><th class="src">Order page</th></tr></thead>
+<div class="split">
+<div class="sbar" id="sbar" role="img" aria-label="Share of the total by charge group"></div>
+<div class="skey" id="skey"></div>
+</div>
+<div class="scroll"><table class="bld">
+<caption>Charge build-up, excluding GST and the Aviation Security Fee</caption>
+<thead><tr><th scope="col">Charge</th><th scope="col">Rate</th><th scope="col" class="bas">Basis</th><th scope="col">Amount</th><th scope="col" class="src">Order page</th></tr></thead>
 <tbody id="rows"></tbody>
 </table></div>
 <p class="note" id="calcnote"></p>
 </section>
 
 <section class="card">
-<h2>The same turnaround at all four airports</h2>
-<div class="scroll"><table>
-<thead><tr><th>Airport</th><th class="bas">Period priced</th><th>Aircraft</th><th>Passenger</th><th>Other</th><th>Total</th><th>Per pax</th></tr></thead>
+<h2><span class="n">6</span> The same turnaround at all four airports</h2>
+<div class="scroll"><table class="cmp">
+<caption id="cmpcap">Each airport priced at the tariff period in force today</caption>
+<thead><tr><th scope="col">Airport</th><th scope="col" class="bas">Period priced</th><th scope="col">Aircraft</th><th scope="col">Passenger</th><th scope="col">Other</th><th scope="col">Total</th><th scope="col">Per pax</th></tr></thead>
 <tbody id="cmp"></tbody>
 </table></div>
-<p class="note">Each airport is priced at the period in force today, on the inputs above. This is a
-total-cost comparison, not a like-for-like rate comparison: the airports levy different lines, so
-Delhi carries X-ray baggage charges, Bengaluru and Hyderabad carry CUTE/CUSS/BRS, and Hyderabad
-alone carries bridge-mounted equipment and the fuel infrastructure charge. Aircraft charges are
-landing and parking; passenger charges are UDF and per-passenger terminal charges.</p>
+<p class="note">This is a total-cost comparison, not a like-for-like rate comparison: the airports
+levy different lines, so Delhi carries X-ray baggage charges and stepped parking, Bengaluru and
+Hyderabad carry CUTE/CUSS/BRS, and Hyderabad alone carries bridge-mounted equipment and the fuel
+infrastructure charge. Each airport also applies its own rounding and free-parking rules, which
+are part of what the comparison shows.</p>
 </section>
 
 <div class="disc">
-<b>Source and standing.</b> Rates are transcribed from the AERA 4th Control Period final tariff
-orders, checked against the page images. Nothing is interpolated.
+<h3>Sources</h3>
+<p>Rates are transcribed from the AERA 4th Control Period final tariff orders and checked against
+the page images. The orders' calculation notes are applied alongside the rate tables.</p>
 <ul>
 <li><b>Delhi</b> &mdash; Order No. 20/2024-25 of 28.03.2025, effective 16.04.2025, Annexure 1A/1B pp.419&ndash;423.
 <a href="https://aera.gov.in/uploads/airports/17431676123962.pdf" target="_blank" rel="noopener">Order PDF</a></li>
@@ -288,11 +355,52 @@ orders, checked against the page images. Nothing is interpolated.
 <li><b>Hyderabad</b> &mdash; Order No. 15/2026-27 of 24.08.2026, effective 01.09.2026, Annexure I pp.540&ndash;543.
 <a href="https://aera.gov.in/uploads/airports/17875898143972.pdf" target="_blank" rel="noopener">Order PDF</a></li>
 </ul>
-<p style="margin:14px 0 0"><b>What this does not include, and what to check.</b></p>
+
+<h3>Rules applied, beyond the rate tables</h3>
+<ul>
+<li><b>Parking time rounds up</b> to the next whole hour at all four airports, per each order's
+parking notes (Delhi p.420 note 3, Mumbai p.502 note 4, Bengaluru p.619 note 4, Hyderabad p.541 note 5).</li>
+<li><b>MTOW rounds</b> to the next whole tonne at Delhi and Mumbai, and to the nearest tonne at
+Bengaluru and Hyderabad, which is what those orders specify. Exactly half a tonne is rounded up;
+the orders do not say.</li>
+<li><b>Delhi steps parking</b> by how long the aircraft stays: the rate for the first 4 hours after
+the free period, twice that from 4 to 12 hours, four times from 12 to 24, and five times beyond
+(p.420 note 5). The other three orders have no such multiplier, so a flat rate is right for them.</li>
+<li><b>Landing is not payable</b> for aircraft with a maximum certified capacity under 80 seats on
+domestic scheduled services (Delhi p.419, Mumbai p.501, Bengaluru p.618, Hyderabad p.540). The tool
+uses the seat count entered as a stand-in for certified capacity, and applies the exemption to the
+domestic sector only &mdash; the orders say "domestic scheduled operators" without naming the sector,
+so this is the conservative reading.</li>
+<li><b>Free parking absorbs the standard times</b> at Delhi, Bengaluru and Hyderabad, whose orders add
+15 minutes for touchdown-to-stand and 15 for stand-to-takeoff. The default is therefore 2.5 hours
+there and 2.0 at Mumbai, which grants no such addition. Whether those 30 minutes extend a window
+measured on-block to off-block is not stated, so the field stays editable.</li>
+<li><b>UDF exemptions</b> &mdash; transit passengers connecting within 24 hours on a single ticket,
+infants under two, and crew on duty &mdash; are not applied automatically, because the share depends on
+the schedule. Set the exempt percentage to model them. It reduces UDF only; per-passenger terminal
+charges are unaffected. (Delhi p.422, Mumbai p.503, Bengaluru p.619, Hyderabad p.542.)</li>
+</ul>
+
+<h3>Assumptions you may want to change</h3>
+<ul>
+<li><b>Incremental tariffs are included</b> from the date each order uses for computation &mdash;
+01.08.2029 and 01.05.2030 at Bengaluru, 01.11.2029 at Hyderabad. The orders make each one payable
+only once AERA notifies an Addendum on commissioning, so they are shown as separate flagged lines
+rather than folded into the base rate. If a project slips, remove those lines mentally; the base
+rate above them is what the order's main card says.</li>
+<li><b>Bengaluru's parking</b> is printed as two rows &mdash; the rate for the first two hours after the
+free period, and a higher rate "beyond 4 hours" &mdash; with nothing for the band between. This tool
+reads both against total time on stand, so the first rate runs to the four-hour mark and the second
+beyond it. That closes the gap rather than reproducing it, but it is an interpretation.</li>
+<li><b>Bridge-mounted equipment</b> at Hyderabad is billed on usage, which can be shorter than time on
+stand. The usage field defaults to the full turn.</li>
+</ul>
+
+<h3>Not included</h3>
 <ul>
 <li>Tariffs are <b>ceiling rates and exclude GST</b>. The Aviation Security Fee is set by the Ministry
-of Civil Aviation separately and is not here. Nor is ground handling, fuel throughput beyond the
-Hyderabad infrastructure charge, or the Mumbai Development Fee levied under Order 09/2023-24.</li>
+of Civil Aviation separately. Ground handling, fuel throughput beyond the Hyderabad infrastructure
+charge, and the Mumbai Development Fee levied under Order 09/2023-24 are all outside this tool.</li>
 <li><b>Variable Tariff Plans and the Key Partnership Programme</b> are narrative and conditional in the
 orders rather than tabulated, so they are not modelled. They can move landing charges materially on a
 qualifying new international route &mdash; Delhi and Mumbai both show nil landing for a qualifying new
@@ -300,22 +408,13 @@ long-haul destination in its first year.</li>
 <li><b>Appeals are live.</b> TDSAT partly set aside Order 20/2024-25 on DIAL's appeal, and on
 29.05.2026 allowed MIAL's appeal and directed AERA to give effect within three months. No revised
 Delhi or Mumbai rate card was on the AERA tariff-orders list as at 29.10.2026.</li>
-<li><b>Bengaluru and Hyderabad incremental tariffs are included</b> from the period each order gives
-them &mdash; the Eastern Connectivity and T2 Phase 2 projects at Bengaluru, the northern runway, apron
-and precinct at Hyderabad. The orders make each one conditional on AERA notifying an Addendum once
-the project commissions; this tool assumes they commission as planned. If a project slips, the later
-periods overstate the charge.</li>
-<li><b>Bengaluru parking</b> is given as two rows &mdash; the first two hours after the free period, and
-beyond four hours &mdash; with no row for the two to four hour band. This tool reads the slabs against
-total time on stand: free for two hours, the first rate for hours two to four, the second beyond four.
-That closes the gap in the order rather than reproducing it.</li>
-<li>Rates are what the orders print. Concessions, exemptions, general conditions and any carrier-specific
+<li>Concessions, exemptions beyond those above, general conditions and any carrier-specific
 arrangement sit outside this tool.</li>
 </ul>
 </div>
 
-<p class="note" style="padding:0;margin:20px 0 0">A working model, not advice. Check the order before
-you price anything on it.</p>
+<p class="note" style="padding:14px 0 0;background:none;border:0;margin:18px 0 0">A working model, not
+advice. Check the order before you price anything on it.</p>
 </div>
 
 <footer class="sitefoot"><div class="wrap">
@@ -327,15 +426,28 @@ you price anything on it.</p>
 </div>
 </div></footer>
 <script>
-const D = {"ap":[{"code":"BLR","name":"Bengaluru","city":"Bengaluru","full":"Kempegowda International Airport","op":"BIAL","order":"14/2026-27","odate":"20.08.2026","eff":"01.09.2026","cp":"01.04.2026 \u2013 31.03.2031","url":"https://aera.gov.in/uploads/airports/17872763073873.pdf","pages":"Annexure I, pp.618\u2013620; contingent Tables 290\u2013292, pp.610\u2013612","cur":0,"parkMode":"tier","bodySplit":false,"classSplit":false,"cute":true,"xray":false,"bmeAvail":false,"fuelAvail":false,"freeNote":"First 2 hours, plus 15 min + 15 min standard disembarking and embarking time (order note).","periods":[{"lbl":"01.09.2026 \u2013 31.03.2027","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":18,"parkT2":29,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.04.2027 \u2013 31.03.2028","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":19,"parkT2":31,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.04.2028 \u2013 31.03.2029","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":20,"parkT2":32,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.04.2029 \u2013 31.03.2030","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":21,"parkT2":34,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.04.2030 \u2013 30.04.2030","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":22,"parkT2":34,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.05.2030 \u2013 31.03.2031","landDomW":295,"landDomN":295,"landIntlW":374,"landIntlN":374,"minLand":null,"parkT1":22,"parkT2":34,"udfDE":160,"udfDD":65,"udfIEE":854,"udfIED":366,"udfIBE":854,"udfIBD":366,"cuteDom":75,"cuteIntlUsd":1}],"inc":[{"name":"Eastern Connectivity","src":"Table 290, p.610","add":{"3":{"udfDE":15,"udfIE":26,"landIntl":30},"4":{"udfDE":15,"udfIE":26,"landIntl":30},"5":{"udfDE":15,"udfIE":26,"landIntl":30}}},{"name":"T2 Phase 2 \u2014 apron","src":"Table 291, p.611","add":{"3":{"udfDE":20,"landDom":30},"4":{"udfDE":20,"landDom":30},"5":{"udfDE":20,"landDom":30}}},{"name":"T2 Phase 2 \u2014 terminal","src":"Table 292, p.612","add":{"5":{"udfDE":166,"udfDD":70,"udfIE":173,"udfID":73,"landDom":196,"landIntl":332}}}],"src":{"land":"p.618","parkT1":"p.618","parkT2":"p.619","udf":"p.619","cute":"p.620"}},{"code":"DEL","name":"Delhi","city":"Delhi","full":"Indira Gandhi International Airport","op":"DIAL","order":"20/2024-25","odate":"28.03.2025","eff":"16.04.2025","cp":"01.04.2024 \u2013 31.03.2029","url":"https://aera.gov.in/uploads/airports/17431676123962.pdf","pages":"Annexure 1A/1B, pp.419\u2013423","cur":1,"parkMode":"stand","bodySplit":true,"classSplit":true,"cute":false,"xray":true,"bmeAvail":false,"fuelAvail":false,"freeNote":"First 2 hours, plus 15 min + 15 min standard times (order note).","periods":[{"lbl":"16.04.2025 \u2013 31.03.2026  (FY2025-26)","landDomW":564,"landDomN":347,"landIntlW":785,"landIntlN":570,"minLand":8000,"parkRemote":18,"parkContact":36,"udfDE":129,"udfDD":56,"udfIEE":650,"udfIED":275,"udfIBE":810,"udfIBD":345},{"lbl":"01.04.2026 \u2013 31.03.2027  (FY2026-27)","landDomW":564,"landDomN":347,"landIntlW":785,"landIntlN":570,"minLand":8000,"parkRemote":18,"parkContact":36,"udfDE":129,"udfDD":56,"udfIEE":650,"udfIED":275,"udfIBE":810,"udfIBD":345},{"lbl":"01.04.2027 \u2013 31.03.2028  (FY2027-28)","landDomW":564,"landDomN":347,"landIntlW":785,"landIntlN":570,"minLand":8000,"parkRemote":18,"parkContact":36,"udfDE":129,"udfDD":56,"udfIEE":650,"udfIED":275,"udfIBE":810,"udfIBD":345},{"lbl":"01.04.2028 \u2013 31.03.2029  (FY2028-29)","landDomW":564,"landDomN":347,"landIntlW":785,"landIntlN":570,"minLand":8000,"parkRemote":18,"parkContact":36,"udfDE":129,"udfDD":56,"udfIEE":650,"udfIED":275,"udfIBE":810,"udfIBD":345}],"inc":[],"xrayDom":[[25,220,"\u2264 25 seats"],[50,440,"26\u201350 seats"],[100,990,"51\u2013100 seats"],[200,1540,"101\u2013200 seats"],[100000,2720,"\u2265 201 seats"]],"xrayIntlNarrow":260,"xrayIntlWide":390,"src":{"land":"p.419","park":"p.420","xray":"p.421","udf":"p.421"}},{"code":"MUM","name":"Mumbai","city":"Mumbai","full":"Chhatrapati Shivaji Maharaj International Airport","op":"MIAL","order":"01/2025-26","odate":"07.05.2025","eff":"16.05.2025","cp":"01.04.2024 \u2013 31.03.2029","url":"https://aera.gov.in/uploads/airports/17466350622028.pdf","pages":"Annexure 1A/1B, pp.501\u2013505","cur":0,"parkMode":"stand","bodySplit":false,"classSplit":true,"cute":false,"xray":false,"bmeAvail":false,"fuelAvail":false,"freeNote":"First 2 hours free (order note).","periods":[{"lbl":"16.05.2025 \u2013 31.03.2029  (single rate)","landDomW":402,"landDomN":402,"landIntlW":603,"landIntlN":603,"minLand":8000,"parkRemote":13.5,"parkContact":27,"udfDE":175,"udfDD":75,"udfIEE":615,"udfIED":260,"udfIBE":695,"udfIBD":304}],"inc":[],"src":{"land":"p.501","park":"p.501","udf":"p.502"}},{"code":"HYD","name":"Hyderabad","city":"Hyderabad","full":"Rajiv Gandhi International Airport","op":"GHIAL","order":"15/2026-27","odate":"24.08.2026","eff":"01.09.2026","cp":"01.04.2026 \u2013 31.03.2031","url":"https://aera.gov.in/uploads/airports/17875898143972.pdf","pages":"Annexure I, pp.540\u2013543; contingent Tables 360\u2013361, pp.533\u2013534","cur":0,"parkMode":"stand","bodySplit":false,"classSplit":false,"cute":true,"xray":false,"bmeAvail":true,"fuelAvail":true,"freeNote":"Rate applies after the free parking period.","periods":[{"lbl":"01.09.2026 \u2013 31.03.2027","landDomW":435,"landDomN":435,"landIntlW":630,"landIntlN":630,"minLand":null,"parkRemote":17,"parkContact":34,"udfDE":515,"udfDD":220,"udfIEE":1030,"udfIED":440,"udfIBE":1030,"udfIBD":440,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":5700,"domWide":10000,"intlNarrow":7100,"intlWide":11000},"fuelInfra":1500},{"lbl":"01.04.2027 \u2013 31.03.2028","landDomW":530,"landDomN":530,"landIntlW":735,"landIntlN":735,"minLand":null,"parkRemote":18,"parkContact":36,"udfDE":555,"udfDD":240,"udfIEE":1085,"udfIED":465,"udfIBE":1085,"udfIBD":465,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":5900,"domWide":10400,"intlNarrow":7400,"intlWide":11400},"fuelInfra":1500},{"lbl":"01.04.2028 \u2013 31.03.2029","landDomW":640,"landDomN":640,"landIntlW":845,"landIntlN":845,"minLand":null,"parkRemote":19,"parkContact":38,"udfDE":620,"udfDD":265,"udfIEE":1130,"udfIED":485,"udfIBE":1130,"udfIBD":485,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":6100,"domWide":10800,"intlNarrow":7700,"intlWide":11900},"fuelInfra":1500},{"lbl":"01.04.2029 \u2013 31.10.2029","landDomW":745,"landDomN":745,"landIntlW":905,"landIntlN":905,"minLand":null,"parkRemote":20,"parkContact":40,"udfDE":670,"udfDD":285,"udfIEE":1175,"udfIED":500,"udfIBE":1175,"udfIBD":500,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":6400,"domWide":11200,"intlNarrow":8000,"intlWide":12400},"fuelInfra":1500},{"lbl":"01.11.2029 \u2013 31.03.2030","landDomW":230,"landDomN":230,"landIntlW":245,"landIntlN":245,"minLand":null,"parkRemote":20,"parkContact":40,"udfDE":415,"udfDD":175,"udfIEE":880,"udfIED":375,"udfIBE":880,"udfIBD":375,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":6400,"domWide":11200,"intlNarrow":8000,"intlWide":12400},"fuelInfra":1500},{"lbl":"01.04.2030 \u2013 31.03.2031","landDomW":275,"landDomN":275,"landIntlW":315,"landIntlN":315,"minLand":null,"parkRemote":21,"parkContact":42,"udfDE":415,"udfDD":175,"udfIEE":915,"udfIED":390,"udfIBE":915,"udfIBD":390,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":6700,"domWide":11700,"intlNarrow":8400,"intlWide":12900},"fuelInfra":1500}],"inc":[{"name":"Northern runway & apron","src":"Table 360, p.533","add":{"4":{"udfDE":122,"udfDD":52,"udfIE":175,"udfID":75,"landDom":255,"landIntl":400},"5":{"udfDE":122,"udfDD":52,"udfIE":175,"udfID":75,"landDom":255,"landIntl":400}}},{"name":"Northern precinct development","src":"Table 361, p.534","add":{"4":{"udfDE":164,"udfDD":70,"udfIE":160,"udfID":70,"landDom":315,"landIntl":350},"5":{"udfDE":164,"udfDD":70,"udfIE":160,"udfID":70,"landDom":315,"landIntl":350}}}],"src":{"land":"p.540","park":"p.541","udf":"p.541","cute":"p.542","bme":"p.543","fuel":"p.543"}}],"ac":[["ATR 72-600",23.0,"C",78],["De Havilland Dash 8 Q400",29.3,"C",78],["Embraer E175",40.4,"C",76],["Airbus A319neo",75.5,"C",140],["Airbus A320ceo",78.0,"C",180],["Airbus A320neo",79.0,"C",186],["Airbus A321neo",97.0,"C",232],["Airbus A321XLR",101.0,"C",200],["Boeing 737-800",79.0,"C",189],["Boeing 737 MAX 8",82.2,"C",189],["Boeing 737 MAX 9",88.3,"C",197],["Boeing 787-8",227.9,"E",256],["Airbus A330-300",242.0,"E",300],["Airbus A330-900neo",251.0,"E",300],["Boeing 787-9",254.0,"E",290],["Airbus A350-900",280.0,"E",315],["Airbus A350-1000",319.0,"E",350],["Boeing 777-300ER",351.5,"E",342],["Airbus A380-800",575.0,"F",500]]};
+const D = {"ap":[{"code":"BLR","name":"Bengaluru","full":"Kempegowda International Airport","op":"BIAL","order":"14/2026-27","odate":"20.08.2026","eff":"01.09.2026","cp":"01.04.2026 \u2013 31.03.2031","url":"https://aera.gov.in/uploads/airports/17872763073873.pdf","pages":"Annexure I, pp.618\u2013620; incremental Tables 290\u2013292, pp.610\u2013612","parkMode":"tier","parkBands":null,"mtRound":"nearest","freeDefault":2.5,"freeNote":"Two hours free, plus the 15 min touchdown-to-stand and 15 min stand-to-takeoff standard times the order adds to free parking.","bodySplit":false,"classSplit":false,"cute":true,"xray":false,"bmeAvail":false,"fuelAvail":false,"periods":[{"lbl":"01.09.2026 \u2013 31.03.2027","from":"2026-09-01","to":"2027-03-31","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":18,"parkT2":29,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.04.2027 \u2013 31.03.2028","from":"2027-04-01","to":"2028-03-31","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":19,"parkT2":31,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.04.2028 \u2013 31.03.2029","from":"2028-04-01","to":"2029-03-31","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":20,"parkT2":32,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.04.2029 \u2013 31.07.2029","from":"2029-04-01","to":"2029-07-31","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":21,"parkT2":34,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.08.2029 \u2013 31.03.2030","from":"2029-08-01","to":"2030-03-31","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":21,"parkT2":34,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.04.2030 \u2013 30.04.2030","from":"2030-04-01","to":"2030-04-30","landDomW":442,"landDomN":442,"landIntlW":652,"landIntlN":652,"minLand":null,"parkT1":22,"parkT2":34,"udfDE":300,"udfDD":125,"udfIEE":997,"udfIED":426,"udfIBE":997,"udfIBD":426,"cuteDom":75,"cuteIntlUsd":1},{"lbl":"01.05.2030 \u2013 31.03.2031","from":"2030-05-01","to":"2031-03-31","landDomW":295,"landDomN":295,"landIntlW":374,"landIntlN":374,"minLand":null,"parkT1":22,"parkT2":34,"udfDE":160,"udfDD":65,"udfIEE":854,"udfIED":366,"udfIBE":854,"udfIBD":366,"cuteDom":75,"cuteIntlUsd":1}],"inc":[{"name":"Eastern Connectivity","src":"Table 290, p.610","from":"2029-08-01","add":{"udfDE":15,"udfIE":26,"landIntl":30}},{"name":"T2 Phase 2 \u2014 apron","src":"Table 291, p.611","from":"2029-08-01","add":{"udfDE":20,"landDom":30}},{"name":"T2 Phase 2 \u2014 terminal","src":"Table 292, p.612","from":"2030-05-01","add":{"udfDE":166,"udfDD":70,"udfIE":173,"udfID":73,"landDom":196,"landIntl":332}}],"src":{"land":"p.618","parkT1":"p.618","parkT2":"p.619","udf":"p.619","cute":"p.620"}},{"code":"DEL","name":"Delhi","full":"Indira Gandhi International Airport","op":"DIAL","order":"20/2024-25","odate":"28.03.2025","eff":"16.04.2025","cp":"01.04.2024 \u2013 31.03.2029","url":"https://aera.gov.in/uploads/airports/17431676123962.pdf","pages":"Annexure 1A/1B, pp.419\u2013423","parkMode":"stand","parkBands":[[4,1],[12,2],[24,4],[null,5]],"mtRound":"ceil","freeDefault":2.5,"freeNote":"Two hours free, plus the 15 min touchdown-to-stand and 15 min stand-to-takeoff standard times the order adds to free parking.","bodySplit":true,"classSplit":true,"cute":false,"xray":true,"bmeAvail":false,"fuelAvail":false,"periods":[{"lbl":"16.04.2025 \u2013 31.03.2026  (FY2025-26)","from":"2025-04-16","to":"2026-03-31","landDomW":564,"landDomN":347,"landIntlW":785,"landIntlN":570,"minLand":8000,"parkRemote":18,"parkContact":36,"udfDE":129,"udfDD":56,"udfIEE":650,"udfIED":275,"udfIBE":810,"udfIBD":345},{"lbl":"01.04.2026 \u2013 31.03.2027  (FY2026-27)","from":"2026-04-01","to":"2027-03-31","landDomW":564,"landDomN":347,"landIntlW":785,"landIntlN":570,"minLand":8000,"parkRemote":18,"parkContact":36,"udfDE":129,"udfDD":56,"udfIEE":650,"udfIED":275,"udfIBE":810,"udfIBD":345},{"lbl":"01.04.2027 \u2013 31.03.2028  (FY2027-28)","from":"2027-04-01","to":"2028-03-31","landDomW":564,"landDomN":347,"landIntlW":785,"landIntlN":570,"minLand":8000,"parkRemote":18,"parkContact":36,"udfDE":129,"udfDD":56,"udfIEE":650,"udfIED":275,"udfIBE":810,"udfIBD":345},{"lbl":"01.04.2028 \u2013 31.03.2029  (FY2028-29)","from":"2028-04-01","to":"2029-03-31","landDomW":564,"landDomN":347,"landIntlW":785,"landIntlN":570,"minLand":8000,"parkRemote":18,"parkContact":36,"udfDE":129,"udfDD":56,"udfIEE":650,"udfIED":275,"udfIBE":810,"udfIBD":345}],"inc":[],"xrayDom":[[25,220,"\u2264 25 seats"],[50,440,"26\u201350 seats"],[100,990,"51\u2013100 seats"],[200,1540,"101\u2013200 seats"],[100000,2720,"\u2265 201 seats"]],"xrayIntlNarrow":260,"xrayIntlWide":390,"src":{"land":"p.419","park":"p.420","xray":"p.421","udf":"p.421"}},{"code":"BOM","name":"Mumbai","full":"Chhatrapati Shivaji Maharaj International Airport","op":"MIAL","order":"01/2025-26","odate":"07.05.2025","eff":"16.05.2025","cp":"01.04.2024 \u2013 31.03.2029","url":"https://aera.gov.in/uploads/airports/17466350622028.pdf","pages":"Annexure 1A/1B, pp.501\u2013505","parkMode":"stand","parkBands":null,"mtRound":"ceil","freeDefault":2,"freeNote":"Two hours free, measured on-block to off-block. This order grants no additional standard times.","bodySplit":false,"classSplit":true,"cute":false,"xray":false,"bmeAvail":false,"fuelAvail":false,"periods":[{"lbl":"16.05.2025 \u2013 31.03.2029  (single rate)","from":"2025-05-16","to":"2029-03-31","landDomW":402,"landDomN":402,"landIntlW":603,"landIntlN":603,"minLand":8000,"parkRemote":13.5,"parkContact":27,"udfDE":175,"udfDD":75,"udfIEE":615,"udfIED":260,"udfIBE":695,"udfIBD":304}],"inc":[],"src":{"land":"p.501","park":"p.501","udf":"p.502"}},{"code":"HYD","name":"Hyderabad","full":"Rajiv Gandhi International Airport","op":"GHIAL","order":"15/2026-27","odate":"24.08.2026","eff":"01.09.2026","cp":"01.04.2026 \u2013 31.03.2031","url":"https://aera.gov.in/uploads/airports/17875898143972.pdf","pages":"Annexure I, pp.540\u2013543; incremental Tables 360\u2013361, pp.533\u2013534","parkMode":"stand","parkBands":null,"mtRound":"nearest","freeDefault":2.5,"freeNote":"Two hours free, plus the 15 min touchdown-to-stand and 15 min stand-to-takeoff standard times the order adds to free parking.","bodySplit":false,"classSplit":false,"cute":true,"xray":false,"bmeAvail":true,"fuelAvail":true,"periods":[{"lbl":"01.09.2026 \u2013 31.03.2027","from":"2026-09-01","to":"2027-03-31","landDomW":435,"landDomN":435,"landIntlW":630,"landIntlN":630,"minLand":null,"parkRemote":17,"parkContact":34,"udfDE":515,"udfDD":220,"udfIEE":1030,"udfIED":440,"udfIBE":1030,"udfIBD":440,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":5700,"domWide":10000,"intlNarrow":7100,"intlWide":11000},"fuelInfra":1500},{"lbl":"01.04.2027 \u2013 31.03.2028","from":"2027-04-01","to":"2028-03-31","landDomW":530,"landDomN":530,"landIntlW":735,"landIntlN":735,"minLand":null,"parkRemote":18,"parkContact":36,"udfDE":555,"udfDD":240,"udfIEE":1085,"udfIED":465,"udfIBE":1085,"udfIBD":465,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":5900,"domWide":10400,"intlNarrow":7400,"intlWide":11400},"fuelInfra":1500},{"lbl":"01.04.2028 \u2013 31.03.2029","from":"2028-04-01","to":"2029-03-31","landDomW":640,"landDomN":640,"landIntlW":845,"landIntlN":845,"minLand":null,"parkRemote":19,"parkContact":38,"udfDE":620,"udfDD":265,"udfIEE":1130,"udfIED":485,"udfIBE":1130,"udfIBD":485,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":6100,"domWide":10800,"intlNarrow":7700,"intlWide":11900},"fuelInfra":1500},{"lbl":"01.04.2029 \u2013 31.10.2029","from":"2029-04-01","to":"2029-10-31","landDomW":745,"landDomN":745,"landIntlW":905,"landIntlN":905,"minLand":null,"parkRemote":20,"parkContact":40,"udfDE":670,"udfDD":285,"udfIEE":1175,"udfIED":500,"udfIBE":1175,"udfIBD":500,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":6400,"domWide":11200,"intlNarrow":8000,"intlWide":12400},"fuelInfra":1500},{"lbl":"01.11.2029 \u2013 31.03.2030","from":"2029-11-01","to":"2030-03-31","landDomW":230,"landDomN":230,"landIntlW":245,"landIntlN":245,"minLand":null,"parkRemote":20,"parkContact":40,"udfDE":415,"udfDD":175,"udfIEE":880,"udfIED":375,"udfIBE":880,"udfIBD":375,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":6400,"domWide":11200,"intlNarrow":8000,"intlWide":12400},"fuelInfra":1500},{"lbl":"01.04.2030 \u2013 31.03.2031","from":"2030-04-01","to":"2031-03-31","landDomW":275,"landDomN":275,"landIntlW":315,"landIntlN":315,"minLand":null,"parkRemote":21,"parkContact":42,"udfDE":415,"udfDD":175,"udfIEE":915,"udfIED":390,"udfIBE":915,"udfIBD":390,"cuteDom":75,"cuteIntlUsd":1.25,"bme":{"domNarrow":6700,"domWide":11700,"intlNarrow":8400,"intlWide":12900},"fuelInfra":1500}],"inc":[{"name":"Northern runway & apron","src":"Table 360, p.533","from":"2029-11-01","add":{"udfDE":122,"udfDD":52,"udfIE":175,"udfID":75,"landDom":255,"landIntl":400}},{"name":"Northern precinct development","src":"Table 361, p.534","from":"2029-11-01","add":{"udfDE":164,"udfDD":70,"udfIE":160,"udfID":70,"landDom":315,"landIntl":350}}],"src":{"land":"p.540","park":"p.541","udf":"p.541","cute":"p.542","bme":"p.543","fuel":"p.543"}}],"ac":[["ATR 72-600",23.0,"C",78],["De Havilland Dash 8 Q400",29.3,"C",78],["Embraer E175",40.4,"C",76],["Airbus A319neo",75.5,"C",140],["Airbus A320ceo",78.0,"C",180],["Airbus A320neo",79.0,"C",186],["Airbus A321neo",97.0,"C",232],["Airbus A321XLR",101.0,"C",200],["Boeing 737-800",79.0,"C",189],["Boeing 737 MAX 8",82.2,"C",189],["Boeing 737 MAX 9",88.3,"C",197],["Boeing 787-8",227.9,"E",256],["Airbus A330-300",242.0,"E",300],["Airbus A330-900neo",251.0,"E",300],["Boeing 787-9",254.0,"E",290],["Airbus A350-900",280.0,"E",315],["Airbus A350-1000",319.0,"E",350],["Boeing 777-300ER",351.5,"E",342],["Airbus A380-800",575.0,"F",500]],"fx":88.5,"fxAsAt":"29 October 2026"};
 const $ = i => document.getElementById(i);
 const nf = (n,d) => Number(n).toLocaleString('en-IN',{minimumFractionDigits:d===undefined?0:d,maximumFractionDigits:d===undefined?0:d});
 const rs = n => '\u20b9' + nf(Math.round(n));
+/* two decimals only where the rate actually has them (Mumbai parking is 13.50) */
+const nfr = v => Number.isInteger(v) ? nf(v,0) : nf(v,2);
 const num = (i,f) => { const v = parseFloat($(i).value); return isFinite(v) ? v : f; };
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-let S = {ap:0, pd:0, sector:'dom', stand:'contact'};
+let S = {ap:0, pd:0, sector:'dom', stand:'contact', freeEdited:false, bmeEdited:false};
 
-/* ---- build the airport and aircraft pickers ---- */
+/* ---- which tariff period is in force on a given day ---- */
+function curIdx(a, d){
+  const t = (d || new Date()).toISOString().slice(0,10);
+  const i = a.periods.findIndex(p => p.from <= t && t <= p.to);
+  if(i >= 0) return i;
+  return t < a.periods[0].from ? 0 : a.periods.length - 1;
+}
+function periodLapsed(a){
+  return new Date().toISOString().slice(0,10) > a.periods[a.periods.length - 1].to;
+}
+
 D.ap.forEach((a,i) => {
   const o = document.createElement('option');
   o.value = i; o.textContent = a.name + ' (' + a.code + ')';
@@ -349,6 +461,8 @@ D.ac.forEach((a,i) => {
 });
 { const o = document.createElement('option'); o.value = '-1'; o.textContent = 'Other \u2014 enter MTOW and seats'; acSel.appendChild(o); }
 acSel.value = '5';
+$('fx').value = D.fx.toFixed(2);
+$('fxhint').textContent = 'RBI reference rate as at ' + D.fxAsAt + '. Set your own.';
 
 function fillPeriods(){
   const a = D.ap[S.ap];
@@ -358,100 +472,142 @@ function fillPeriods(){
     o.value = i; o.textContent = p.lbl;
     $('pd').appendChild(o);
   });
-  S.pd = Math.min(S.pd, a.periods.length - 1);
   $('pd').value = S.pd;
 }
 
-/* ---- rate set for a period, with the incremental add-ons folded in.
-   The orders make these conditional on AERA notifying an Addendum once each
-   project commissions. The tool assumes the projects land as planned, so the
-   add-on is part of the rate from the period the order gives it. ---- */
+/* ---- base rates for a period, plus any incremental tariffs that have started.
+   Base and increment are kept apart so the build-up can show both. ---- */
 function rates(a, pi){
   const p = a.periods[pi];
-  const r = {
+  const base = {
     landDomW:p.landDomW, landDomN:p.landDomN, landIntlW:p.landIntlW, landIntlN:p.landIntlN,
     minLand:p.minLand,
     parkRemote:p.parkRemote, parkContact:p.parkContact, parkT1:p.parkT1, parkT2:p.parkT2,
     udfDE:p.udfDE, udfDD:p.udfDD,
     udfIEE:p.udfIEE, udfIED:p.udfIED, udfIBE:p.udfIBE, udfIBD:p.udfIBD,
     cuteDom:p.cuteDom, cuteIntlUsd:p.cuteIntlUsd,
-    bme:p.bme ? Object.assign({}, p.bme) : null, fuelInfra:p.fuelInfra
+    bme:p.bme || null, fuelInfra:p.fuelInfra
   };
-  r.applied = [];
-  (a.inc || []).forEach(prj => {
-    const d = prj.add[pi]; if(!d) return;
-    if(d.landDom){ r.landDomW += d.landDom; r.landDomN += d.landDom; }
-    if(d.landIntl){ r.landIntlW += d.landIntl; r.landIntlN += d.landIntl; }
-    if(d.udfDE) r.udfDE += d.udfDE;
-    if(d.udfDD) r.udfDD += d.udfDD;
-    if(d.udfIE){ r.udfIEE += d.udfIE; r.udfIBE += d.udfIE; }
-    if(d.udfID){ r.udfIED += d.udfID; r.udfIBD += d.udfID; }
-    r.applied.push(prj.name);
-  });
-  return r;
+  const inc = (a.inc || []).filter(prj => p.from >= prj.from);
+  return {base:base, inc:inc};
 }
 
-/* ---- the build-up. Each line is tagged ac (aircraft), px (passenger) or ot. ---- */
+/* hours after the free period, split across the order's multiplier bands */
+function bandHours(ph, bands){
+  let lo = 0; const out = [];
+  for(const [hiRaw, m] of bands){
+    const hi = hiRaw === null ? Infinity : hiRaw;
+    const h = Math.max(0, Math.min(ph, hi) - lo);
+    if(h > 0) out.push({h:h, m:m, lo:lo, hi:hi});
+    lo = hi;
+    if(ph <= hi) break;
+  }
+  return out;
+}
+
+/* "first 4 h after free parking", "4-12 h after free parking (2x)" ... */
+function bandLabel(sg, banded){
+  if(!banded) return '';
+  const span = sg.lo === 0 ? 'first ' + sg.hi + ' h'
+             : (sg.hi === Infinity ? 'beyond ' + sg.lo + ' h' : sg.lo + '\u2013' + sg.hi + ' h');
+  return ', ' + span + ' after free parking' + (sg.m > 1 ? ' (' + sg.m + '\u00d7)' : '');
+}
+
 function compute(a, pi, I){
-  const r = rates(a, pi);
-  const L = [], wide = I.body !== 'C';
-  const dom = I.sector === 'dom';
+  const R = rates(a, pi), r = R.base, inc = R.inc;
+  const L = [], wide = I.body !== 'C', dom = I.sector === 'dom';
+  const sum = (o, k) => inc.reduce((s,p) => s + (p.add[k] || 0), 0);
+  const names = ks => inc.filter(p => ks.some(k => p.add[k])).map(p => p.name).join(', ');
 
-  let lr = dom ? (wide ? r.landDomW : r.landDomN) : (wide ? r.landIntlW : r.landIntlN);
-  let land = I.mtow * lr, lname = 'Landing', min = false;
-  if(r.minLand != null && land < r.minLand){ land = r.minLand; min = true; }
-  L.push({g:'ac', n:lname + (min ? ' \u2014 minimum charge applies' : ''),
-    r:min ? rs(r.minLand) + ' / landing' : '\u20b9' + nf(lr,0) + ' / MT',
-    b:min ? 'Floor above ' + nf(I.mtow,1) + ' MT \u00d7 ' + rs(lr) : nf(I.mtow,1) + ' MT MTOW'
-       + (a.bodySplit ? (wide ? ', wide body' : ', narrow body') : ''),
-    a:land, s:a.src.land});
+  /* MTOW: next whole tonne at DEL/BOM, nearest at BLR/HYD */
+  const mt = a.mtRound === 'ceil' ? Math.ceil(I.mtow - 1e-9) : Math.round(I.mtow);
+  const mtTxt = (mt === I.mtow) ? nf(mt,0) + ' MT' : nf(I.mtow,1) + ' t \u2192 ' + nf(mt,0) + ' MT';
 
+  /* ---------- landing ---------- */
+  const exempt = I.sched && dom && I.seats < 80;
+  const lBase = dom ? (wide ? r.landDomW : r.landDomN) : (wide ? r.landIntlW : r.landIntlN);
+  if(exempt){
+    L.push({g:'ac', n:'Landing', flag:'exempt', fx:'ex',
+      r:'\u2014', b:I.seats + ' seats, under the 80-seat threshold', a:0, s:a.src.land});
+  } else {
+    let land = mt * lBase, min = false;
+    if(r.minLand != null && land < r.minLand){ min = true; }
+    L.push({g:'ac', n:'Landing' + (min ? ' \u2014 minimum applies' : ''),
+      r:'\u20b9' + nfr(lBase) + ' / MT',
+      b:min ? mtTxt + ' \u00d7 \u20b9' + nfr(lBase) + ' = ' + rs(land) + ', below the ' +
+              rs(r.minLand) + ' minimum'
+            : mtTxt + (a.bodySplit ? (wide ? ', wide body' : ', narrow body') : ''),
+      a:min ? r.minLand : land, s:a.src.land});
+    const lAdd = dom ? sum(inc,'landDom') : sum(inc,'landIntl');
+    if(lAdd > 0) L.push({g:'ac', n:'Landing \u2014 incremental tariff', flag:'contingent',
+      r:'\u20b9' + nfr(lAdd) + ' / MT', b:names([dom ? 'landDom' : 'landIntl']),
+      a:mt * lAdd, s:inc.map(p => p.src).join('; ')});
+  }
+
+  /* ---------- parking: part hours round up, then the bands ---------- */
   const chg = Math.max(0, I.tat - I.free);
-  const ph = I.roundUp ? Math.ceil(chg) : chg;
+  const ph = Math.ceil(chg - 1e-9);
   if(ph > 0){
     if(a.parkMode === 'tier'){
-      const h1 = Math.min(ph, 2), h2 = Math.max(0, ph - 2);
-      if(h1 > 0) L.push({g:'ac', n:'Parking \u2014 first 2 h after the free period',
-        r:'\u20b9' + nf(r.parkT1,0) + ' / MT / h', b:nf(I.mtow,1) + ' MT \u00d7 ' + nf(h1,2) + ' h',
-        a:I.mtow * r.parkT1 * h1, s:a.src.parkT1});
-      if(h2 > 0) L.push({g:'ac', n:'Parking \u2014 beyond 4 h',
-        r:'\u20b9' + nf(r.parkT2,0) + ' / MT / h', b:nf(I.mtow,1) + ' MT \u00d7 ' + nf(h2,2) + ' h',
-        a:I.mtow * r.parkT2 * h2, s:a.src.parkT2});
+      /* bands measured on total time on stand so the "beyond 4 h" label stays true */
+      const t1 = Math.max(0, Math.min(I.tat, 4) - I.free);
+      const t2 = Math.max(0, I.tat - Math.max(4, I.free));
+      const h1 = Math.ceil(t1 - 1e-9), h2 = Math.ceil(t1 + t2 - 1e-9) - h1;
+      if(h1 > 0) L.push({g:'ac', n:'Parking \u2014 to 4 h on stand',
+        r:'\u20b9' + nfr(r.parkT1) + ' / MT / h', b:mtTxt + ' \u00d7 ' + nf(h1,0) + ' h',
+        a:mt * r.parkT1 * h1, s:a.src.parkT1});
+      if(h2 > 0) L.push({g:'ac', n:'Parking \u2014 beyond 4 h on stand',
+        r:'\u20b9' + nfr(r.parkT2) + ' / MT / h', b:mtTxt + ' \u00d7 ' + nf(h2,0) + ' h',
+        a:mt * r.parkT2 * h2, s:a.src.parkT2});
     } else {
       const pr = I.stand === 'contact' ? r.parkContact : r.parkRemote;
-      L.push({g:'ac', n:'Parking \u2014 ' + I.stand + ' stand',
-        r:'\u20b9' + nf(pr,2) + ' / MT / h', b:nf(I.mtow,1) + ' MT \u00d7 ' + nf(ph,2) + ' h',
-        a:I.mtow * pr * ph, s:a.src.park});
+      const banded = !!a.parkBands;
+      const bands = a.parkBands || [[null,1]];
+      bandHours(ph, bands).forEach(sg => {
+        L.push({g:'ac',
+          n:'Parking \u2014 ' + I.stand + ' stand' + bandLabel(sg, banded),
+          r:'\u20b9' + nfr(pr * sg.m) + ' / MT / h',
+          b:mtTxt + ' \u00d7 ' + nf(sg.h,0) + ' h' + (sg.m > 1 ? ' at ' + sg.m + '\u00d7 the base rate' : ''),
+          a:mt * pr * sg.m * sg.h, s:a.src.park});
+      });
     }
   }
 
+  /* ---------- passengers ---------- */
   const pOut = Math.round(I.seats * I.lfOut / 100);
   const pIn = I.arrival ? Math.round(I.seats * I.lfIn / 100) : 0;
+  const keep = 1 - I.exempt / 100;
+  const uOut = Math.round(pOut * keep), uIn = Math.round(pIn * keep);
+  const exTxt = I.exempt > 0 ? ' after ' + nf(I.exempt,0) + '% exempt' : '';
 
-  if(dom){
-    L.push({g:'px', n:'UDF \u2014 embarking', r:rs(r.udfDE) + ' / pax',
-      b:nf(pOut) + ' departing pax', a:pOut * r.udfDE, s:a.src.udf});
-    if(I.arrival) L.push({g:'px', n:'UDF \u2014 disembarking', r:rs(r.udfDD) + ' / pax',
-      b:nf(pIn) + ' arriving pax', a:pIn * r.udfDD, s:a.src.udf});
-  } else if(a.classSplit){
-    const bO = Math.round(pOut * I.biz / 100), eO = pOut - bO;
-    const bI = Math.round(pIn * I.biz / 100), eI = pIn - bI;
-    if(eO > 0) L.push({g:'px', n:'UDF \u2014 embarking, economy', r:rs(r.udfIEE) + ' / pax',
-      b:nf(eO) + ' departing pax', a:eO * r.udfIEE, s:a.src.udf});
-    if(bO > 0) L.push({g:'px', n:'UDF \u2014 embarking, business', r:rs(r.udfIBE) + ' / pax',
-      b:nf(bO) + ' departing pax', a:bO * r.udfIBE, s:a.src.udf});
-    if(I.arrival && eI > 0) L.push({g:'px', n:'UDF \u2014 disembarking, economy',
-      r:rs(r.udfIED) + ' / pax', b:nf(eI) + ' arriving pax', a:eI * r.udfIED, s:a.src.udf});
-    if(I.arrival && bI > 0) L.push({g:'px', n:'UDF \u2014 disembarking, business',
-      r:rs(r.udfIBD) + ' / pax', b:nf(bI) + ' arriving pax', a:bI * r.udfIBD, s:a.src.udf});
-  } else {
-    L.push({g:'px', n:'UDF \u2014 embarking', r:rs(r.udfIEE) + ' / pax',
-      b:nf(pOut) + ' departing pax', a:pOut * r.udfIEE, s:a.src.udf});
-    if(I.arrival) L.push({g:'px', n:'UDF \u2014 disembarking', r:rs(r.udfIED) + ' / pax',
-      b:nf(pIn) + ' arriving pax', a:pIn * r.udfIED, s:a.src.udf});
+  function udf(label, n, rate, addKey, group){
+    if(n <= 0 || !rate) return;
+    L.push({g:'px', n:label, r:rs(rate) + ' / pax',
+      b:nf(n) + ' ' + group + ' pax' + exTxt, a:n * rate, s:a.src.udf});
+    const add = sum(inc, addKey);
+    if(add > 0) L.push({g:'px', n:label + ' \u2014 incremental tariff', flag:'contingent',
+      r:rs(add) + ' / pax', b:names([addKey]), a:n * add,
+      s:inc.map(p => p.src).join('; ')});
   }
 
-  if(a.cute){
+  if(dom){
+    udf('UDF \u2014 embarking', uOut, r.udfDE, 'udfDE', 'departing');
+    if(I.arrival) udf('UDF \u2014 disembarking', uIn, r.udfDD, 'udfDD', 'arriving');
+  } else if(a.classSplit){
+    const bO = Math.round(uOut * I.biz / 100), eO = uOut - bO;
+    const bI = Math.round(uIn * I.biz / 100), eI = uIn - bI;
+    udf('UDF \u2014 embarking, economy', eO, r.udfIEE, 'udfIE', 'departing');
+    udf('UDF \u2014 embarking, business', bO, r.udfIBE, 'udfIE', 'departing');
+    if(I.arrival){
+      udf('UDF \u2014 disembarking, economy', eI, r.udfIED, 'udfID', 'arriving');
+      udf('UDF \u2014 disembarking, business', bI, r.udfIBD, 'udfID', 'arriving');
+    }
+  } else {
+    udf('UDF \u2014 embarking', uOut, r.udfIEE, 'udfIE', 'departing');
+    if(I.arrival) udf('UDF \u2014 disembarking', uIn, r.udfIED, 'udfID', 'arriving');
+  }
+
+  if(a.cute && pOut > 0){
     if(dom) L.push({g:'px', n:'CUTE / CUSS / BRS', r:rs(r.cuteDom) + ' / pax',
       b:nf(pOut) + ' departing pax', a:pOut * r.cuteDom, s:a.src.cute});
     else L.push({g:'px', n:'CUTE / CUSS / BRS', r:'$' + nf(r.cuteIntlUsd,2) + ' / pax',
@@ -459,6 +615,7 @@ function compute(a, pi, I){
       a:pOut * r.cuteIntlUsd * I.fx, s:a.src.cute});
   }
 
+  /* ---------- other ---------- */
   if(a.xray){
     if(dom){
       const sl = a.xrayDom.find(x => I.seats <= x[0]) || a.xrayDom[a.xrayDom.length - 1];
@@ -475,10 +632,13 @@ function compute(a, pi, I){
   if(a.bmeAvail && I.bme && I.stand === 'contact' && r.bme){
     const k = (dom ? 'dom' : 'intl') + (wide ? 'Wide' : 'Narrow');
     const br = r.bme[k];
-    const eq = 1 + Math.ceil(Math.max(0, I.tat - 1) * 2) / 2;
-    L.push({g:'ot', n:'Bridge-mounted equipment (GPU/FEGP and PCA)',
-      r:rs(br) + ' / h', b:'First hour flat, then per 30 min \u2014 ' + nf(eq,1) + ' h charged',
-      a:br * eq, s:a.src.bme});
+    const use = Math.max(0, I.bmeHrs);
+    if(use > 0){
+      const eq = 1 + Math.ceil(Math.max(0, use - 1) * 2 - 1e-9) / 2;
+      L.push({g:'ot', n:'Bridge-mounted equipment (GPU/FEGP and PCA)',
+        r:rs(br) + ' / h', b:nf(use,2) + ' h used \u2192 ' + nf(eq,1) + ' h charged',
+        a:br * eq, s:a.src.bme});
+    }
   }
 
   if(a.fuelAvail && I.fuelKl > 0 && r.fuelInfra){
@@ -486,47 +646,61 @@ function compute(a, pi, I){
       b:nf(I.fuelKl) + ' KL uplift', a:r.fuelInfra * I.fuelKl, s:a.src.fuel});
   }
 
+  /* round each line, then sum, so the rows add up to the total shown */
+  L.forEach(x => { x.a = Math.round(x.a); });
   const tot = L.reduce((s,x) => s + x.a, 0);
-  const sum = g => L.filter(x => x.g === g).reduce((s,x) => s + x.a, 0);
-  return {L:L, tot:tot, pOut:pOut, pIn:pIn, applied:r.applied,
-    ac:sum('ac'), px:sum('px'), ot:sum('ot')};
+  const grp = g => L.filter(x => x.g === g).reduce((s,x) => s + x.a, 0);
+  return {L:L, tot:tot, pOut:pOut, pIn:pIn, uOut:uOut, mt:mt, ph:ph,
+    exemptLanding:exempt, inc:inc,
+    ac:grp('ac'), px:grp('px'), ot:grp('ot')};
 }
 
 function inputs(){
-  const a = D.ap[S.ap];
   return {
     sector:S.sector, stand:S.stand, body:$('body').value,
     mtow:num('mtow',79), seats:Math.round(num('seats',186)),
     lfOut:num('lfOut',85), lfIn:num('lfIn',85), biz:num('biz',0),
-    tat:num('tat',1), free:num('free',2), fx:num('fx',88.5),
-    fuelKl:num('fuelKl',0),
-    arrival:$('arrival').checked, roundUp:$('roundUp').checked,
-    bme:$('bme').checked
+    exempt:num('exempt',0),
+    tat:num('tat',1), free:num('free',2.5), fx:num('fx',D.fx),
+    fuelKl:num('fuelKl',0), bmeHrs:num('bmeHrs',num('tat',1)),
+    arrival:$('arrival').checked, sched:$('sched').checked, bme:$('bme').checked
   };
 }
 
+const GRP = [['ac','Aircraft charges','var(--g-ac)'],
+             ['px','Passenger charges','var(--g-px)'],
+             ['ot','Other charges','var(--g-ot)']];
+
 function run(){
   const a = D.ap[S.ap];
+  if(!S.bmeEdited) $('bmeHrs').value = $('tat').value;
   const I = inputs();
   const R = compute(a, S.pd, I);
 
-  /* conditional fields */
+  /* fields that only apply to some airports */
   $('wLfIn').classList.toggle('hd', !I.arrival);
   $('wBiz').classList.toggle('hd', !(a.classSplit && S.sector === 'intl'));
-  /* the dollar rate only bites where a charge is denominated in dollars */
   $('wFx').classList.toggle('hd', !(S.sector === 'intl' && (a.cute || a.xray)));
   $('wBme').classList.toggle('hd', !a.bmeAvail);
+  $('wBmeHrs').classList.toggle('hd', !(a.bmeAvail && I.bme));
   $('wFuel').classList.toggle('hd', !a.fuelAvail);
+  $('wHydExtra').classList.toggle('hd', !a.fuelAvail && !(a.bmeAvail && I.bme));
   $('wStand').classList.toggle('hd', a.parkMode === 'tier');
   $('bodyhint').textContent = a.bodySplit
     ? 'Delhi splits the landing rate on this.'
-    : (a.xray ? 'Used for the X-ray slab.' : 'This airport does not split landing by body type.');
+    : (a.bmeAvail ? 'Not used for landing here; it sets the bridge-equipment rate.'
+                  : (a.xray ? 'Used for the X-ray slab.' : 'Not used at this airport.'));
+  $('mtowhint').textContent = a.mtRound === 'ceil'
+    ? 'Rounded up to the next whole tonne, per the order.'
+    : 'Rounded to the nearest whole tonne, per the order.';
   $('freehint').textContent = a.freeNote;
 
-  $('apnote').innerHTML = '<b>' + a.full + '</b> (' + a.code + '), operated by ' + a.op +
+  const lapsed = periodLapsed(a);
+  $('apnote').innerHTML = '<b>' + esc(a.full) + '</b> (' + a.code + '), operated by ' + esc(a.op) +
     '. Order No. ' + a.order + ' of ' + a.odate + ', effective ' + a.eff +
-    ', fourth control period ' + a.cp + '. ' + a.pages + '. ' +
-    '<a href="' + a.url + '" target="_blank" rel="noopener">Order PDF</a>';
+    ', fourth control period ' + a.cp + '. ' + esc(a.pages) + '. ' +
+    '<a href="' + a.url + '" target="_blank" rel="noopener">Order PDF</a>' +
+    (lapsed ? ' <b>This order\u2019s last period has ended \u2014 check AERA for a newer order.</b>' : '');
 
   /* KPIs */
   $('kTot').textContent = rs(R.tot);
@@ -536,58 +710,98 @@ function run(){
   $('kPax').textContent = R.pOut > 0 ? rs(R.tot / R.pOut) : '\u2014';
   $('kPaxS').textContent = R.pOut > 0 ? 'Total divided by departing pax' : 'No departing pax';
   $('kSeat').textContent = I.seats > 0 ? rs(R.tot / I.seats) : '\u2014';
-  $('kShare').textContent = R.tot > 0 ? nf(100 * R.px / R.tot, 1) + '%' : '\u2014';
+  $('kShare').textContent = R.tot > 0 ? nf(100 * R.px / R.tot, 0) + '%' : '\u2014';
 
-  /* build-up */
+  /* proportion bar */
+  const bar = $('sbar'), key = $('skey');
+  bar.innerHTML = ''; key.innerHTML = '';
+  GRP.forEach(([g, label, col]) => {
+    const v = R[g];
+    if(v <= 0) return;
+    const sp = document.createElement('span');
+    sp.style.width = (100 * v / R.tot) + '%';
+    sp.style.background = col;
+    bar.appendChild(sp);
+    const d = document.createElement('div');
+    d.innerHTML = '<i style="background:' + col + '"></i>' + label + ' <b>' + rs(v) + '</b>';
+    key.appendChild(d);
+  });
+
+  /* build-up, grouped with a subtotal per group */
   const tb = $('rows');
   tb.innerHTML = '';
-  R.L.forEach(x => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + x.n + '</td><td>' + x.r + '</td><td class="bas">' + x.b +
-      '</td><td>' + rs(x.a) + '</td><td class="src">' + x.s + '</td>';
-    tb.appendChild(tr);
+  GRP.forEach(([g, label, col]) => {
+    const rows = R.L.filter(x => x.g === g);
+    if(!rows.length) return;
+    const h = document.createElement('tr');
+    h.className = 'grp';
+    h.innerHTML = '<td colspan="5"><span class="dot" style="background:' + col + '"></span>' + label + '</td>';
+    tb.appendChild(h);
+    rows.forEach(x => {
+      const tr = document.createElement('tr');
+      if(x.a === 0) tr.className = 'zero';
+      const flag = x.flag ? '<span class="flag ' + (x.fx || '') + '">' + x.flag + '</span>' : '';
+      tr.innerHTML = '<td>' + esc(x.n) + flag + '<span class="pg">' + esc(x.s) + '</span></td>' +
+        '<td>' + x.r + '</td><td class="bas">' + esc(x.b) + '</td>' +
+        '<td>' + rs(x.a) + '</td><td class="src">' + esc(x.s) + '</td>';
+      tb.appendChild(tr);
+    });
+    if(rows.length > 1){
+      const st = document.createElement('tr');
+      st.className = 'sub';
+      st.innerHTML = '<td>' + label + ' subtotal</td><td></td><td class="bas"></td><td>' +
+        rs(R[g]) + '</td><td class="src"></td>';
+      tb.appendChild(st);
+    }
   });
   const tr = document.createElement('tr');
   tr.className = 'tot';
-  tr.innerHTML = '<td>Total aeronautical charges</td><td></td><td class="bas">Excluding GST and ASF</td><td>' +
+  tr.innerHTML = '<td>Total aeronautical charges</td><td></td><td class="bas"></td><td>' +
     rs(R.tot) + '</td><td class="src"></td>';
   tb.appendChild(tr);
 
+  /* what the reader should know about this particular build-up */
   const bits = [];
-  bits.push('Aircraft charges ' + rs(R.ac) + ', passenger charges ' + rs(R.px) +
-    (R.ot > 0 ? ', other ' + rs(R.ot) : '') + '.');
+  if(R.exemptLanding) bits.push('Landing is exempt: under 80 seats on a domestic scheduled service.');
   const chg = Math.max(0, I.tat - I.free);
   if(chg <= 0) bits.push('The turn sits inside the free parking allowance, so no parking is charged.');
+  else if(R.ph !== chg) bits.push('Chargeable parking of ' + nf(chg,2) +
+    ' h rounds up to ' + nf(R.ph,0) + ' h, per the order.');
   if(a.parkMode === 'tier') bits.push('This order sets parking by how long the aircraft stays, not by stand type.');
+  if(a.parkBands && R.ph > 4) bits.push('Delhi steps the parking rate the longer the aircraft stays.');
   if(a.bmeAvail && I.bme && S.stand !== 'contact') bits.push('Bridge-mounted equipment needs a contact stand.');
-  if(R.applied.length){
-    const many = R.applied.length > 1;
-    const list = many
-      ? R.applied.slice(0, -1).join(', ') + ' and ' + R.applied[R.applied.length - 1]
-      : R.applied[0];
-    bits.push('Rates include the incremental tariff' + (many ? 's' : '') + ' for ' + list +
-      ', on the assumption ' + (many ? 'those projects commission' : 'that project commissions') +
-      ' as planned.');
-  }
+  if(I.exempt > 0) bits.push(nf(I.exempt,0) + '% of passengers are treated as UDF-exempt; per-passenger terminal charges still apply to all.');
+  if(R.inc.length) bits.push('Incremental tariffs for ' + R.inc.map(p => p.name).join(' and ') +
+    ' are shown separately. They are payable only once AERA notifies an Addendum on commissioning.');
   $('calcnote').textContent = bits.join(' ');
 
   /* four-airport comparison, each at the period in force today */
   const cb = $('cmp');
   cb.innerHTML = '';
-  D.ap.forEach((o,i) => {
-    const X = compute(o, o.cur, I);
+  const res = D.ap.map(o => ({o:o, pi:curIdx(o), X:compute(o, curIdx(o), I)}));
+  const max = Math.max.apply(null, res.map(z => z.X.tot)) || 1;
+  res.forEach((z,i) => {
     const t = document.createElement('tr');
     if(i === S.ap) t.className = 'me';
-    t.innerHTML = '<td>' + o.name + ' (' + o.code + ')</td><td class="bas">' + o.periods[o.cur].lbl +
-      '</td><td>' + rs(X.ac) + '</td><td>' + rs(X.px) + '</td><td>' + (X.ot > 0 ? rs(X.ot) : '\u2014') +
-      '</td><td><b>' + rs(X.tot) + '</b></td><td>' + (X.pOut > 0 ? rs(X.tot / X.pOut) : '\u2014') + '</td>';
+    t.innerHTML = '<td>' + z.o.name + ' (' + z.o.code + ')</td>' +
+      '<td class="bas">' + esc(z.o.periods[z.pi].lbl) + '</td>' +
+      '<td>' + rs(z.X.ac) + '</td><td>' + rs(z.X.px) + '</td>' +
+      '<td>' + (z.X.ot > 0 ? rs(z.X.ot) : '\u2014') + '</td>' +
+      '<td class="cmpbar"><i style="width:' + (100 * z.X.tot / max) + '%"></i>' +
+      '<span><b>' + rs(z.X.tot) + '</b></span></td>' +
+      '<td>' + (z.X.pOut > 0 ? rs(z.X.tot / z.X.pOut) : '\u2014') + '</td>';
     cb.appendChild(t);
   });
+  $('cmpcap').textContent = 'Each airport priced at the tariff period in force on ' +
+    new Date().toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
 }
 
 /* ---- wiring ---- */
 $('ap').addEventListener('change', e => {
-  S.ap = +e.target.value; S.pd = D.ap[S.ap].cur;
+  S.ap = +e.target.value;
+  const a = D.ap[S.ap];
+  S.pd = curIdx(a);
+  if(!S.freeEdited) $('free').value = a.freeDefault;
   fillPeriods(); run();
 });
 $('pd').addEventListener('change', e => { S.pd = +e.target.value; run(); });
@@ -599,19 +813,32 @@ acSel.addEventListener('change', e => {
   }
   run();
 });
-document.querySelectorAll('#sector button').forEach(b => b.addEventListener('click', () => {
-  document.querySelectorAll('#sector button').forEach(x => x.classList.remove('active'));
-  b.classList.add('active'); S.sector = b.dataset.v; run();
-}));
-document.querySelectorAll('#stand button').forEach(b => b.addEventListener('click', () => {
-  document.querySelectorAll('#stand button').forEach(x => x.classList.remove('active'));
-  b.classList.add('active'); S.stand = b.dataset.v; run();
-}));
-['mtow','seats','lfOut','lfIn','biz','tat','free','fx','fuelKl','body']
-  .forEach(i => $(i).addEventListener('input', run));
-['arrival','roundUp','bme'].forEach(i => $(i).addEventListener('change', run));
+/* a manual MTOW or seat edit means the preset no longer describes the aircraft */
+function dropPreset(){
+  const i = +acSel.value;
+  if(i < 0) return;
+  const a = D.ac[i];
+  if(Math.abs(num('mtow',a[1]) - a[1]) > 1e-9 || Math.round(num('seats',a[3])) !== a[3]) acSel.value = '-1';
+}
+['mtow','seats'].forEach(i => $(i).addEventListener('input', dropPreset));
+$('free').addEventListener('input', () => { S.freeEdited = true; });
+$('bmeHrs').addEventListener('input', () => { S.bmeEdited = true; });
+$('tat').addEventListener('input', () => { if(!S.bmeEdited) $('bmeHrs').value = $('tat').value; });
 
-S.pd = D.ap[0].cur;
+[['sector','sector'],['stand','stand']].forEach(([id,key]) => {
+  document.querySelectorAll('#' + id + ' button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#' + id + ' button')
+      .forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    S[key] = b.dataset.v; run();
+  }));
+});
+['mtow','seats','lfOut','lfIn','biz','exempt','tat','free','fx','fuelKl','bmeHrs','body']
+  .forEach(i => $(i).addEventListener('input', run));
+['arrival','sched','bme'].forEach(i => $(i).addEventListener('change', run));
+
+S.ap = 0;
+S.pd = curIdx(D.ap[0]);
+$('free').value = D.ap[0].freeDefault;
 fillPeriods(); run();
 </script>
 </body>
