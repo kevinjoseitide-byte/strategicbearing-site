@@ -194,7 +194,7 @@ Mumbai, Bengaluru and Hyderabad. Every rate shows the order page it came from.</
 <label class="fld"><span class="lbl">Seats on the aircraft</span>
 <input id="seats" type="number" min="1" max="900" step="1" value="186"></label>
 </div>
-<div class="grid g3">
+<div class="grid g4">
 <label class="fld"><span class="lbl">Departing load factor (%)</span>
 <input id="lfOut" type="number" min="0" max="100" step="0.5" value="85"></label>
 <label class="fld hd" id="wLfIn"><span class="lbl">Arriving load factor (%)</span>
@@ -202,6 +202,9 @@ Mumbai, Bengaluru and Hyderabad. Every rate shows the order page it came from.</
 <label class="fld hd" id="wBiz"><span class="lbl">Premium cabin share (%)</span>
 <input id="biz" type="number" min="0" max="100" step="1" value="0">
 <span class="hint">Charged the Business UDF rate.</span></label>
+<label class="fld hd" id="wFx"><span class="lbl">USD / INR</span>
+<input id="fx" type="number" min="1" max="200" step="0.01" value="88.50">
+<span class="hint">Some charges are set in dollars and converted at the RBI reference rate.</span></label>
 </div>
 <div style="margin-top:16px">
 <label class="chk"><input type="checkbox" id="arrival">
@@ -238,21 +241,6 @@ Mumbai, Bengaluru and Hyderabad. Every rate shows the order page it came from.</
 <input id="fuelKl" type="number" min="0" max="500" step="1" value="0">
 <span class="hint">Hyderabad levies a fuel infrastructure charge per kilolitre. Leave at zero to exclude it.</span></label>
 </div>
-</div>
-</section>
-
-<section class="card">
-<h2>Adjustments</h2>
-<div class="bd" style="display:flex;flex-direction:column;gap:11px">
-<label class="chk"><input type="checkbox" id="cut">
-<span><b>Apply the 25% cut to domestic landing and parking</b>
-<span class="sp">Order 01/2026-27 of 07.04.2026 cut both by a quarter on domestic flights at all major
-airports for three months, on a Central Government direction. Off by default &mdash; check whether it
-was extended before relying on it.</span></span></label>
-<div id="incBox" style="display:flex;flex-direction:column;gap:11px"></div>
-<label class="fld" style="max-width:260px;margin-top:5px"><span class="lbl">USD / INR</span>
-<input id="fx" type="number" min="1" max="200" step="0.01" value="88.50">
-<span class="hint">Some charges are set in dollars and converted at the RBI reference rate.</span></label>
 </div>
 </section>
 
@@ -309,8 +297,11 @@ long-haul destination in its first year.</li>
 <li><b>Appeals are live.</b> TDSAT partly set aside Order 20/2024-25 on DIAL's appeal, and on
 29.05.2026 allowed MIAL's appeal and directed AERA to give effect within three months. No revised
 Delhi or Mumbai rate card was on the AERA tariff-orders list as at 29.10.2026.</li>
-<li><b>Bengaluru and Hyderabad contingent add-ons</b> apply only once AERA issues an Addendum on
-project commissioning. They are off by default and labelled where they appear.</li>
+<li><b>Bengaluru and Hyderabad incremental tariffs are included</b> from the period each order gives
+them &mdash; the Eastern Connectivity and T2 Phase 2 projects at Bengaluru, the northern runway, apron
+and precinct at Hyderabad. The orders make each one conditional on AERA notifying an Addendum once
+the project commissions; this tool assumes they commission as planned. If a project slips, the later
+periods overstate the charge.</li>
 <li><b>Bengaluru parking</b> is given as two rows &mdash; the first two hours after the free period, and
 beyond four hours &mdash; with no row for the two to four hour band. This tool reads the slabs against
 total time on stand: free for two hours, the first rate for hours two to four, the second beyond four.
@@ -339,7 +330,7 @@ const nf = (n,d) => Number(n).toLocaleString('en-IN',{minimumFractionDigits:d===
 const rs = n => '\u20b9' + nf(Math.round(n));
 const num = (i,f) => { const v = parseFloat($(i).value); return isFinite(v) ? v : f; };
 
-let S = {ap:0, pd:0, sector:'dom', stand:'contact', inc:[]};
+let S = {ap:0, pd:0, sector:'dom', stand:'contact'};
 
 /* ---- build the airport and aircraft pickers ---- */
 D.ap.forEach((a,i) => {
@@ -368,26 +359,11 @@ function fillPeriods(){
   $('pd').value = S.pd;
 }
 
-function fillInc(){
-  const a = D.ap[S.ap], box = $('incBox');
-  box.innerHTML = '';
-  S.inc = (a.inc || []).map(() => false);
-  (a.inc || []).forEach((prj,i) => {
-    const l = document.createElement('label');
-    l.className = 'chk';
-    const c = document.createElement('input');
-    c.type = 'checkbox'; c.dataset.i = i;
-    c.addEventListener('change', () => { S.inc[i] = c.checked; run(); });
-    const s = document.createElement('span');
-    const per = Object.keys(prj.add).map(k => a.periods[k].lbl).join('; ');
-    s.innerHTML = '<b>Contingent: ' + prj.name + '</b><span class="sp">Add-on tariff in ' + per +
-      '. Applies only from the date AERA notifies by Addendum on commissioning. ' + prj.src + '.</span>';
-    l.appendChild(c); l.appendChild(s); box.appendChild(l);
-  });
-}
-
-/* ---- rate set for a period, after contingent add-ons and the temporary cut ---- */
-function rates(a, pi, inc, cut, sector){
+/* ---- rate set for a period, with the incremental add-ons folded in.
+   The orders make these conditional on AERA notifying an Addendum once each
+   project commissions. The tool assumes the projects land as planned, so the
+   add-on is part of the rate from the period the order gives it. ---- */
+function rates(a, pi){
   const p = a.periods[pi];
   const r = {
     landDomW:p.landDomW, landDomN:p.landDomN, landIntlW:p.landIntlW, landIntlN:p.landIntlN,
@@ -398,8 +374,8 @@ function rates(a, pi, inc, cut, sector){
     cuteDom:p.cuteDom, cuteIntlUsd:p.cuteIntlUsd,
     bme:p.bme ? Object.assign({}, p.bme) : null, fuelInfra:p.fuelInfra
   };
-  (a.inc || []).forEach((prj,i) => {
-    if(!inc[i]) return;
+  r.applied = [];
+  (a.inc || []).forEach(prj => {
     const d = prj.add[pi]; if(!d) return;
     if(d.landDom){ r.landDomW += d.landDom; r.landDomN += d.landDom; }
     if(d.landIntl){ r.landIntlW += d.landIntl; r.landIntlN += d.landIntl; }
@@ -407,17 +383,14 @@ function rates(a, pi, inc, cut, sector){
     if(d.udfDD) r.udfDD += d.udfDD;
     if(d.udfIE){ r.udfIEE += d.udfIE; r.udfIBE += d.udfIE; }
     if(d.udfID){ r.udfIED += d.udfID; r.udfIBD += d.udfID; }
+    r.applied.push(prj.name);
   });
-  if(cut && sector === 'dom'){
-    r.landDomW *= 0.75; r.landDomN *= 0.75;
-    ['parkRemote','parkContact','parkT1','parkT2'].forEach(k => { if(r[k] != null) r[k] *= 0.75; });
-  }
   return r;
 }
 
 /* ---- the build-up. Each line is tagged ac (aircraft), px (passenger) or ot. ---- */
 function compute(a, pi, I){
-  const r = rates(a, pi, I.inc, I.cut, I.sector);
+  const r = rates(a, pi);
   const L = [], wide = I.body !== 'C';
   const dom = I.sector === 'dom';
 
@@ -512,7 +485,7 @@ function compute(a, pi, I){
 
   const tot = L.reduce((s,x) => s + x.a, 0);
   const sum = g => L.filter(x => x.g === g).reduce((s,x) => s + x.a, 0);
-  return {L:L, tot:tot, pOut:pOut, pIn:pIn,
+  return {L:L, tot:tot, pOut:pOut, pIn:pIn, applied:r.applied,
     ac:sum('ac'), px:sum('px'), ot:sum('ot')};
 }
 
@@ -525,7 +498,7 @@ function inputs(){
     tat:num('tat',1), free:num('free',2), fx:num('fx',88.5),
     fuelKl:num('fuelKl',0),
     arrival:$('arrival').checked, roundUp:$('roundUp').checked,
-    bme:$('bme').checked, cut:$('cut').checked, inc:S.inc
+    bme:$('bme').checked
   };
 }
 
@@ -537,6 +510,8 @@ function run(){
   /* conditional fields */
   $('wLfIn').classList.toggle('hd', !I.arrival);
   $('wBiz').classList.toggle('hd', !(a.classSplit && S.sector === 'intl'));
+  /* the dollar rate only bites where a charge is denominated in dollars */
+  $('wFx').classList.toggle('hd', !(S.sector === 'intl' && (a.cute || a.xray)));
   $('wBme').classList.toggle('hd', !a.bmeAvail);
   $('wFuel').classList.toggle('hd', !a.fuelAvail);
   $('wStand').classList.toggle('hd', a.parkMode === 'tier');
@@ -581,16 +556,23 @@ function run(){
   const chg = Math.max(0, I.tat - I.free);
   if(chg <= 0) bits.push('The turn sits inside the free parking allowance, so no parking is charged.');
   if(a.parkMode === 'tier') bits.push('This order sets parking by how long the aircraft stays, not by stand type.');
-  if(I.cut && S.sector === 'intl') bits.push('The 25% cut applies to domestic flights only, so it does not bite here.');
   if(a.bmeAvail && I.bme && S.stand !== 'contact') bits.push('Bridge-mounted equipment needs a contact stand.');
+  if(R.applied.length){
+    const many = R.applied.length > 1;
+    const list = many
+      ? R.applied.slice(0, -1).join(', ') + ' and ' + R.applied[R.applied.length - 1]
+      : R.applied[0];
+    bits.push('Rates include the incremental tariff' + (many ? 's' : '') + ' for ' + list +
+      ', on the assumption ' + (many ? 'those projects commission' : 'that project commissions') +
+      ' as planned.');
+  }
   $('calcnote').textContent = bits.join(' ');
 
   /* four-airport comparison, each at the period in force today */
   const cb = $('cmp');
   cb.innerHTML = '';
   D.ap.forEach((o,i) => {
-    const J = Object.assign({}, I, {inc:(o.inc || []).map(() => false)});
-    const X = compute(o, o.cur, J);
+    const X = compute(o, o.cur, I);
     const t = document.createElement('tr');
     if(i === S.ap) t.className = 'me';
     t.innerHTML = '<td>' + o.name + ' (' + o.code + ')</td><td class="bas">' + o.periods[o.cur].lbl +
@@ -603,7 +585,7 @@ function run(){
 /* ---- wiring ---- */
 $('ap').addEventListener('change', e => {
   S.ap = +e.target.value; S.pd = D.ap[S.ap].cur;
-  fillPeriods(); fillInc(); run();
+  fillPeriods(); run();
 });
 $('pd').addEventListener('change', e => { S.pd = +e.target.value; run(); });
 acSel.addEventListener('change', e => {
@@ -624,10 +606,10 @@ document.querySelectorAll('#stand button').forEach(b => b.addEventListener('clic
 }));
 ['mtow','seats','lfOut','lfIn','biz','tat','free','fx','fuelKl','body']
   .forEach(i => $(i).addEventListener('input', run));
-['arrival','roundUp','bme','cut'].forEach(i => $(i).addEventListener('change', run));
+['arrival','roundUp','bme'].forEach(i => $(i).addEventListener('change', run));
 
 S.pd = D.ap[0].cur;
-fillPeriods(); fillInc(); run();
+fillPeriods(); run();
 </script>
 </body>
 </html>
