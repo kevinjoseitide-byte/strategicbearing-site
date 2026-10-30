@@ -148,9 +148,12 @@ footer a:hover{color:var(--accent-soft)}
 .hero-eyebrow{font-size:14px; font-weight:600; color:var(--accent-soft); margin-bottom:12px}
 .hero h1{color:#fff; font-size:clamp(30px,4.2vw,46px); max-width:17ch; margin-bottom:16px}
 .hero-sub{color:#E3EEFB; font-size:17px; max-width:60ch; margin-bottom:26px}
-.terminal{position:absolute; left:0; right:0; bottom:0; width:100%; height:104px;
-  z-index:1; pointer-events:none;
-  background:url('/terminal.png') center bottom / cover no-repeat}
+.engine{position:absolute; top:0; right:0; bottom:0; width:52%; max-width:880px;
+  background:url('/engine-hero.jpg') center center / cover no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 44%,#000 100%);
+  z-index:1; pointer-events:none}
+@media (max-width:900px){ .engine{display:none} }
 
 /* ---------- pillar filter ---------- */
 .tabs{display:flex; gap:8px; flex-wrap:wrap; padding-bottom:4px}
@@ -215,7 +218,6 @@ footer a:hover{color:var(--accent-soft)}
 @media (max-width:560px){
   .post-head{grid-template-columns:1fr 20px; gap:12px}
   .pd-date{grid-row:2; grid-column:1; padding-top:0}
-  .terminal{height:74px}
 }
 @media (max-width:1023px){
   .hero{background:var(--grad-hero-narrow)}
@@ -239,7 +241,7 @@ footer a:hover{color:var(--accent-soft)}
 </nav>
 
 <header class="hero">
-  <div class="terminal"></div>
+  <div class="engine"></div>
   <div class="wrap">
     <div class="hero-eyebrow">Strategic Bearing</div>
     <h1>Clarity of direction in aviation, strategy, and capital.</h1>
