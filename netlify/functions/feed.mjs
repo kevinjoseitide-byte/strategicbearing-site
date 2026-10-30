@@ -1,9 +1,19 @@
 // Server-side proxy for the Strategic Bearing Substack feed.
 // The browser cannot fetch substack.com directly (no CORS headers), so this
 // runs on Netlify, fetches the RSS, and hands back clean JSON.
+//
+// 30 Oct 2026: the function was returning {"items":[]} while the same feed in a
+// browser carried the post. The fetch succeeded, so this was not a network or
+// status problem — Substack was answering the old 'strategicbearing.in feed
+// reader' agent with something that held no <item> elements. It now sends a
+// normal browser user-agent and an Accept header asking for RSS, and when it
+// parses zero items it reports what it actually received instead of failing
+// silently, so the next failure is diagnosable from the endpoint itself.
 
 const FEED = 'https://strategicbearing.substack.com/feed';
 const MAX_ITEMS = 6;
+const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
+           '(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 
 const strip = (s) =>
   s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
@@ -22,6 +32,14 @@ const tag = (block, name) => {
   return m ? strip(m[1]) : '';
 };
 
+// trim on a word boundary rather than mid-word
+const clamp = (s, n) => {
+  if (s.length <= n) return s;
+  const cut = s.slice(0, n);
+  const sp = cut.lastIndexOf(' ');
+  return (sp > n * 0.6 ? cut.slice(0, sp) : cut).replace(/[\s,;:.–-]+$/, '') + '…';
+};
+
 const reply = (body, status = 200) =>
   new Response(JSON.stringify(body), {
     status,
@@ -37,24 +55,44 @@ const reply = (body, status = 200) =>
 export default async () => {
   try {
     const res = await fetch(FEED, {
-      headers: { 'user-agent': 'strategicbearing.in feed reader' },
+      headers: {
+        'user-agent': UA,
+        accept: 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
+        'accept-language': 'en-GB,en;q=0.9',
+      },
+      redirect: 'follow',
     });
     if (!res.ok) return reply({ items: [], error: `upstream ${res.status}` });
 
     const xml = await res.text();
-    const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)]
+    const blocks = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)];
+
+    if (!blocks.length) {
+      // Say what came back. Lengths and content type only, never the body.
+      return reply({
+        items: [],
+        error: 'no items parsed',
+        upstream: {
+          status: res.status,
+          type: res.headers.get('content-type') || '',
+          bytes: xml.length,
+          looksLikeRss: /<rss[\s>]|<feed[\s>]/i.test(xml),
+          finalUrl: res.url || FEED,
+        },
+      });
+    }
+
+    const items = blocks
       .slice(0, MAX_ITEMS)
       .map(([, block]) => {
         const categories = [...block.matchAll(/<category(?:\s[^>]*)?>([\s\S]*?)<\/category>/g)]
           .map((c) => strip(c[1]))
           .filter(Boolean);
-        let blurb = tag(block, 'description');
-        if (blurb.length > 180) blurb = blurb.slice(0, 177).trimEnd() + '…';
         return {
           title: tag(block, 'title'),
           link: tag(block, 'link'),
           date: tag(block, 'pubDate'),
-          blurb,
+          blurb: clamp(tag(block, 'description'), 180),
           categories,
         };
       })
