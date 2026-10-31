@@ -7,10 +7,15 @@ import validate
 
 
 def edit(d, fname, fn):
+    """Apply a mutation and write it back.
+
+    fn may return a new frame or mutate in place; returning is preferred,
+    since the inplace keyword is on its way out of pandas.
+    """
     p = d / fname
     df = pd.read_csv(p)
-    fn(df)
-    df.to_csv(p, index=False)
+    out = fn(df)
+    (df if out is None else out).to_csv(p, index=False)
 
 
 def test_live_data_passes(data_dir):
@@ -20,7 +25,7 @@ def test_live_data_passes(data_dir):
 def test_major_carrier_row_dropped(work_data):
     edit(work_data, 'market_share_by_carrier.csv',
          lambda x: x.drop(x[(x.period == x.period.max()) &
-                            (x.airline == 'IndiGo')].index, inplace=True))
+                            (x.airline == 'IndiGo')].index))
     with pytest.raises(validate.Failure, match='sum to the national total'):
         validate.run(work_data)
 
@@ -51,7 +56,7 @@ def test_seat_factor_out_of_range(work_data):
 
 def test_month_missing(work_data):
     edit(work_data, 'national_monthly_domestic.csv',
-         lambda x: x.drop(x.index[20], inplace=True))
+         lambda x: x.drop(x.index[20]))
     with pytest.raises(validate.Failure, match='gap in the monthly series'):
         validate.run(work_data)
 

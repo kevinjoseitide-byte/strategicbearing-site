@@ -23,12 +23,19 @@ import urllib.parse
 import requests
 
 PORTAL = 'https://www.dgca.gov.in/digigov-portal'
-SCAN = f'{PORTAL}/scan?'
-# the "Air Transport / Domestic / Air Traffic" listing
+# the "Air Transport / Domestic / Air Traffic" listing. It is a plain GET:
+# the page is a JavaScript app, but the year/month picker is rendered server
+# side, so every report back to 2014 is already in the HTML when it arrives.
 RULEBOOK_ID = '4264'
 CONTENT_ID = '4206'
+LISTING = f'{PORTAL}/?page={RULEBOOK_ID}/{CONTENT_ID}/servicename'
 BUCKET = 'public-prd-dgca.s3.ap-south-1.amazonaws.com'
 PATH_HINT = 'airTransport/domestic/airTraffic'
+# What the page actually carries. Not an absolute URL — a path relative to
+# the portal, which the site rewrites to the S3 bucket by dropping jsp/dgca/.
+HREF_RE = re.compile(
+    r'jsp/dgca/(InventoryList/dataReports/aviationDataStatistics/'
+    r'airTransport/domestic/airTraffic/[^"\'<>]+?\.pdf)', re.I)
 
 UA = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
       '(KHTML, like Gecko) Chrome/129.0 Safari/537.36')
@@ -89,38 +96,64 @@ def _session() -> requests.Session:
     return s
 
 
-def list_reports(session: requests.Session | None = None) -> dict[str, str]:
+def s3_url(path: str) -> str:
+    """Portal path -> the bucket URL that actually serves the file."""
+    rest = path.split('jsp/dgca/', 1)[-1].lstrip('/')
+    return f'https://{BUCKET}/' + urllib.parse.quote(rest, safe='/')
+
+
+def harvest(body: str) -> dict[str, str]:
+    """Pull monthly report links out of the listing HTML.
+
+    These are relative hrefs, not absolute URLs. Looking only for http(s)
+    links finds nothing here — which is exactly how the first live run
+    failed. Absolute URLs are still accepted in case the portal changes.
+    """
+    body = html.unescape(body).replace('\\/', '/').replace('\\"', '"')
+    out: dict[str, str] = {}
+    for rel in HREF_RE.findall(body):
+        p = month_from_filename(rel)
+        if p:
+            out.setdefault(p, s3_url(rel))
+    for u in re.findall(r'https?://[^\s"\'<>\\]+?\.pdf', body, re.I):
+        if BUCKET in u and PATH_HINT in u:
+            p = month_from_filename(u)
+            if p:
+                out.setdefault(p, u)
+    return out
+
+
+def list_reports(session: requests.Session | None = None,
+                 verbose: bool = False) -> dict[str, str]:
     """Return {'YYYY-MM': url} for every monthly domestic traffic report listed."""
     s = session or _session()
-    try:
-        s.get(f'{PORTAL}/', timeout=TIMEOUT)          # pick up any cookie the app sets
-        r = s.post(SCAN, timeout=TIMEOUT, data={
-            'ruleBookId': RULEBOOK_ID,
-            'contentId': CONTENT_ID,
-            'serviceName': 'getParentData',
-        })
-        r.raise_for_status()
-        body = r.text
-    except requests.RequestException as e:
-        raise DiscoveryError(f'could not reach the DGCA portal: {e}') from e
+    report: list[str] = []
+    for label, url in (('listing page', LISTING), ('portal home', f'{PORTAL}/')):
+        try:
+            r = s.get(url, timeout=TIMEOUT)
+            found = harvest(r.text) if r.ok else {}
+            report.append(f'  {label} ({url}): HTTP {r.status_code}, '
+                          f'{len(r.text):,} bytes, {len(found)} report link(s)')
+            if verbose:
+                report.append('      ' + ' '.join(r.text.split())[:400])
+            if found:
+                if verbose:
+                    print('\n'.join(report))
+                return found
+        except requests.RequestException as e:
+            report.append(f'  {label}: {type(e).__name__}: {str(e)[:200]}')
 
-    # the JSON carries an HTML fragment; the links are what we are after,
-    # so pull them out of the raw text rather than guessing the JSON shape
-    body = html.unescape(body).replace('\\/', '/').replace('\\"', '"')
-    urls = re.findall(r'https?://[^\s"\'<>\\]+?\.pdf', body, re.I)
-
-    out: dict[str, str] = {}
-    for u in urls:
-        if BUCKET not in u or PATH_HINT not in u:
-            continue
-        p = month_from_filename(u)
-        if p:
-            out.setdefault(p, u)                      # first listed wins; newest is listed first
-    if not out:
-        raise DiscoveryError(
-            f'the portal answered ({len(body):,} bytes) but no monthly traffic '
-            f'PDF links were found. The listing has probably moved — check '
-            f'ruleBookId={RULEBOOK_ID} contentId={CONTENT_ID}.')
+    raise DiscoveryError(
+        'could not find the monthly traffic listing on the DGCA portal.\n'
+        + '\n'.join(report) +
+        '\n\nHow to read this. A connection error or timeout on every line means '
+        'DGCA is refusing the request rather than that the listing moved — '
+        'government sites do block cloud datacentre ranges, and GitHub runners '
+        'are US-based. HTTP 200 with plenty of bytes but no links means the '
+        'page no longer carries the report paths; check that an href still '
+        f'looks like jsp/dgca/.../{PATH_HINT}/<file>.pdf. '
+        'Run `python pipeline/dgca_portal.py --diagnose` from an ordinary '
+        'connection to see which it is.')
     return out
 
 
@@ -134,7 +167,12 @@ def head(url: str, session: requests.Session | None = None) -> dict:
 
 
 if __name__ == '__main__':
-    reps = list_reports()
+    v = '--diagnose' in sys.argv
+    try:
+        reps = list_reports(verbose=v)
+    except DiscoveryError as e:
+        print(e, file=sys.stderr)
+        raise SystemExit(1) from None
     for p in sorted(reps)[-6:]:
         print(f'{p}  {urllib.parse.unquote(reps[p].rsplit("/", 1)[-1])}')
     print(f'\n{len(reps)} monthly reports listed, latest {max(reps)}', file=sys.stderr)
