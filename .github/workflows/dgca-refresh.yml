@@ -1,0 +1,107 @@
+name: DGCA traffic refresh
+
+# DGCA publishes a month's domestic traffic report 20 to 40 days after the
+# month ends — September 2026 went up on 28 October. A single monthly cron
+# would sit on the wrong side of that window half the time, so this checks
+# daily through the second half of the month and weekly otherwise. A check
+# that finds nothing costs one portal request and ends.
+#
+# Nothing is pushed to the live site directly. A refresh opens a pull
+# request, so the numbers that reach the page have been looked at by a
+# person and previewed by Netlify first.
+
+on:
+  schedule:
+    - cron: '41 7 18-31 * *'   # daily, second half of the month
+    - cron: '41 7 * * 1'       # Mondays, in case a report lands late
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Re-parse the latest report even if it is already in the data'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: dgca-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install
+        run: pip install -r pipeline/requirements.txt
+
+      - name: Check the gates still pass on the data in the repo
+        run: python pipeline/validate.py tools/domestic-traffic/data
+
+      - name: Self-test the pipeline
+        run: python -m pytest pipeline/tests -q
+
+      - name: Look for a new DGCA report
+        id: run
+        run: |
+          set +e
+          python pipeline/refresh.py ${{ inputs.force && '--force' || '' }} \
+            2>&1 | tee /tmp/refresh.log
+          code=${PIPESTATUS[0]}
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          {
+            echo 'log<<EOF'
+            tail -c 6000 /tmp/refresh.log
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+          [ "$code" -eq 1 ] && exit 1 || exit 0
+
+      - name: Open a pull request
+        if: steps.run.outputs.code == '10'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          month=$(python -c "import json;print(json.load(open('tools/domestic-traffic/data/dgca_domestic.json'))['as_of_label'])")
+          branch="dgca/$(date -u +%Y%m%d-%H%M)"
+          git config user.name  'dgca-refresh'
+          git config user.email 'actions@github.com'
+          git checkout -b "$branch"
+          git add tools/domestic-traffic/data pipeline/manifest.json pipeline/meta.json
+          git commit -m "DGCA domestic traffic: $month" -m "$(cat /tmp/refresh.log | tail -c 3000)"
+          git push -u origin "$branch"
+          {
+            cat pipeline/pr_body.md
+            printf '\n<details><summary>Refresh log</summary>\n\n```\n'
+            tail -c 3000 /tmp/refresh.log
+            printf '```\n\n</details>\n'
+          } > /tmp/pr-body.md
+          gh pr create --title "DGCA domestic traffic: $month" \
+                       --body-file /tmp/pr-body.md --head "$branch"
+
+      - name: Raise an issue if the refresh broke
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            printf 'The refresh stopped before publishing anything, so the live page is untouched.\n\n'
+            printf 'Most likely DGCA has reworded a table heading or moved the listing.\n\n'
+            printf '```\n'
+            tail -c 5000 /tmp/refresh.log 2>/dev/null || echo 'no log was written'
+            printf '```\n\nTo see what the file actually contains:\n\n'
+            printf '```\npython pipeline/refresh.py --check-only\n'
+            printf 'python pipeline/refresh.py --force\n'
+            printf 'python pipeline/dgca_parse.py pipeline/raw/DGCA_Domestic_YYYY-MM.pdf --dump\n```\n'
+          } > /tmp/issue.md
+          gh issue create --title "DGCA refresh failed ($(date -u +%Y-%m-%d))" \
+                          --body-file /tmp/issue.md || true
