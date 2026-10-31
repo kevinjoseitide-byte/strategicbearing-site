@@ -134,6 +134,8 @@ thead th{font-size:11px;font-weight:700;color:var(--mute);text-transform:upperca
  font-size:13.5px;line-height:1.55;color:#2C4166;border-radius:0 8px 8px 0}
 .callout b{color:#8A5A10}
 .callout a{color:#0F5FC0}
+
+.scroll:focus-visible{outline:2px solid #0F5FC0;outline-offset:2px;border-radius:6px}
 </style>
 </head>
 <body>
@@ -168,7 +170,7 @@ carries it, and how full the planes are. Every figure comes from DGCA's own tabl
 <p class="take" id="t1"></p>
 <div id="c1" class="chart" role="img" aria-label="Column chart of monthly domestic passengers since January 2023, with year-on-year percentage change below."></div>
 <p class="hint">Lower panel: green = growth, red = decline. Lighter bars for 2023 are DGCA's published growth figures, measured against a Covid-hit 2022. The axis is capped at 30%, so January 2023 (+95.7%) and February 2023 (+56.8%) run off the top. Hover or tap for exact values.</p>
-<details class="tbl"><summary>Show the data as a table</summary><div class="scroll"><table id="tb1"></table></div></details>
+<details class="tbl"><summary>Show the data as a table</summary><div class="scroll" tabindex="0" role="region" aria-label="Monthly domestic passengers and year-on-year change, scrollable table"><table id="tb1"></table></div></details>
 <p class="src"><span>Source: <a href="https://www.dgca.gov.in/digigov-portal/" target="_blank" rel="noopener">DGCA, Government of India</a>, monthly domestic traffic reports (<a class="lastrep" href="#" target="_blank" rel="noopener">latest report, PDF</a>; <a href="#reports">all reports</a>). Data as of <span class="asof">Sep 2026</span>.</span>
 <a class="dl" href="data/national_monthly_domestic.csv" download>&darr; CSV</a></p>
 </section>
@@ -178,7 +180,7 @@ carries it, and how full the planes are. Every figure comes from DGCA's own tabl
 <p class="take" id="t2"></p>
 <div id="c2" class="chart" role="img" aria-label="Stacked area chart of monthly domestic market share by airline group since January 2023, with numbered markers for mergers and exits."></div>
 <ul class="ev" id="events" aria-label="Events marked on the chart"></ul>
-<details class="tbl"><summary>Show the data as a table</summary><div class="scroll"><table id="tb2"></table></div></details>
+<details class="tbl"><summary>Show the data as a table</summary><div class="scroll" tabindex="0" role="region" aria-label="Market share by airline group by month, scrollable table"><table id="tb2"></table></div></details>
 <p class="src"><span>Source: DGCA, Government of India, "Market share of scheduled domestic airlines" table in each monthly report (<a class="lastrep" href="#" target="_blank" rel="noopener">latest, PDF</a>). Air India Group = Air India, Air India Express, AIX Connect and Vistara in every month. Data as of <span class="asof">Sep 2026</span>.</span>
 <span><a class="dl" href="data/market_share_grouped.csv" download>&darr; CSV (groups)</a> <a class="dl" href="data/market_share_by_carrier.csv" download>&darr; CSV (as reported)</a></span></p>
 </section>
@@ -188,7 +190,7 @@ carries it, and how full the planes are. Every figure comes from DGCA's own tabl
 <p class="take" id="t3"></p>
 <div id="c3" class="chart" role="img" aria-label="Heatmap of monthly passenger load factor in percent for each domestic airline since January 2023."></div>
 <p class="hint">* Air India until December 2024 (DGCA's figure includes Air India Express); Air India Group from January 2025. Blank cells mean the airline was not in DGCA's table that month. Rows are ordered by passengers carried.</p>
-<details class="tbl"><summary>Show the latest month as a table</summary><div class="scroll"><table id="tb3"></table></div></details>
+<details class="tbl"><summary>Show the latest month as a table</summary><div class="scroll" tabindex="0" role="region" aria-label="Load factor by airline for the latest month, scrollable table"><table id="tb3"></table></div></details>
 <p class="src"><span>Source: DGCA, Government of India, Table 1 "Month-wise seat factor of scheduled operators" in each monthly report (<a class="lastrep" href="#" target="_blank" rel="noopener">latest, PDF</a>). Carriers are shown as DGCA reports them. Data as of <span class="asof">Sep 2026</span>.</span>
 <a class="dl" href="data/plf_by_carrier.csv" download>&darr; CSV</a></p>
 </section>
@@ -201,10 +203,13 @@ carrier by carrier, then added up. Treat the direction and the gap as the signal
 number of seats. <a href="#m-capacity">How this is derived and what it assumes</a>.</p>
 <p class="take" id="t4"></p>
 <div id="c4" class="chart" role="img" aria-label="Line chart comparing year-on-year growth in passengers with year-on-year growth in implied seats, since January 2024."></div>
-<p class="hint">Where the seats line sits above the passengers line, the industry was adding
-capacity faster than it was filling it, and seat factor fell. Where it sits below, capacity was
-coming out faster than demand.</p>
-<details class="tbl"><summary>Show the data as a table</summary><div class="scroll"><table id="tb4"></table></div></details>
+<p class="hint">The gap between the two lines is the change in seat factor. Where the seats line
+sits above the passengers line, capacity moved ahead of demand &mdash; added faster, or cut more
+slowly &mdash; and seat factor fell. Where it sits below, demand moved ahead of capacity and seat
+factor rose. Either line can sit on either side of zero, so read the gap rather than the
+direction: the takeaway above states which way both are moving in the latest month.</p>
+<details class="tbl"><summary>Show the data as a table</summary><div class="scroll" tabindex="0" role="region" aria-label="Passengers and implied seats year on year, scrollable table"><table id="tb4"></table></div></details>
+<details class="tbl"><summary>Show how each airline changed over the year</summary><div class="scroll" tabindex="0" role="region" aria-label="Passenger and implied seat change by airline, scrollable table"><table id="tb4c"></table></div></details>
 <p class="src"><span>Derived by Strategic Bearing from DGCA, Government of India: monthly passengers
 by airline and Table 1 seat factor (<a class="lastrep" href="#" target="_blank" rel="noopener">latest, PDF</a>).
 Data as of <span class="asof">Sep 2026</span>.</span>

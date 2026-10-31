@@ -1,2 +1,33 @@
 [functions]
   directory = "netlify/functions"
+
+# Tested against every page on the site — home, writing, the tools index and
+# all three tools — by serving them with these headers and failing on any
+# violation or page error. That matters here: a policy checked against one
+# page would have passed and then broken both calculators, which carry their
+# application code in inline <script> blocks.
+#
+# 'unsafe-inline' in script-src is there for exactly those three inline
+# blocks. It is the weak part of this policy. Moving that code into .js files
+# would let it go, and the rest of the policy is worth having either way:
+# no third-party script origin can run, nothing can be framed, and nothing
+# can rewrite the base URI or retarget a form.
+#
+# frame-ancestors 'none' blocks embedding anywhere. If a chart is ever meant
+# to sit in a Substack post as an iframe, this is the line to widen.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# The vendored chart library and the data never change within a deploy, and
+# both are fingerprint-free, so a day is as far as this should go.
+[[headers]]
+  for = "/tools/domestic-traffic/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

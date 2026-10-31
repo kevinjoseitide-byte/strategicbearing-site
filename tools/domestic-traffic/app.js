@@ -76,7 +76,7 @@
     function opt1() {
       var n = narrow();
       return {
-        aria: { enabled: true, decal: { show: false } }, textStyle: { fontFamily: FONT, color: C.body },
+        aria: { enabled: false }, textStyle: { fontFamily: FONT, color: C.body },
         animation: false,
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow', link: [{ xAxisIndex: 'all' }] }, confine: true,
           formatter: function (ps) { var r = nat[ps[0].dataIndex];
@@ -130,7 +130,7 @@
         data: ev.map(function (e, i) { var gap = i ? periods.indexOf(e.p) - periods.indexOf(ev[i - 1].p) : 99;
           var st = gap <= span && !stagPrev; stagPrev = st; return [e.p, st ? 113 : 104, String(i + 1)]; }) });
       return {
-        aria: { enabled: true }, textStyle: { fontFamily: FONT, color: C.body }, animation: false,
+        aria: { enabled: false }, textStyle: { fontFamily: FONT, color: C.body }, animation: false,
         legend: { top: 4, left: n ? 0 : 'center', itemWidth: 12, itemHeight: 10, itemGap: n ? 8 : 14, textStyle: { color: C.body, fontSize: n ? 11 : 12 }, data: GROUPS.map(function (g) { return g[0]; }) },
         tooltip: { trigger: 'axis', confine: true, order: 'seriesDesc',
           formatter: function (ps) { ps = ps.filter(function (x) { return x.seriesName !== 'events'; }); if (!ps.length) return ''; var p = periods[ps[0].dataIndex], rows = byP[p], h = '<b>' + full(p) + '</b>';
@@ -161,7 +161,7 @@
     function opt3() {
       var n = narrow();
       return {
-        aria: { enabled: true }, textStyle: { fontFamily: FONT, color: C.body }, animation: false,
+        aria: { enabled: false }, textStyle: { fontFamily: FONT, color: C.body }, animation: false,
         tooltip: { confine: true, formatter: function (p) { var d = p.data; return '<b>' + esc(d[3]) + '</b> · ' + full(periods[d[0]]) + '<br>Load factor: <b>' + f1(d[2]) + '%</b>'; } },
         grid: { left: n ? 82 : 128, right: n ? 6 : 18, top: 10, bottom: n ? 62 : 56 },
         xAxis: { type: 'category', data: periods, splitArea: { show: false }, axisTick: { show: false }, axisLine: { show: false },
@@ -187,20 +187,39 @@
       var cp = cap.national.filter(function (r) { return r.pax_yoy != null && r.seat_yoy != null; });
       var cper = cp.map(function (r) { return r.p; });
       var lastc = cp[cp.length - 1];
-      var wider = lastc.seat_yoy > lastc.pax_yoy;
+
+      /* Both series can go either way, and in this dataset they usually go up:
+         23 of the 33 charted months grew. So the sentence is built from the
+         signs rather than assuming a downturn. Saying "capacity is coming out"
+         in a month when airlines added seats would be plainly wrong. */
+      function gapLine(pax, seat) {
+        var up = 'added', dn = 'taken out';
+        if (pax >= 0 && seat >= 0) {
+          return seat > pax
+            ? 'Seats are being added faster than passengers are filling them.'
+            : 'Seats are being added more slowly than demand is growing.';
+        }
+        if (pax < 0 && seat < 0) {
+          return seat > pax
+            ? 'Seats are coming out more slowly than demand is falling.'
+            : 'Seats are coming out faster than demand is falling.';
+        }
+        return pax >= 0
+          ? 'Demand grew while seats were ' + dn + ', which is why the aircraft are fuller.'
+          : 'Seats were ' + up + ' into falling demand.';
+      }
+
       $('t4').innerHTML = '<b>In ' + full(lastc.p) + ', passengers were ' + sg(lastc.pax_yoy, 2) +
         ' against a year earlier and implied seats ' + sg(lastc.seat_yoy, 2) + '</b>, so seat factor ' +
         (lastc.plf_chg < 0 ? 'fell ' : 'rose ') + Math.abs(lastc.plf_chg).toFixed(1) + ' points to ' +
-        f1(lastc.plf) + '%. ' + (wider
-          ? 'Capacity is still coming out more slowly than demand.'
-          : 'Capacity is coming out faster than demand.');
+        f1(lastc.plf) + '%. ' + gapLine(lastc.pax_yoy, lastc.seat_yoy);
 
       var c4 = echarts.init($('c4'), null, { renderer: 'svg' });
       charts.push([c4, opt4]);
       function opt4() {
         var n = narrow();
         return {
-          aria: { enabled: true }, textStyle: { fontFamily: FONT, color: C.body }, animation: false,
+          aria: { enabled: false }, textStyle: { fontFamily: FONT, color: C.body }, animation: false,
           tooltip: {
             trigger: 'axis', confine: true,
             formatter: function (ps) {
@@ -248,6 +267,22 @@
             Math.abs(r.plf_chg).toFixed(1) + 'pp</td></tr>';
         }).join('') + '</tbody>';
     }
+
+
+      /* the per-carrier block was being shipped and never shown; it answers
+         the question the national lines raise but cannot: who actually took
+         the seats out */
+      if (cap && cap.carriers && cap.carriers.length) {
+        var fromL = lab(cap.from), toL = lab(cap.to);
+        $('tb4c').innerHTML = '<caption class="sr">Change by airline, ' + fromL +
+          ' to ' + toL + '</caption><thead><tr><th>Airline</th><th>Passengers</th>' +
+          '<th>Implied seats</th><th>Seat factor</th></tr></thead><tbody>' +
+          cap.carriers.map(function (r) {
+            return '<tr><td>' + esc(r.a) + '</td><td>' + sg(r.pax_pct, 1) + '</td><td>' +
+              sg(r.seat_pct, 1) + '</td><td>' + (r.plf_chg > 0 ? '+' : '−') +
+              Math.abs(r.plf_chg).toFixed(1) + 'pp</td></tr>';
+          }).join('') + '</tbody>';
+      }
 
     /* ---------- reports + checks ---------- */
     $('replist').innerHTML = Object.keys(D.reports).sort().reverse().map(function (k) { return '<li><a href="' + esc(D.reports[k]) + '" target="_blank" rel="noopener">' + full(k) + '</a></li>'; }).join('');
