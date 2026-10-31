@@ -1,0 +1,276 @@
+period,group,pax_lakh,share_pct_reported,carriers,share_pct_computed
+2023-01,Air India Group,31.9,25.4,AIX Connect + Air India + Vistara,25.43
+2023-01,Akasa Air,3.57,2.8,Akasa Air,2.85
+2023-01,Alliance Air,1.43,1.1,Alliance Air,1.14
+2023-01,Go First,10.53,8.4,Go First,8.4
+2023-01,IndiGo,68.47,54.6,Indigo,54.59
+2023-01,Others,0.39,0.3,Fly Big + Indiaone Air + Star Air,0.31
+2023-01,SpiceJet,9.14,7.3,Spice Jet,7.29
+2023-02,Air India Group,29.75,24.6,AIX Connect + Air India + Vistara,24.65
+2023-02,Akasa Air,3.61,3.0,Akasa Air,2.99
+2023-02,Alliance Air,1.34,1.1,Alliance Air,1.11
+2023-02,Go First,9.63,8.0,Go First,7.98
+2023-02,IndiGo,67.42,55.9,Indigo,55.87
+2023-02,Others,0.35,0.3,Fly Big + Indiaone Air + Star Air,0.29
+2023-02,SpiceJet,8.58,7.1,Spice Jet,7.11
+2023-03,Air India Group,32.64,25.3,AIX Connect + Air India + Vistara,25.32
+2023-03,Akasa Air,4.2,3.3,Akasa Air,3.26
+2023-03,Alliance Air,1.33,1.0,Alliance Air,1.03
+2023-03,Go First,8.95,6.9,Go First,6.94
+2023-03,IndiGo,73.17,56.8,Indigo,56.76
+2023-03,Others,0.36,0.2,Fly Big + Indiaone Air + Star Air,0.28
+2023-03,SpiceJet,8.27,6.4,Spice Jet,6.41
+2023-04,Air India Group,32.17,24.9,AIX Connect + Air India + Vistara,24.96
+2023-04,Akasa Air,5.13,4.0,Akasa Air,3.98
+2023-04,Alliance Air,1.42,1.1,Alliance Air,1.1
+2023-04,Go First,8.29,6.4,Go First,6.43
+2023-04,IndiGo,74.06,57.5,Indigo,57.46
+2023-04,Others,0.41,0.3,Fly Big + Indiaone Air + Star Air,0.32
+2023-04,SpiceJet,7.41,5.8,Spice Jet,5.75
+2023-05,Air India Group,34.8,26.3,AIX Connect + Air India + Vistara,26.33
+2023-05,Akasa Air,6.29,4.8,Akasa Air,4.76
+2023-05,Alliance Air,1.85,1.4,Alliance Air,1.4
+2023-05,Go First,0.48,0.4,Go First,0.36
+2023-05,IndiGo,81.1,61.4,Indigo,61.37
+2023-05,Others,0.43,0.3,Fly Big + Indiaone Air + Star Air,0.33
+2023-05,SpiceJet,7.2,5.4,Spice Jet,5.45
+2023-06,Air India Group,32.28,25.8,AIX Connect + Air India + Vistara,25.85
+2023-06,Akasa Air,6.18,4.9,Akasa Air,4.95
+2023-06,Alliance Air,1.44,1.2,Alliance Air,1.15
+2023-06,IndiGo,78.93,63.2,Indigo,63.21
+2023-06,Others,0.48,0.4,Fly Big + Indiaone Air + Star Air,0.38
+2023-06,SpiceJet,5.55,4.4,Spice Jet,4.44
+2023-07,Air India Group,31.19,25.8,AIX Connect + Air India + Vistara,25.78
+2023-07,Akasa Air,6.24,5.2,Akasa Air,5.16
+2023-07,Alliance Air,1.24,1.0,Alliance Air,1.02
+2023-07,IndiGo,76.75,63.4,Indigo,63.43
+2023-07,Others,0.54,0.4,Fly Big + Indiaone Air + Star Air,0.45
+2023-07,SpiceJet,5.04,4.2,Spice Jet,4.17
+2023-08,Air India Group,33.07,26.7,AIX Connect + Air India + Vistara,26.62
+2023-08,Akasa Air,5.27,4.2,Akasa Air,4.24
+2023-08,Alliance Air,1.25,1.0,Alliance Air,1.01
+2023-08,IndiGo,78.67,63.3,Indigo,63.33
+2023-08,Others,0.56,0.5,Fly Big + Indiaone Air + Star Air,0.45
+2023-08,SpiceJet,5.41,4.4,Spice Jet,4.35
+2023-09,Air India Group,32.42,26.5,AIX Connect + Air India + Vistara,26.47
+2023-09,Akasa Air,5.17,4.2,Akasa Air,4.22
+2023-09,Alliance Air,1.2,1.0,Alliance Air,0.98
+2023-09,IndiGo,77.7,63.4,Indigo,63.44
+2023-09,Others,0.53,0.4,Fly Big + Indiaone Air + Star Air,0.43
+2023-09,SpiceJet,5.45,4.4,Spice Jet,4.45
+2023-10,Air India Group,33.9,26.8,AIX Connect + Air India + Vistara,26.83
+2023-10,Akasa Air,5.25,4.2,Akasa Air,4.15
+2023-10,Alliance Air,1.3,1.0,Alliance Air,1.03
+2023-10,IndiGo,79.07,62.6,Indigo,62.57
+2023-10,Others,0.57,0.4,Fly Big + Indiaone Air + Star Air,0.45
+2023-10,SpiceJet,6.28,5.0,Spice Jet,4.97
+2023-11,Air India Group,33.67,26.5,AIX Connect + Air India + Vistara,26.43
+2023-11,Akasa Air,5.37,4.2,Akasa Air,4.22
+2023-11,Alliance Air,1.24,1.0,Alliance Air,0.97
+2023-11,IndiGo,78.76,61.8,Indigo,61.84
+2023-11,Others,0.48,0.3,Fly Big + Indiaone Air + Star Air,0.38
+2023-11,SpiceJet,7.85,6.2,Spice Jet,6.16
+2023-12,Air India Group,37.14,26.9,AIX Connect + Air India + Vistara,26.91
+2023-12,Akasa Air,6.04,4.4,Akasa Air,4.38
+2023-12,Alliance Air,1.31,0.9,Alliance Air,0.95
+2023-12,IndiGo,85.26,61.8,Indigo,61.79
+2023-12,Others,0.52,0.4,Fly Big + Indiaone Air + Star Air,0.38
+2023-12,SpiceJet,7.72,5.6,Spice Jet,5.59
+2024-01,Air India Group,37.03,28.2,AIX Connect + Air India + Vistara,28.2
+2024-01,Akasa Air,5.97,4.5,Akasa Air,4.55
+2024-01,Alliance Air,1.33,1.0,Alliance Air,1.01
+2024-01,IndiGo,79.09,60.2,Indigo,60.23
+2024-01,Others,0.49,0.4,Fly Big + Indiaone Air + Star Air,0.37
+2024-01,SpiceJet,7.4,5.6,Spice Jet,5.64
+2024-02,Air India Group,36.4,28.8,AIX Connect + Air India + Vistara,28.78
+2024-02,Akasa Air,5.68,4.5,Akasa Air,4.49
+2024-02,Alliance Air,1.29,1.0,Alliance Air,1.02
+2024-02,IndiGo,76.02,60.1,Indigo,60.11
+2024-02,Others,0.49,0.4,Fly Big + Indiaone Air + Star Air + Zooom,0.39
+2024-02,SpiceJet,6.59,5.2,Spice Jet,5.21
+2024-03,Air India Group,38.01,28.5,AIX Connect + Air India + Vistara,28.44
+2024-03,Akasa Air,5.9,4.4,Akasa Air,4.41
+2024-03,Alliance Air,1.4,1.0,Alliance Air,1.05
+2024-03,IndiGo,80.86,60.5,Indigo,60.49
+2024-03,Others,0.48,0.3,Fly Big + Fly91 + Indiaone Air + Star Air + Zooom,0.36
+2024-03,SpiceJet,7.02,5.3,Spice Jet,5.25
+2024-04,Air India Group,38.15,28.8,AIX Connect + Air India + Vistara,28.9
+2024-04,Akasa Air,5.8,4.4,Akasa Air,4.39
+2024-04,Alliance Air,1.28,1.0,Alliance Air,0.97
+2024-04,IndiGo,80.0,60.6,Indigo,60.61
+2024-04,Others,0.6,0.4,Fly Big + Fly91 + Indiaone Air + Star Air + Zooom,0.45
+2024-04,SpiceJet,6.17,4.7,Spice Jet,4.67
+2024-05,Air India Group,38.67,28.0,AIX Connect + Air India + Vistara,28.03
+2024-05,Akasa Air,6.64,4.8,Akasa Air,4.81
+2024-05,Alliance Air,1.35,1.0,Alliance Air,0.98
+2024-05,IndiGo,85.04,61.6,Indigo,61.65
+2024-05,Others,0.71,0.5,Fly Big + Fly91 + Indiaone Air + Star Air + Zooom,0.51
+2024-05,SpiceJet,5.54,4.0,Spice Jet,4.02
+2024-06,Air India Group,38.36,29.1,AIX Connect + Air India + Vistara,29.05
+2024-06,Akasa Air,6.34,4.8,Akasa Air,4.8
+2024-06,Alliance Air,1.34,1.0,Alliance Air,1.01
+2024-06,IndiGo,80.3,60.8,Indigo,60.8
+2024-06,Others,0.73,0.5,Fly Big + Fly91 + Indiaone Air + Star Air + Zooom,0.55
+2024-06,SpiceJet,5.0,3.8,Spice Jet,3.79
+2024-07,Air India Group,37.44,28.8,AIX Connect + Air India + Vistara,28.83
+2024-07,Akasa Air,6.05,4.7,Akasa Air,4.66
+2024-07,Alliance Air,1.21,0.9,Alliance Air,0.93
+2024-07,IndiGo,80.47,62.0,Indigo,61.96
+2024-07,Others,0.65,0.5,Fly Big + Fly91 + Indiaone Air + Star Air + Zooom,0.5
+2024-07,SpiceJet,4.05,3.1,Spice Jet,3.12
+2024-08,Air India Group,38.6,29.4,AIX Connect + Air India + Vistara,29.4
+2024-08,Akasa Air,5.92,4.5,Akasa Air,4.51
+2024-08,Alliance Air,1.15,0.9,Alliance Air,0.88
+2024-08,IndiGo,81.9,62.4,Indigo,62.38
+2024-08,Others,0.7,0.5,Fly Big + Fly91 + Indiaone Air + Star Air + Zooom,0.53
+2024-08,SpiceJet,3.02,2.3,Spice Jet,2.3
+2024-09,Air India Group,38.12,29.2,AIX Connect + Air India + Vistara,29.26
+2024-09,Akasa Air,5.73,4.4,Akasa Air,4.4
+2024-09,Alliance Air,1.02,0.8,Alliance Air,0.78
+2024-09,IndiGo,82.12,63.0,Indigo,63.03
+2024-09,Others,0.68,0.5,Fly Big + Fly91 + Indiaone Air + Star Air + Zooom,0.52
+2024-09,SpiceJet,2.61,2.0,Spice Jet,2.0
+2024-10,Air India Group,38.91,28.5,Air India + Vistara,28.49
+2024-10,Akasa Air,6.16,4.5,Akasa Air,4.51
+2024-10,Alliance Air,0.98,0.7,Alliance Air,0.72
+2024-10,IndiGo,86.4,63.3,Indigo,63.26
+2024-10,Others,0.78,0.5,Fly Big + Fly91 + Indiaone Air + Star Air,0.57
+2024-10,SpiceJet,3.35,2.4,Spice Jet,2.45
+2024-11,Air India Group,38.88,27.3,Air India + Vistara,27.28
+2024-11,Akasa Air,6.74,4.7,Akasa Air,4.73
+2024-11,Alliance Air,0.97,0.7,Alliance Air,0.68
+2024-11,IndiGo,90.7,63.6,Indigo,63.64
+2024-11,Others,0.81,0.5,Fly Big + Fly91 + Indiaone Air + Star Air,0.57
+2024-11,SpiceJet,4.43,3.1,Spice Jet,3.11
+2024-12,Air India Group,39.46,26.4,Air India,26.44
+2024-12,Akasa Air,6.89,4.6,Akasa Air,4.62
+2024-12,Alliance Air,1.0,0.7,Alliance Air,0.67
+2024-12,IndiGo,96.15,64.4,Indigo,64.41
+2024-12,Others,0.88,0.6,Fly Big + Fly91 + Indiaone Air + Star Air,0.59
+2024-12,SpiceJet,4.89,3.3,Spice Jet,3.28
+2025-01,Air India Group,37.58,25.7,Air India Group,25.72
+2025-01,Akasa Air,6.87,4.7,Akasa Air,4.7
+2025-01,Alliance Air,0.91,0.6,Alliance Air,0.62
+2025-01,IndiGo,95.22,65.2,Indigo,65.17
+2025-01,Others,0.88,0.5,Fly Big + Fly91 + Indiaone Air + Star Air,0.6
+2025-01,SpiceJet,4.66,3.2,Spice Jet,3.19
+2025-02,Air India Group,38.3,27.3,Air India Group,27.27
+2025-02,Akasa Air,6.59,4.7,Akasa Air,4.69
+2025-02,Alliance Air,0.86,0.6,Alliance Air,0.61
+2025-02,IndiGo,89.4,63.7,Indigo,63.65
+2025-02,Others,0.76,0.5,Fly Big + Fly91 + Indiaone Air + Star Air,0.54
+2025-02,SpiceJet,4.54,3.2,Spice Jet,3.23
+2025-03,Air India Group,38.78,26.7,Air India Group,26.67
+2025-03,Akasa Air,7.2,5.0,Akasa Air,4.95
+2025-03,Alliance Air,0.78,0.5,Alliance Air,0.54
+2025-03,IndiGo,93.09,64.0,Indigo,64.01
+2025-03,Others,0.77,0.5,Fly Big + Fly91 + Indiaone Air + Star Air,0.53
+2025-03,SpiceJet,4.8,3.3,Spice Jet,3.3
+2025-04,Air India Group,38.9,27.2,Air India Group,27.17
+2025-04,Akasa Air,7.13,5.0,Akasa Air,4.98
+2025-04,Alliance Air,0.76,0.5,Alliance Air,0.53
+2025-04,IndiGo,91.72,64.1,Indigo,64.07
+2025-04,Others,0.86,0.5,Fly Big + Fly91 + Indiaone Air + Star Air,0.6
+2025-04,SpiceJet,3.79,2.6,Spice Jet,2.65
+2025-05,Air India Group,37.22,26.5,Air India Group,26.48
+2025-05,Akasa Air,7.48,5.3,Akasa Air,5.32
+2025-05,Alliance Air,0.62,0.4,Alliance Air,0.44
+2025-05,IndiGo,90.8,64.6,Indigo,64.6
+2025-05,Others,1.04,0.7,Fly Big + Fly91 + Indiaone Air + Star Air,0.74
+2025-05,SpiceJet,3.4,2.4,Spice Jet,2.42
+2025-06,Air India Group,36.92,27.1,Air India Group,27.14
+2025-06,Akasa Air,7.22,5.3,Akasa Air,5.31
+2025-06,Alliance Air,0.66,0.5,Alliance Air,0.49
+2025-06,IndiGo,87.74,64.5,Indigo,64.5
+2025-06,Others,0.89,0.7,Fly Big + Fly91 + Indiaone Air + Star Air,0.65
+2025-06,SpiceJet,2.61,1.9,Spice Jet,1.92
+2025-07,Air India Group,33.08,26.2,Air India Group,26.24
+2025-07,Akasa Air,6.98,5.5,Akasa Air,5.54
+2025-07,Alliance Air,0.46,0.4,Alliance Air,0.36
+2025-07,IndiGo,82.15,65.2,Indigo,65.17
+2025-07,Others,0.92,0.7,Fly Big + Fly91 + Indiaone Air + Star Air,0.73
+2025-07,SpiceJet,2.46,2.0,Spice Jet,1.95
+2025-08,Air India Group,35.39,27.3,Air India Group,27.33
+2025-08,Akasa Air,7.03,5.4,Akasa Air,5.43
+2025-08,Alliance Air,0.37,0.3,Alliance Air,0.29
+2025-08,IndiGo,83.14,64.2,Indigo,64.22
+2025-08,Others,0.94,0.7,Fly Big + Fly91 + Indiaone Air + Star Air,0.73
+2025-08,SpiceJet,2.6,2.0,Spice Jet,2.01
+2025-09,Air India Group,34.67,27.4,Air India Group,27.42
+2025-09,Akasa Air,6.65,5.3,Akasa Air,5.26
+2025-09,Alliance Air,0.44,0.3,Alliance Air,0.35
+2025-09,IndiGo,81.27,64.3,Indigo,64.28
+2025-09,Others,0.96,0.7,Fly Big + Fly91 + Indiaone Air + Star Air,0.76
+2025-09,SpiceJet,2.45,1.9,Spice Jet,1.94
+2025-10,Air India Group,36.04,25.7,Air India Group,25.69
+2025-10,Akasa Air,7.25,5.2,Akasa Air,5.17
+2025-10,Alliance Air,0.29,0.2,Alliance Air,0.21
+2025-10,IndiGo,91.96,65.6,Indigo,65.55
+2025-10,Others,1.13,0.7,Fly91 + Indiaone Air + Star Air,0.81
+2025-10,SpiceJet,3.62,2.6,Spice Jet,2.58
+2025-11,Air India Group,40.75,26.7,Air India Group,26.74
+2025-11,Akasa Air,7.23,4.7,Akasa Air,4.74
+2025-11,Alliance Air,0.58,0.4,Alliance Air,0.38
+2025-11,IndiGo,96.93,63.6,Indigo,63.61
+2025-11,Others,1.23,0.8,Fly91 + Indiaone Air + Star Air,0.81
+2025-11,SpiceJet,5.67,3.7,Spice Jet,3.72
+2025-12,Air India Group,42.29,29.6,Air India Group,29.55
+2025-12,Akasa Air,7.43,5.2,Akasa Air,5.19
+2025-12,Alliance Air,0.57,0.4,Alliance Air,0.4
+2025-12,IndiGo,85.23,59.6,Indigo,59.56
+2025-12,Others,1.44,1.0,Fly91 + Indiaone Air + Star Air,1.01
+2025-12,SpiceJet,6.14,4.3,Spice Jet,4.29
+2026-01,Air India Group,40.34,26.5,Air India Group,26.46
+2026-01,Akasa Air,7.29,4.8,Akasa Air,4.78
+2026-01,Alliance Air,0.57,0.4,Alliance Air,0.37
+2026-01,IndiGo,97.04,63.6,Indigo,63.64
+2026-01,Others,1.32,0.81,Fly91 + Indiaone Air + Star Air,0.87
+2026-01,SpiceJet,5.92,3.9,Spice Jet,3.88
+2026-02,Air India Group,37.94,27.0,Air India Group,26.97
+2026-02,Akasa Air,6.89,4.9,Akasa Air,4.9
+2026-02,Alliance Air,0.54,0.4,Alliance Air,0.38
+2026-02,IndiGo,88.71,63.1,Indigo,63.06
+2026-02,Others,1.04,0.71,Fly91 + Indiaone Air + Star Air,0.74
+2026-02,SpiceJet,5.55,3.9,Spice Jet,3.95
+2026-03,Air India Group,37.73,26.2,Air India Group,26.17
+2026-03,Akasa Air,7.79,5.4,Akasa Air,5.4
+2026-03,Alliance Air,0.91,0.6,Alliance Air,0.63
+2026-03,IndiGo,91.19,63.3,Indigo,63.25
+2026-03,Others,1.14,0.71,Fly91 + Indiaone Air + Star Air,0.79
+2026-03,SpiceJet,5.41,3.8,Spice Jet,3.75
+2026-04,Air India Group,34.1,24.7,Air India Group,24.67
+2026-04,Akasa Air,7.95,5.8,Akasa Air,5.75
+2026-04,Alliance Air,0.43,0.3,Alliance Air,0.31
+2026-04,IndiGo,89.79,65.0,Indigo,64.97
+2026-04,Others,1.19,0.9,Fly91 + Indiaone Air + Star Air,0.86
+2026-04,SpiceJet,4.74,3.4,Spice Jet,3.43
+2026-05,Air India Group,39.33,25.6,Air India Group,25.56
+2026-05,Akasa Air,8.9,5.8,Akasa Air,5.78
+2026-05,Alliance Air,0.5,0.3,Alliance Air,0.32
+2026-05,IndiGo,99.91,64.9,Indigo,64.92
+2026-05,Others,1.39,0.9,Fly91 + Indiaone Air + Star Air,0.9
+2026-05,SpiceJet,3.86,2.5,Spice Jet,2.51
+2026-06,Air India Group,32.22,23.9,Air India Group,23.93
+2026-06,Akasa Air,8.61,6.4,Akasa Air,6.39
+2026-06,Alliance Air,0.51,0.4,Alliance Air,0.38
+2026-06,IndiGo,89.2,66.3,Indigo,66.25
+2026-06,Others,1.48,1.1,Fly91 + Indiaone Air + Star Air,1.1
+2026-06,SpiceJet,2.63,1.9,Spice Jet,1.95
+2026-07,Air India Group,28.75,24.0,Air India Group,23.96
+2026-07,Akasa Air,6.65,5.5,Akasa Air,5.54
+2026-07,Alliance Air,0.5,0.4,Alliance Air,0.42
+2026-07,IndiGo,80.82,67.4,Indigo,67.36
+2026-07,Others,1.4,1.2,Fly91 + Indiaone Air + Star Air,1.17
+2026-07,SpiceJet,1.87,1.6,Spice Jet,1.56
+2026-08,Air India Group,32.32,26.7,Air India Group,26.65
+2026-08,Akasa Air,6.68,5.5,Akasa Air,5.51
+2026-08,Alliance Air,0.57,0.5,Alliance Air,0.47
+2026-08,IndiGo,78.87,65.0,Indigo,65.04
+2026-08,Others,1.43,1.2,Fly91 + Indiaone Air + Star Air,1.18
+2026-08,SpiceJet,1.4,1.2,Spice Jet,1.15
+2026-09,Air India Group,31.65,26.8,Air India Group,26.77
+2026-09,Akasa Air,6.64,5.6,Akasa Air,5.62
+2026-09,Alliance Air,0.49,0.4,Alliance Air,0.41
+2026-09,IndiGo,77.3,65.4,Indigo,65.38
+2026-09,Others,1.42,1.2,Fly91 + Indiaone Air + Star Air,1.2
+2026-09,SpiceJet,0.73,0.6,Spice Jet,0.62
