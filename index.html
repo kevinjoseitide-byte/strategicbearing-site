@@ -245,7 +245,12 @@ footer a:hover{color:var(--accent-soft)}
 /* ---------- contact ---------- */
 .contact{text-align:center}
 .contact .marker{justify-content:center}
-.contact p{color:var(--muted); margin:14px auto 26px; max-width:46ch}
+.contact p{color:var(--muted); margin:14px auto 26px; max-width:52ch}
+/* two routes, email first: someone ready to commission work sends an email,
+   and making them send a connection request instead loses them */
+.contact-routes{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
+.btn--line{background:transparent; color:var(--navy); border:1px solid var(--line-strong,#C9D9EE)}
+.btn--line:hover{border-color:var(--navy); background:rgba(11,58,119,.04)}
 
 @media (max-width:980px){
   .about-grid{grid-template-columns:1fr; gap:32px}
@@ -499,9 +504,12 @@ footer a:hover{color:var(--accent-soft)}
   <div class="wrap contact">
     <div class="marker">Contact</div>
     <h2>Get in touch</h2>
-    <p>Conversations on airport and airline economics, tariff and regulatory strategy, and where
-    aviation capital earns its return. LinkedIn is the fastest route.</p>
-    <a href="https://www.linkedin.com/in/kevinjv" class="btn btn--dark" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    <p>Airport and airline economics, tariff and regulatory strategy, network and route
+    decisions, and where aviation capital earns its return. Email goes straight to me.</p>
+    <div class="contact-routes">
+      <a href="mailto:josek@tcd.ie" class="btn btn--dark">josek@tcd.ie</a>
+      <a href="https://www.linkedin.com/in/kevinjv" class="btn btn--line" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
   </div>
 </section>
 
@@ -509,6 +517,7 @@ footer a:hover{color:var(--accent-soft)}
   <div class="wrap">
     <small>&copy; 2026 Strategic Bearing &middot; Kevin Jose</small>
     <div class="foot-links">
+      <a href="mailto:josek@tcd.ie">Email</a>
       <a href="https://www.linkedin.com/in/kevinjv" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://strategicbearing.substack.com" target="_blank" rel="noopener">Newsletter</a>
       <a href="/tools/">Tools</a>
