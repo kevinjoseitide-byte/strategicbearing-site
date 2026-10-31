@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Strategic Bearing">
 <meta property="og:title" content="Route feasibility | Strategic Bearing">
-<meta property="og:description" content="Does this route earn its keep? Market, capture, yield and cost over five years.">
+<meta property="og:description" content="How to tell whether a route earns its keep: market, capture, yield, and cost split by what is escapable. Working model for paid subscribers.">
 <meta property="og:url" content="https://strategicbearing.in/tools/route-feasibility/">
 <meta property="og:image" content="https://strategicbearing.in/og-tools.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -125,6 +125,21 @@ tr.sub td{color:var(--mute);font-size:13px}
  .sblinks a{white-space:nowrap}
 }
 @media(max-width:520px){ .g2{grid-template-columns:1fr} }
+
+.gate{border:1px solid var(--line)}
+.lockbadge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.07em;
+ text-transform:uppercase;padding:4px 10px;border-radius:999px;
+ background:#E6F0FC;color:#0B3A77;margin-bottom:14px}
+.gate h2{margin-top:0}
+/* this page's .btn is the calculator's ghost button; the one thing on the
+   page we want pressed should not look like a secondary control */
+.gate .btn{display:inline-block;margin:6px 0 14px;padding:11px 20px;font-size:15px;
+ font-weight:700;text-decoration:none;border:0;border-radius:9px;
+ background:var(--mint);color:#06323B}
+.gate .btn:hover{background:var(--mint-deep);color:#fff}
+.fineprint{font-size:13px;color:var(--mute);margin-bottom:0}
+ul.what{margin:0 0 14px;padding-left:20px}
+ul.what li{margin-bottom:9px}
 </style>
 </head>
 <body>
@@ -147,104 +162,48 @@ tr.sub td{color:var(--mute);font-size:13px}
   <h1>Does this route earn its keep?</h1>
   <p class="lede">Size the market, take a share of it by cabin, price it at a yield, fly it with
   a given aircraft and frequency. Cost splits two ways: <b>escapable</b> if you don't operate,
-  <b>carried either way</b> if you do. Costs normalise per block hour or per departure depending
-  on what actually drives them.</p>
+  <b>carried either way</b> if you do. The method is below; the working model goes to paid
+  subscribers.</p>
 </header>
 
-<section class="card">
-  <h2>Market and capture</h2>
+<section class="card gate">
   <div class="bd">
-    <div class="scroll">
-    <table class="od">
-      <thead><tr>
-        <th>O&amp;D pair</th><th>Market, pax/yr</th><th>Growth %</th>
-        <th>Business %</th><th>Capture, Y1 econ %</th><th>Capture, Y5 econ %</th><th></th>
-      </tr></thead>
-      <tbody id="odBody"></tbody>
-    </table>
-    </div>
-    <p class="hint" style="margin:12px 0 0">Market is total one-way passenger journeys, both
-    directions summed, as O&amp;D data reports it. Capture ramps straight-line from Y1 to Y5.
-    Business-cabin capture is taken as 0.8&times; the economy rate unless the market is
-    business-heavy.</p>
-    <button class="btn" id="addOd" type="button" style="margin-top:12px">Add O&amp;D pair</button>
+    <span class="lockbadge">For paid subscribers</span>
+    <h2>The working model is for paid subscribers</h2>
+    <p>The page you are on explains the method. The model itself &mdash; the one you type your
+    own market size, fares, aircraft and frequency into &mdash; goes to paid subscribers of
+    Strategic Bearing, as a spreadsheet where every output is a live formula rather than a
+    number someone typed.</p>
+    <p>That means you can point it at a different route, argue with an assumption, and watch
+    the whole thing move. It is a structure for the argument, not a substitute for it.</p>
+    <p><a class="btn btn--solid" href="https://strategicbearing.substack.com/subscribe">Subscribe to get it</a></p>
+    <p class="fineprint">Already a paid subscriber? Reply to any Strategic Bearing email and
+    I will send it over.</p>
   </div>
 </section>
 
 <section class="card">
-  <h2>Service</h2>
+  <h2>What the model does</h2>
   <div class="bd">
-    <div class="grid g4">
-      <div class="fld"><label class="lbl" for="freq">Round trips per week</label>
-        <input id="freq" type="number" step="any" value="4" data-calc></div>
-      <div class="fld"><label class="lbl" for="seatsY">Economy seats</label>
-        <input id="seatsY" type="number" step="1" value="264" data-calc></div>
-      <div class="fld"><label class="lbl" for="seatsJ">Business seats</label>
-        <input id="seatsJ" type="number" step="1" value="28" data-calc></div>
-      <div class="fld"><label class="lbl" for="bh">Block hours per leg</label>
-        <input id="bh" type="number" step="any" value="9.5" data-calc></div>
-      <div class="fld"><label class="lbl" for="stage">Stage length, km</label>
-        <input id="stage" type="number" step="any" value="7100" data-calc></div>
-      <div class="fld"><label class="lbl" for="yieldY">Economy yield, round trip</label>
-        <input id="yieldY" type="number" step="any" value="520" data-calc></div>
-      <div class="fld"><label class="lbl" for="yieldJ">Business yield, round trip</label>
-        <input id="yieldJ" type="number" step="any" value="2100" data-calc></div>
-      <div class="fld"><label class="lbl" for="yGrow">Yield change %/yr</label>
-        <input id="yGrow" type="number" step="any" value="1.5" data-calc></div>
-    </div>
-    <p class="hint" style="margin:12px 0 0">Yields are round-trip fares net of tax. The model
-    halves them to value a one-way journey, so the market figure and the fare stay on the same
-    footing.</p>
+    <p>Five years, built from the inputs you control rather than a verdict handed down:</p>
+    <ul class="what">
+      <li><b>Market and capture.</b> Size the origin&ndash;destination market, take a share of
+      it by cabin, and price that share at a yield you set.</li>
+      <li><b>Service.</b> Aircraft, frequency, stage length and seats, turning into block
+      hours and departures.</li>
+      <li><b>Cost, split by what it actually is.</b> Thirteen lines, each marked
+      <b>escapable</b> &mdash; the cost that disappears if you do not operate &mdash; or
+      <b>carried either way</b>. Each normalises per block hour or per departure depending on
+      what drives it.</li>
+      <li><b>Two breakevens.</b> Cash breakeven asks whether the route covers the cost you
+      would avoid by not flying it. Full breakeven asks whether it also covers the cost you
+      carry anyway.</li>
+    </ul>
+    <p class="disc"><b>Why two.</b> A route can clear cash and still destroy value. That gap is
+    the thing most often argued about in a network meeting and most often left implicit, which
+    is the reason the model separates the two rather than reporting one number.</p>
   </div>
 </section>
-
-<section class="card">
-  <h2>Cost levers, per block hour</h2>
-  <div class="bd scroll">
-    <table><thead><tr><th>Line</th><th>Per block hour</th><th>Treatment</th></tr></thead>
-    <tbody><tr><td>Fuel</td><td><input id="bh_fuel" type="number" step="any" value="2400" data-calc aria-label="Fuel"></td><td><label class="esc"><input type="checkbox" id="esc_bh_fuel" checked data-calc> escapable</label></td></tr>
-<tr><td>Aircraft maintenance</td><td><input id="bh_maint" type="number" step="any" value="620" data-calc aria-label="Aircraft maintenance"></td><td><label class="esc"><input type="checkbox" id="esc_bh_maint" checked data-calc> escapable</label></td></tr>
-<tr><td>Crew layover and subsistence</td><td><input id="bh_crew" type="number" step="any" value="180" data-calc aria-label="Crew layover and subsistence"></td><td><label class="esc"><input type="checkbox" id="esc_bh_crew" checked data-calc> escapable</label></td></tr>
-<tr><td>Sales cost (GDS, commission)</td><td><input id="bh_sales" type="number" step="any" value="240" data-calc aria-label="Sales cost (GDS, commission)"></td><td><label class="esc"><input type="checkbox" id="esc_bh_sales" checked data-calc> escapable</label></td></tr>
-<tr><td>Aircraft lease</td><td><input id="bh_lease" type="number" step="any" value="900" data-calc aria-label="Aircraft lease"></td><td><label class="esc"><input type="checkbox" id="esc_bh_lease"  data-calc> escapable</label></td></tr>
-<tr><td>Insurance and depreciation</td><td><input id="bh_insdep" type="number" step="any" value="160" data-calc aria-label="Insurance and depreciation"></td><td><label class="esc"><input type="checkbox" id="esc_bh_insdep"  data-calc> escapable</label></td></tr>
-<tr><td>Station, traffic and IFE</td><td><input id="bh_station" type="number" step="any" value="140" data-calc aria-label="Station, traffic and IFE"></td><td><label class="esc"><input type="checkbox" id="esc_bh_station"  data-calc> escapable</label></td></tr>
-<tr><td>Engineering management</td><td><input id="bh_engmgt" type="number" step="any" value="90" data-calc aria-label="Engineering management"></td><td><label class="esc"><input type="checkbox" id="esc_bh_engmgt"  data-calc> escapable</label></td></tr></tbody></table>
-  </div>
-  <p class="note">Fuel, maintenance and crew accrue with time in the air. Lease, insurance and
-  the engineering and station overheads are carried whether or not this route operates, so they
-  are not escapable by cancelling it.</p>
-</section>
-
-<section class="card">
-  <h2>Cost levers, per departure</h2>
-  <div class="bd scroll">
-    <table><thead><tr><th>Line</th><th>Per departure</th><th>Treatment</th></tr></thead>
-    <tbody><tr><td>Landing and parking</td><td><input id="dep_land" type="number" step="any" value="2600" data-calc aria-label="Landing and parking"></td><td><label class="esc"><input type="checkbox" id="esc_dep_land" checked data-calc> escapable</label></td></tr>
-<tr><td>Overflying</td><td><input id="dep_overfly" type="number" step="any" value="1400" data-calc aria-label="Overflying"></td><td><label class="esc"><input type="checkbox" id="esc_dep_overfly" checked data-calc> escapable</label></td></tr>
-<tr><td>Ground handling, home base</td><td><input id="dep_ghhome" type="number" step="any" value="1100" data-calc aria-label="Ground handling, home base"></td><td><label class="esc"><input type="checkbox" id="esc_dep_ghhome" checked data-calc> escapable</label></td></tr>
-<tr><td>Ground handling, outstation</td><td><input id="dep_ghaway" type="number" step="any" value="1900" data-calc aria-label="Ground handling, outstation"></td><td><label class="esc"><input type="checkbox" id="esc_dep_ghaway" checked data-calc> escapable</label></td></tr>
-<tr><td>Inflight catering</td><td><input id="dep_cater" type="number" step="any" value="2100" data-calc aria-label="Inflight catering"></td><td><label class="esc"><input type="checkbox" id="esc_dep_cater" checked data-calc> escapable</label></td></tr></tbody></table>
-  </div>
-  <p class="note">Charged per turn, not per hour. A departure here is one leg, so a round trip
-  incurs two.</p>
-</section>
-
-<section class="card">
-  <h2>Five-year view</h2>
-  <div class="kpis" id="kpis"></div>
-  <div class="bd scroll">
-    <table id="pnl"></table>
-  </div>
-  <div class="verdict" id="verdict"></div>
-</section>
-
-<div class="disc"><b>How to read this.</b> Cash breakeven asks whether the route covers the cost
-you would avoid by not flying it. Full breakeven asks whether it also covers the cost you carry
-anyway. A route can clear cash and still destroy value, which is the case most often argued
-about in a network meeting. Figures are indicative and no better than the assumptions typed
-above; this is a structure for the argument, not a substitute for it.</div>
-</div>
 
 <footer class="sitefoot"><div class="wrap">
 <small>&copy; 2026 Strategic Bearing &middot; Kevin Jose</small>
@@ -255,161 +214,6 @@ above; this is a structure for the argument, not a substitute for it.</div>
 </div>
 </div></footer>
 
-<script>
-const $ = id => document.getElementById(id);
-const N = id => parseFloat($(id).value) || 0;
-const YEARS = 5;
 
-const OD_SEED = [
-  ['Origin – Destination', 240000, 4.0, 7, 9, 14],
-  ['Destination – Origin', 210000, 4.0, 6, 8, 12],
-];
-
-function odRow(d){
-  const tr = document.createElement('tr');
-  tr.innerHTML =
-    '<td><input type="text" value="'+d[0]+'" aria-label="O and D pair"></td>' +
-    '<td><input type="number" step="any" value="'+d[1]+'" data-calc aria-label="Market"></td>' +
-    '<td><input type="number" step="any" value="'+d[2]+'" data-calc aria-label="Growth"></td>' +
-    '<td><input type="number" step="any" value="'+d[3]+'" data-calc aria-label="Business share"></td>' +
-    '<td><input type="number" step="any" value="'+d[4]+'" data-calc aria-label="Capture year 1"></td>' +
-    '<td><input type="number" step="any" value="'+d[5]+'" data-calc aria-label="Capture year 5"></td>' +
-    '<td><button class="btn btn--x" type="button" aria-label="Remove row">&times;</button></td>';
-  tr.querySelector('.btn--x').onclick = () => { tr.remove(); calc(); };
-  tr.querySelectorAll('input').forEach(i => i.addEventListener('input', calc));
-  return tr;
-}
-
-OD_SEED.forEach(d => $('odBody').appendChild(odRow(d)));
-$('addOd').onclick = () => {
-  $('odBody').appendChild(odRow(['New pair', 100000, 4.0, 6, 6, 10]));
-  calc();
-};
-
-const fmt0 = n => (isFinite(n) ? Math.round(n).toLocaleString('en-US') : '—');
-const fmtM = n => (isFinite(n) ? (n/1e6).toFixed(1) : '—');
-const pct = n => (isFinite(n) ? n.toFixed(1) + '%' : '—');
-
-function calc(){
-  const freq = N('freq'), seatsY = N('seatsY'), seatsJ = N('seatsJ');
-  const bh = N('bh'), stage = N('stage'), yGrow = N('yGrow')/100;
-  const legs = freq * 52 * 2;                 // both directions
-  const seats = seatsY + seatsJ;
-  const capY = legs * seatsY, capJ = legs * seatsJ, capTot = legs * seats;
-  const ask = capTot * stage;
-  const annualBH = legs * bh;
-
-  let perBH = 0, perBHesc = 0;
-  for (const [k] of BH_KEYS) {
-    const v = N('bh_' + k);
-    perBH += v;
-    if ($('esc_bh_' + k).checked) perBHesc += v;
-  }
-  let perDep = 0, perDepEsc = 0;
-  for (const [k] of DEP_KEYS) {
-    const v = N('dep_' + k);
-    perDep += v;
-    if ($('esc_dep_' + k).checked) perDepEsc += v;
-  }
-
-  const costTot = perBH * annualBH + perDep * legs;
-  const costEsc = perBHesc * annualBH + perDepEsc * legs;
-  const costNon = costTot - costEsc;
-
-  const ods = [...$('odBody').children].map(tr => {
-    const v = [...tr.querySelectorAll('input')].map(i => i.value);
-    return { mkt:+v[1]||0, grow:(+v[2]||0)/100, bus:(+v[3]||0)/100,
-             c1:(+v[4]||0)/100, c5:(+v[5]||0)/100 };
-  });
-
-  const out = [];
-  for (let y = 0; y < YEARS; y++) {
-    let paxY = 0, paxJ = 0;
-    for (const o of ods) {
-      const mkt = o.mkt * Math.pow(1 + o.grow, y);
-      const cap = o.c1 + (o.c5 - o.c1) * (y / (YEARS - 1));
-      paxY += mkt * (1 - o.bus) * cap;
-      paxJ += mkt * o.bus * cap * 0.8;
-    }
-    paxY = Math.min(paxY, capY);
-    paxJ = Math.min(paxJ, capJ);
-    const g = Math.pow(1 + yGrow, y);
-    const revY = paxY * (N('yieldY') / 2) * g;
-    const revJ = paxJ * (N('yieldJ') / 2) * g;
-    const rev = revY + revJ;
-    const pax = paxY + paxJ;
-    out.push({ y:y+1, paxY, paxJ, pax, rev, revY, revJ,
-      plf: capTot ? pax / capTot * 100 : NaN,
-      res: rev - costTot,
-      rpp: pax ? rev / pax : 0 });
-  }
-
-  const last = out[out.length - 1];
-  const rppAvg = out.reduce((s,r) => s + r.rpp, 0) / out.length;
-  const beCash = rppAvg * capTot ? costEsc / (rppAvg * capTot) * 100 : NaN;
-  const beFull = rppAvg * capTot ? costTot / (rppAvg * capTot) * 100 : NaN;
-  const cask = ask ? costTot / ask * 100 : NaN;
-  const raskY5 = ask ? last.rev / ask * 100 : NaN;
-
-  $('kpis').innerHTML = [
-    ['Flights per year', fmt0(legs), 'legs, both directions'],
-    ['Seats per year', fmt0(capTot), seats + ' per departure'],
-    ['Cash breakeven LF', pct(beCash), 'covers escapable cost'],
-    ['Full breakeven LF', pct(beFull), 'covers everything'],
-  ].map((k,i) =>
-    '<div class="kpi'+(i>1?' lead':'')+'"><span class="k">'+k[0]+'</span>' +
-    '<span class="v">'+k[1]+'</span><span class="sm">'+k[2]+'</span></div>').join('');
-
-  const hdr = '<thead><tr><th>Year</th>' +
-    out.map(r => '<th>Y'+r.y+'</th>').join('') + '</tr></thead>';
-  const line = (lab, f, cls) => '<tr'+(cls?' class="'+cls+'"':'')+'><td>'+lab+'</td>' +
-    out.map(r => '<td>'+f(r)+'</td>').join('') + '</tr>';
-  $('pnl').innerHTML = hdr + '<tbody>' +
-    line('Economy passengers', r => fmt0(r.paxY), 'sub') +
-    line('Business passengers', r => fmt0(r.paxJ), 'sub') +
-    line('Passengers carried', r => fmt0(r.pax)) +
-    line('Passenger load factor', r => pct(r.plf)) +
-    line('Revenue, m', r => fmtM(r.rev)) +
-    line('Escapable cost, m', () => fmtM(costEsc), 'sub') +
-    line('Carried either way, m', () => fmtM(costNon), 'sub') +
-    line('Total cost, m', () => fmtM(costTot)) +
-    line('Operating result, m', r => fmtM(r.res), 'tot') +
-    line('Margin', r => r.rev ? pct(r.res / r.rev * 100) : '—', 'sub') +
-    '</tbody>';
-
-  let tag, msg;
-  if (!isFinite(beFull) || capTot === 0) {
-    tag = '<span class="tag as">Incomplete</span>';
-    msg = 'Enter a frequency and a seat count to size the route.';
-  } else if (last.plf >= beFull) {
-    tag = '<span class="tag ok">Clears full cost</span>';
-    msg = 'By Y5 the route carries a load factor of <b>' + pct(last.plf) +
-      '</b> against a full breakeven of <b>' + pct(beFull) + '</b>. It covers the cost you ' +
-      'carry anyway, not just the cost you could avoid.';
-  } else if (last.plf >= beCash) {
-    tag = '<span class="tag as">Covers cash only</span>';
-    msg = 'By Y5 the route clears cash breakeven at <b>' + pct(beCash) + '</b> but falls short ' +
-      'of full breakeven at <b>' + pct(beFull) + '</b>. It is worth flying rather than parking ' +
-      'the aircraft, and it is still consuming capital. That distinction is the argument.';
-  } else {
-    tag = '<span class="tag bm">Below cash breakeven</span>';
-    msg = 'By Y5 the load factor of <b>' + pct(last.plf) + '</b> sits under cash breakeven of ' +
-      '<b>' + pct(beCash) + '</b>. On these assumptions the route loses money you would keep ' +
-      'by not operating it.';
-  }
-  $('verdict').innerHTML = tag + msg +
-    '<div class="hint" style="margin-top:10px">Y5 CASK ' + (isFinite(cask)?cask.toFixed(2):'—') +
-    ' and RASK ' + (isFinite(raskY5)?raskY5.toFixed(2):'—') + ' per 100 ASK, at a stage ' +
-    'length of ' + fmt0(stage) + ' km.</div>';
-}
-
-const BH_KEYS = [["fuel"],["maint"],["crew"],["sales"],["lease"],["insdep"],["station"],["engmgt"]];
-const DEP_KEYS = [["land"],["overfly"],["ghhome"],["ghaway"],["cater"]];
-document.querySelectorAll('[data-calc]').forEach(el => {
-  el.addEventListener('input', calc);
-  el.addEventListener('change', calc);
-});
-calc();
-</script>
 </body>
 </html>

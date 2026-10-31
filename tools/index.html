@@ -77,6 +77,8 @@ h1{margin:10px 0 8px;font-size:32px;line-height:1.14;color:var(--blue);letter-sp
 .card:hover{border-color:var(--teal);transform:translateY(-1px)}
 .tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;
  padding:3px 9px;border-radius:10px;background:rgba(0,168,181,.13);color:#00808a}
+/* a different badge, so "Live" keeps meaning you can use it right now */
+.tag--sub{background:rgba(11,58,119,.10);color:#0B3A77}
 .card h2{margin:12px 0 7px;font-size:21px;color:var(--navy);letter-spacing:-.01em}
 .card p{margin:0 0 14px;font-size:14.5px;color:var(--body)}
 .meta{display:flex;flex-wrap:wrap;gap:8px}
@@ -161,16 +163,17 @@ the turn; every rate shows the order page it came from. Prices the same turn at 
 </a>
 
 <a class="card" href="/tools/route-feasibility/">
-<span class="tag">Live</span>
+<span class="tag tag--sub">Subscribers</span>
 <h2>Route feasibility</h2>
 <p>Whether a route earns its keep over five years: size the market, take a share of it by cabin,
 price it at a yield, fly it with a given aircraft and frequency. Separates the cost you would
-avoid by not operating from the cost you carry either way.</p>
+avoid by not operating from the cost you carry either way. The method is public; the working
+model goes to paid subscribers.</p>
 <div class="meta">
 <span class="chip">Five-year view</span><span class="chip">Escapable vs carried</span>
-<span class="chip">Cash and full breakeven</span><span class="chip">No sign-up</span>
+<span class="chip">Cash and full breakeven</span><span class="chip">Live formulas</span>
 </div>
-<span class="go">Open the model</span>
+<span class="go">Read the method</span>
 </a>
 
 <div class="soon">
