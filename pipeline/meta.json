@@ -1,0 +1,61 @@
+{
+  "ytd": {
+    "pax": 1223.53,
+    "prev": 1233.7,
+    "growth": -0.82,
+    "scope": "ytd",
+    "label": "January - September 2026"
+  },
+  "checks": {
+    "n": 674,
+    "fails": [
+      {
+        "p": "2023-01",
+        "t": "airline pax PDF vs XLSX – Alliance Air",
+        "d": "pdf=1.43L xlsx=1.51L diff=-5.55%"
+      },
+      {
+        "p": "2026-03",
+        "t": "airline pax PDF vs XLSX – Alliance Air",
+        "d": "pdf=0.91L xlsx=0.46L diff=+99.25%"
+      }
+    ]
+  },
+  "events": [
+    {
+      "p": "2023-05",
+      "label": "Go First stops flying",
+      "detail": "DGCA footnote: \"M/s Go First stopped Operations from 3rd May 2023.\"",
+      "src_report": "2023-05",
+      "url": "https://public-prd-dgca.s3.ap-south-1.amazonaws.com/InventoryList/dataReports/aviationDataStatistics/airTransport/domestic/airTraffic/May2023.pdf"
+    },
+    {
+      "p": "2024-10",
+      "label": "AIX Connect merges into Air India Express",
+      "detail": "DGCA footnote: \"AIX connect merged with Air India Express effective Oct 2024. Air India Data includes Air India Express also.\"",
+      "src_report": "2024-12",
+      "url": "https://public-prd-dgca.s3.ap-south-1.amazonaws.com/InventoryList/dataReports/aviationDataStatistics/airTransport/domestic/airTraffic/Traffic%20Data%20Report%20December%2024.pdf"
+    },
+    {
+      "p": "2024-11",
+      "label": "Vistara merges into Air India",
+      "detail": "DGCA footnote: \"Vistara November month data is till 11 Nov 2024. Effective 12 Nov 2024 Vistara merged with Air India.\"",
+      "src_report": "2024-11",
+      "url": "https://public-prd-dgca.s3.ap-south-1.amazonaws.com/InventoryList/dataReports/aviationDataStatistics/airTransport/domestic/airTraffic/traffic%20Data%20November%2024.pdf"
+    },
+    {
+      "p": "2025-01",
+      "label": "DGCA reports \"Air India Group\"",
+      "detail": "DGCA footnote: \"Air India Group includes Air India & Air India Express.\"",
+      "src_report": "2025-01",
+      "url": "https://public-prd-dgca.s3.ap-south-1.amazonaws.com/InventoryList/dataReports/aviationDataStatistics/airTransport/domestic/airTraffic/traffic%20report%20January%2025.pdf"
+    },
+    {
+      "p": "2025-10",
+      "label": "Fly Big suspends scheduled flights",
+      "detail": "DGCA footnote: \"Flybig suspended scheduled flights operation during October 2025.\"",
+      "src_report": "2025-10",
+      "url": "https://public-prd-dgca.s3.ap-south-1.amazonaws.com/InventoryList/dataReports/aviationDataStatistics/airTransport/domestic/airTraffic/traffic%20Data%20Oct%2025.pdf"
+    }
+  ]
+}

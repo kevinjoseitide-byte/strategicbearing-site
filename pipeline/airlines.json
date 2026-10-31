@@ -1,0 +1,61 @@
+{
+  "_comment": "DGCA spells the same carrier several ways across reports. This maps its spelling to the display name and the group the page rolls it into. A spelling that is not here stops the refresh on purpose: a carrier appearing for the first time needs a person to decide its group.",
+  "airlines": {
+    "air india": {
+      "name": "Air India",
+      "group": "Air India Group"
+    },
+    "air india group": {
+      "name": "Air India Group",
+      "group": "Air India Group"
+    },
+    "aix connect": {
+      "name": "AIX Connect (AirAsia India)",
+      "group": "Air India Group"
+    },
+    "akasa air": {
+      "name": "Akasa Air",
+      "group": "Akasa Air"
+    },
+    "alliance air": {
+      "name": "Alliance Air",
+      "group": "Alliance Air"
+    },
+    "fly big": {
+      "name": "Fly Big",
+      "group": "Others"
+    },
+    "fly91": {
+      "name": "Fly91",
+      "group": "Others"
+    },
+    "go first": {
+      "name": "Go First",
+      "group": "Go First"
+    },
+    "indiaone air": {
+      "name": "IndiaOne Air",
+      "group": "Others"
+    },
+    "indigo": {
+      "name": "IndiGo",
+      "group": "IndiGo"
+    },
+    "spice jet": {
+      "name": "SpiceJet",
+      "group": "SpiceJet"
+    },
+    "star air": {
+      "name": "Star Air",
+      "group": "Others"
+    },
+    "vistara": {
+      "name": "Vistara",
+      "group": "Air India Group"
+    },
+    "zooom": {
+      "name": "Zooom",
+      "group": "Others"
+    }
+  }
+}
