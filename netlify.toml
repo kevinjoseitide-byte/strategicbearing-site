@@ -1,6 +1,17 @@
 [functions]
   directory = "netlify/functions"
 
+# On the credit plan a production deploy costs 15 credits whatever it builds,
+# and the free month is 300. Changes under pipeline/ and .github/ never alter
+# a single byte the site serves, so publishing them is 15 credits for nothing.
+# This cancels the build when a push touched only those two directories. The
+# monthly data refresh writes to tools/domestic-traffic/data/, which is
+# outside them, so a real refresh still deploys. Exit 0 cancels, non-zero
+# builds; on the first build CACHED_COMMIT_REF is empty and git errors, which
+# is non-zero, so the safe case is the default.
+[build]
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':!pipeline' ':!.github'"
+
 # Tested against every page on the site — home, writing, the tools index and
 # all three tools — by serving them with these headers and failing on any
 # violation or page error. That matters here: a policy checked against one

@@ -23,19 +23,40 @@ import urllib.parse
 import requests
 
 PORTAL = 'https://www.dgca.gov.in/digigov-portal'
-# the "Air Transport / Domestic / Air Traffic" listing. It is a plain GET:
-# the page is a JavaScript app, but the year/month picker is rendered server
-# side, so every report back to 2014 is already in the HTML when it arrives.
 RULEBOOK_ID = '4264'
 CONTENT_ID = '4206'
 LISTING = f'{PORTAL}/?page={RULEBOOK_ID}/{CONTENT_ID}/servicename'
+SCAN = f'{PORTAL}/scan?'
 BUCKET = 'public-prd-dgca.s3.ap-south-1.amazonaws.com'
 PATH_HINT = 'airTransport/domestic/airTraffic'
-# What the page actually carries. Not an absolute URL — a path relative to
-# the portal, which the site rewrites to the S3 bucket by dropping jsp/dgca/.
+
+# The listing page itself is a shell: fetching it returns ~190 KB that
+# contains no reports at all. The months arrive from one XHR to scan?, which
+# answers with JSON wrapping an escaped HTML table. No cookies, no token, no
+# session — but the full field set is required. Sending only ruleBookId,
+# contentId and serviceName returns HTTP 200 with a 4 KB body and no reports,
+# which is how this failed silently twice.
+SCAN_FIELDS = {
+    'screenId': '10000001',
+    'actionVal': 'viewStaticData',
+    'requestType': 'ApplicationRH',
+    'langType': '2',
+    'ruleBookId': RULEBOOK_ID,
+    'contentId': CONTENT_ID,
+    'serviceName': 'getParentData',
+    'baseLocale': '',
+    'classification': '',
+    'attachId': '',
+    'attr': '',
+}
+
+# Inside that HTML the months are <a data-url="jsp/dgca/...pdf">September</a>.
+# data-url, not href: the page's own JavaScript rewrites it on render, so the
+# DOM shows href and the response does not. The pattern matches the path
+# itself rather than the attribute, so either spelling is found.
 HREF_RE = re.compile(
     r'jsp/dgca/(InventoryList/dataReports/aviationDataStatistics/'
-    r'airTransport/domestic/airTraffic/[^"\'<>]+?\.pdf)', re.I)
+    r'airTransport/domestic/airTraffic/[^"\'<>\\]+?\.pdf)', re.I)
 
 UA = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
       '(KHTML, like Gecko) Chrome/129.0 Safari/537.36')
@@ -128,9 +149,14 @@ def list_reports(session: requests.Session | None = None,
     """Return {'YYYY-MM': url} for every monthly domestic traffic report listed."""
     s = session or _session()
     report: list[str] = []
-    for label, url in (('listing page', LISTING), ('portal home', f'{PORTAL}/')):
+    attempts = [
+        ('scan, full field set', 'POST', SCAN, SCAN_FIELDS),
+        ('listing page', 'GET', LISTING, None),
+    ]
+    for label, method, url, data in attempts:
         try:
-            r = s.get(url, timeout=TIMEOUT)
+            r = (s.post(url, data=data, timeout=TIMEOUT) if method == 'POST'
+                 else s.get(url, timeout=TIMEOUT))
             found = harvest(r.text) if r.ok else {}
             report.append(f'  {label} ({url}): HTTP {r.status_code}, '
                           f'{len(r.text):,} bytes, {len(found)} report link(s)')
@@ -149,12 +175,14 @@ def list_reports(session: requests.Session | None = None,
         '\n\nHow to read this. A connection error or timeout on every line means '
         'DGCA is refusing the request rather than that the listing moved — '
         'government sites do block cloud datacentre ranges, and GitHub runners '
-        'are US-based. HTTP 200 with plenty of bytes but no links means the '
-        'page no longer carries the report paths; check that an href still '
-        f'looks like jsp/dgca/.../{PATH_HINT}/<file>.pdf. '
-        'Run `python pipeline/dgca_portal.py --diagnose` from an ordinary '
-        'connection to see which it is.')
-    return out
+        'are US-based. HTTP 200 from scan with only a few KB means the field '
+        'set is wrong: it answers 200 with a near-empty body rather than an '
+        'error, so compare SCAN_FIELDS against the hidden inputs in the '
+        'listing page\'s form. HTTP 200 with plenty of bytes but no links '
+        'means the paths have moved; they should still look like '
+        f'jsp/dgca/.../{PATH_HINT}/<file>.pdf. Run '
+        '`python pipeline/dgca_portal.py --diagnose` from an ordinary '
+        'connection to compare.')
 
 
 def head(url: str, session: requests.Session | None = None) -> dict:
