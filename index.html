@@ -230,6 +230,17 @@ footer a:hover{color:var(--accent-soft)}
 .tool-figs{display:flex; gap:30px; margin-top:20px}
 .tool-fig b{display:block; font-size:24px; font-weight:700; color:var(--accent-soft); letter-spacing:-.02em}
 .tool-fig span{font-size:13.5px; color:#D7E8FB}
+/* the two newer tools sit side by side under the flagship: same card, one
+   column, stat row above the button rather than beside it */
+.tool-row{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+.tool--sm{grid-template-columns:1fr; align-items:start; gap:22px;
+  padding:30px 30px 28px; margin-top:22px}
+.tool--sm h2{font-size:21px}
+.tool--sm p{font-size:15px; max-width:46ch}
+.tool--sm .tool-figs{gap:24px; margin-top:18px}
+.tool--sm .tool-fig b{font-size:21px}
+.tool--sm .tool-fig span{font-size:12.5px}
+.tool--sm .btn{justify-self:start}
 
 /* ---------- contact ---------- */
 .contact{text-align:center}
@@ -253,6 +264,10 @@ footer a:hover{color:var(--accent-soft)}
   .stop-years{color:var(--muted)}
   .tool{grid-template-columns:1fr; padding:28px 24px; gap:24px}
   .tool-figs{gap:22px}
+  .tool-row{grid-template-columns:1fr; gap:18px}
+}
+@media (max-width:980px) and (min-width:761px){
+  .tool-row{grid-template-columns:1fr}
 }
 @media (max-width:520px){
   .lenses{grid-template-columns:1fr}
@@ -398,17 +413,50 @@ footer a:hover{color:var(--accent-soft)}
       </svg>
       <div>
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"/></svg>
-        <h2>Airport charges and route economics</h2>
+        <h2>Airport charges</h2>
         <p>What one turnaround costs at Delhi, Mumbai, Bengaluru or Hyderabad, built from the
         AERA control-period orders and their calculation rules, not just their rate tables.
         Every line shows the order page it came from.</p>
         <div class="tool-figs">
-          <div class="tool-fig"><b>6</b><span>tariff periods</span></div>
-          <div class="tool-fig"><b>9</b><span>variable tariff schemes</span></div>
-          <div class="tool-fig"><b>2</b><span>breakevens, cash and full</span></div>
+          <div class="tool-fig"><b>4</b><span>metro airports</span></div>
+          <div class="tool-fig"><b>18</b><span>tariff periods to 2031</span></div>
+          <div class="tool-fig"><b>4</b><span>AERA orders, every rate traced</span></div>
         </div>
       </div>
       <a href="/tools/airport-charges/" class="btn btn--solid">Open the calculator</a>
+    </div>
+
+    <div class="tool-row">
+      <div class="tool tool--sm">
+        <div>
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V9M9 20V4M15 20v-7M21 20V11"/><path d="M2 20h20"/></svg>
+          <h2>Indian domestic traffic</h2>
+          <p>How many people fly within India each month and on which airline, from every DGCA
+          monthly report since January 2023. Traffic and its year-on-year change, who carries it,
+          how full the aircraft are, and a derived read on whether capacity is coming out as fast
+          as demand. Refreshed when DGCA publishes.</p>
+          <div class="tool-figs">
+            <div class="tool-fig"><b>14</b><span>airlines tracked</span></div>
+            <div class="tool-fig"><b>4</b><span>charts, each downloadable</span></div>
+          </div>
+        </div>
+        <a href="/tools/domestic-traffic/" class="btn btn--solid">Open the data</a>
+      </div>
+
+      <div class="tool tool--sm">
+        <div>
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18c4.5 0 6-3 9-6s4.5-6 9-6"/><circle cx="3" cy="18" r="2"/><circle cx="21" cy="6" r="2"/><path d="M11.5 9.5l2 2"/></svg>
+          <h2>Route feasibility</h2>
+          <p>Whether a route earns its keep over five years: size the market, take a share of it,
+          price it at a yield, fly it with a given aircraft and frequency. Separates the cost you
+          would avoid by not operating from the cost you carry either way.</p>
+          <div class="tool-figs">
+            <div class="tool-fig"><b>13</b><span>cost lines, escapable or carried</span></div>
+            <div class="tool-fig"><b>2</b><span>breakevens, cash and full</span></div>
+          </div>
+        </div>
+        <a href="/tools/route-feasibility/" class="btn btn--solid">Open the model</a>
+      </div>
     </div>
   </div>
 </section>

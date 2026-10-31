@@ -13,6 +13,12 @@
   function full(p) { var a = p.split('-'); return FULL[+a[1] - 1] + ' ' + a[0]; }
   function f1(x) { return x == null ? '–' : x.toFixed(1); }
   function f2(x) { return x == null ? '–' : x.toFixed(2); }
+  /* India counts air passengers in lakh (one lakh = 100,000) and DGCA prints
+     the figure that way. Most readers outside India do not, so the headline
+     numbers lead in millions and keep DGCA's own lakh figure alongside,
+     rather than quietly converting and leaving no way back to the source. */
+  function mn(x) { return x == null ? '–' : (x / 10).toFixed(2) + ' million'; }
+  function mnl(x) { return x == null ? '–' : mn(x) + ' (' + f2(x) + ' lakh)'; }
   function sg(x, d) { return x == null ? '–' : (x > 0 ? '+' : x < 0 ? '−' : '') + Math.abs(x).toFixed(d == null ? 1 : d) + '%'; }
   function $(id) { return document.getElementById(id); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
@@ -38,8 +44,8 @@
     var shareLast = D.share.filter(function (r) { return r.p === D.as_of; }).sort(function (a, b) { return b.s - a.s; });
     var lead = shareLast[0];
     $('kpis').innerHTML =
-      kpi('lead', 'Passengers, ' + lab(last.p), f2(last.pax) + ' lakh', '<span class="' + (last.yoy < 0 ? 'neg' : '') + '">' + sg(last.yoy, 2) + '</span> vs ' + lab((+y - 1) + last.p.slice(4))) +
-      kpi('', 'Jan–' + MON[m - 1] + ' ' + y, f2(ytd) + ' lakh', '<span class="' + (ytdG < 0 ? 'neg' : 'pos') + '">' + sg(ytdG, 2) + '</span> vs same months of ' + (+y - 1)) +
+      kpi('lead', 'Passengers, ' + lab(last.p), mn(last.pax) + '<i>' + f2(last.pax) + ' lakh</i>', '<span class="' + (last.yoy < 0 ? 'neg' : '') + '">' + sg(last.yoy, 2) + '</span> vs ' + lab((+y - 1) + last.p.slice(4))) +
+      kpi('', 'Jan–' + MON[m - 1] + ' ' + y, mn(ytd) + '<i>' + f2(ytd) + ' lakh</i>', '<span class="' + (ytdG < 0 ? 'neg' : 'pos') + '">' + sg(ytdG, 2) + '</span> vs same months of ' + (+y - 1)) +
       kpi('', 'Largest airline, ' + lab(last.p), esc(lead.g) + ' ' + f1(lead.s) + '%', 'share of passengers carried') +
       kpi('', 'Months covered', String(nat.length), lab(periods[0]) + ' – ' + lab(last.p));
     function kpi(cls, k, v, sm) { return '<div class="kpi ' + cls + '"><span class="k">' + k + '</span><span class="v">' + v + '</span><span class="sm">' + sm + '</span></div>'; }
@@ -49,10 +55,10 @@
     var minR = nat.reduce(function (a, b) { return b.pax < a.pax ? b : a; });
     var maxR = nat.reduce(function (a, b) { return b.pax > a.pax ? b : a; });
     var ord = ['', '', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth'];
-    var t1 = '<b>' + full(last.p) + ': ' + f2(last.pax) + ' lakh passengers, ' + sg(last.yoy, 2) + ' year on year</b>';
+    var t1 = '<b>' + full(last.p) + ': ' + mnl(last.pax) + ' passengers, ' + sg(last.yoy, 2) + ' year on year</b>';
     if (streak >= 2) t1 += ', the ' + (ord[streak] || streak + 'th') + ' straight month below the previous year';
     if (minR.p === last.p) t1 += ', and the lowest month since this series began in ' + lab(periods[0]);
-    t1 += '. The busiest month was ' + lab(maxR.p) + ' (' + f2(maxR.pax) + ' lakh).';
+    t1 += '. The busiest month was ' + lab(maxR.p) + ', at ' + mnl(maxR.pax) + '.';
     $('t1').innerHTML = t1;
 
     var first = D.share.filter(function (r) { return r.p === periods[0]; });
@@ -80,7 +86,7 @@
         animation: false,
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow', link: [{ xAxisIndex: 'all' }] }, confine: true,
           formatter: function (ps) { var r = nat[ps[0].dataIndex];
-            return '<b>' + full(r.p) + '</b><br>Passengers: <b>' + f2(r.pax) + ' lakh</b><br>YoY: <b>' + sg(r.yoy, 2) + '</b>' +
+            return '<b>' + full(r.p) + '</b><br>Passengers: <b>' + mn(r.pax) + '</b> (' + f2(r.pax) + ' lakh)<br>YoY: <b>' + sg(r.yoy, 2) + '</b>' +
               (r.basis === 'dgca_reported' ? ' <span style="color:#53688A">(as published by DGCA)</span>' : (r.yoy_dgca != null ? '<br><span style="color:#53688A">DGCA "monthly growth": ' + sg(r.yoy_dgca, 2) + '</span>' : '')); } },
         axisPointer: { link: [{ xAxisIndex: 'all' }] },
         grid: [{ left: n ? 40 : 52, right: n ? 8 : 18, top: 30, height: '52%' }, { left: n ? 40 : 52, right: n ? 8 : 18, top: '70%', bottom: n ? 40 : 34 }],
