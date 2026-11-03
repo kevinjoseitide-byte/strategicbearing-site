@@ -215,6 +215,26 @@ footer a:hover{color:var(--accent-soft)}
 .lens p{font-size:14.5px; color:var(--muted); margin-bottom:14px; flex:1}
 .lens ul{margin:0; padding:0; list-style:none; border-top:1px solid var(--line); padding-top:12px}
 .lens li{font-size:14.5px; color:var(--text); padding:3px 0}
+.lens-link{display:inline-block; margin-top:14px; font-size:14px; font-weight:600;
+  color:var(--accent); text-decoration:none}
+.lens-link:hover{text-decoration:underline}
+
+/* ---------- latest writing ---------- */
+.sec-sub{color:var(--muted); font-size:16px; max-width:66ch; margin:0}
+.recents{margin:26px 0 24px; border-top:1px solid var(--line)}
+.recent{display:grid; grid-template-columns:96px 1fr 104px; gap:18px; align-items:baseline;
+  padding:16px 6px; border-bottom:1px solid var(--line); text-decoration:none;
+  color:inherit; transition:background-color .15s ease}
+.recent:hover{background:var(--white)}
+.recent:focus-visible{outline:2px solid var(--teal); outline-offset:-2px}
+.rc-date{font-size:14px; font-weight:600; color:var(--muted)}
+.rc-title{font-size:16.5px; font-weight:600; letter-spacing:-.015em; color:var(--text);
+  line-height:1.35}
+.rc-tag{font-size:13.5px; color:var(--teal); font-weight:500; text-align:right}
+@media (max-width:700px){
+  .recent{grid-template-columns:1fr; gap:4px; padding:14px 6px}
+  .rc-tag{text-align:left}
+}
 
 /* ---------- tool promo ---------- */
 .tool{position:relative; overflow:hidden;
@@ -477,30 +497,71 @@ footer a:hover{color:var(--accent-soft)}
         <h3>Flightpath</h3>
         <p>Networks, routes and the economics of flying them.</p>
         <ul><li>Network strategy</li><li>Route development</li><li>Airport commercial</li><li>Fleet economics</li></ul>
+        <a class="lens-link" href="/strategic-bearing.html#flightpath">51 pieces &rarr;</a>
       </article>
       <article class="lens">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.5" y="2.5" width="7" height="5" rx="1.2"/><rect x="2" y="16" width="6.5" height="5" rx="1.2"/><rect x="15.5" y="16" width="6.5" height="5" rx="1.2"/><path d="M12 7.5v4M5.25 16v-2.5h13.5V16"/></svg>
         <h3>Boardroom</h3>
         <p>What separates a plan from a decision.</p>
         <ul><li>Corporate strategy</li><li>Execution and governance</li><li>Leadership judgment</li><li>Operating models</li></ul>
+        <a class="lens-link" href="/strategic-bearing.html#boardroom">22 pieces &rarr;</a>
       </article>
       <article class="lens">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V9M9 20V4M15 20v-7M21 20V11"/><path d="M2 20h20"/></svg>
         <h3>Capital</h3>
         <p>Where returns are earned, and where they only look earned.</p>
         <ul><li>Portfolio construction</li><li>Business quality</li><li>Capital allocation</li><li>Valuation and compounding</li></ul>
+        <a class="lens-link" href="/strategic-bearing.html#capital">13 pieces &rarr;</a>
       </article>
       <article class="lens">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v17M7 20.5h10M4 8h16"/><path d="M4 8l-2.5 5a2.8 2.8 0 0 0 5 0z"/><path d="M20 8l-2.5 5a2.8 2.8 0 0 0 5 0z"/><circle cx="12" cy="5.5" r="1.6"/></svg>
         <h3>Wisdom</h3>
         <p>The judgment that outlasts the decision.</p>
         <ul><li>Stewardship</li><li>Character</li><li>Perspective</li><li>Discipline</li></ul>
+        <a class="lens-link" href="/strategic-bearing.html#wisdom">11 pieces &rarr;</a>
       </article>
     </div>
   </div>
 </section>
 
-<section id="contact" class="band band--paper">
+<section id="latest" class="band band--paper">
+  <div class="wrap">
+    <div class="marker">Writing</div>
+    <h2>Latest writing</h2>
+    <p class="sec-sub">97 pieces on aviation, strategy and capital &mdash; airport
+    economics, route and network decisions, and the judgment behind them.</p>
+    <div class="recents">
+      <a class="recent" href="/writing/2026-09-testing-times/">
+        <span class="rc-date">Sep 2026</span>
+        <span class="rc-title">Testing times!</span>
+        <span class="rc-tag">Boardroom</span>
+      </a>
+      <a class="recent" href="/writing/2026-09-saudi-carriers-supplied-just-10-of-dammam-international/">
+        <span class="rc-date">Sep 2026</span>
+        <span class="rc-title">Saudi carriers supplied just 10% of Dammam’s international seat capacity in 2025</span>
+        <span class="rc-tag">Flightpath</span>
+      </a>
+      <a class="recent" href="/writing/2026-09-india-air-services-agreements-need-a-proactive-renewal/">
+        <span class="rc-date">Sep 2026</span>
+        <span class="rc-title">India&#x27;s air services agreements need a proactive renewal cycle</span>
+        <span class="rc-tag">Boardroom</span>
+      </a>
+      <a class="recent" href="/writing/2026-09-who-pays-how-much-when-india-airport-tariff/">
+        <span class="rc-date">Sep 2026</span>
+        <span class="rc-title">Who Pays. How Much. When. India’s Airport Tariff Model Is Evolving.</span>
+        <span class="rc-tag">Boardroom</span>
+      </a>
+      <a class="recent" href="/writing/2026-09-the-crack-spread-has-gone-from-a-quarter/">
+        <span class="rc-date">Sep 2026</span>
+        <span class="rc-title">The crack spread has gone from a quarter of the jet fuel price to nearly half</span>
+        <span class="rc-tag">Capital</span>
+      </a>
+    </div>
+    <a class="btn btn--line" href="/strategic-bearing.html">Read all 97 pieces</a>
+  </div>
+</section>
+
+<section id="contact" class="band band--white">
   <div class="wrap contact">
     <div class="marker">Contact</div>
     <h2>Get in touch</h2>
