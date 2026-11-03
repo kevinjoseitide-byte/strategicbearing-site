@@ -81,9 +81,7 @@ h1{font-size:clamp(28px,4.2vw,40px);line-height:1.12;letter-spacing:-.026em;colo
  margin:0;line-height:1.6;display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between}
 .src a{color:var(--blue);text-decoration:none;font-weight:600}
 .src a:hover{text-decoration:underline}
-.src a:focus-visible,summary:focus-visible,.dl:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:3px}
-.dl{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--blue);
- background:var(--chip);border-radius:999px;padding:3px 11px;text-decoration:none!important}
+.src a:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:3px}
 .ev{list-style:none;margin:0;padding:4px 20px 12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px 18px;font-size:13px;color:var(--body)}
 .ev li{display:flex;gap:8px;align-items:baseline}
 .ev .b{flex:none;font-size:11px;font-weight:700;color:#fff;background:var(--navy);width:18px;height:18px;border-radius:50%;
@@ -161,7 +159,7 @@ thead th{font-size:11px;font-weight:700;color:var(--mute);text-transform:upperca
 <h1>How many people fly within India, and on which airline?</h1>
 <p class="lede">Every month DGCA publishes how many passengers India's scheduled domestic airlines carried. This page
 puts the <b>monthly reports since January 2023</b> on one timeline: total traffic and its year-on-year change, who
-carries it, and how full the planes are. Every figure comes from DGCA's own tables, and each chart's data can be downloaded.</p>
+carries it, and how full the planes are. Every figure comes from DGCA's own tables, and every chart has the numbers behind it as a table.</p>
 </header>
 
 <section class="card" aria-label="Headline figures">
@@ -175,8 +173,7 @@ carries it, and how full the planes are. Every figure comes from DGCA's own tabl
 <div id="c1" class="chart" role="img" aria-label="Column chart of monthly domestic passengers since January 2023, with year-on-year percentage change below."></div>
 <p class="hint">Lower panel: green = growth, red = decline. Lighter bars for 2023 are DGCA's published growth figures, measured against a Covid-hit 2022. The axis is capped at 30%, so January 2023 (+95.7%) and February 2023 (+56.8%) run off the top. Hover or tap for exact values.</p>
 <details class="tbl"><summary>Show the data as a table</summary><div class="scroll" tabindex="0" role="region" aria-label="Monthly domestic passengers and year-on-year change, scrollable table"><table id="tb1"></table></div></details>
-<p class="src"><span>Source: <a href="https://www.dgca.gov.in/digigov-portal/" target="_blank" rel="noopener">DGCA, Government of India</a>, monthly domestic traffic reports (<a class="lastrep" href="#" target="_blank" rel="noopener">latest report, PDF</a>; <a href="#reports">all reports</a>). Data as of <span class="asof">Sep 2026</span>.</span>
-<a class="dl" href="data/national_monthly_domestic.csv" download>&darr; CSV</a></p>
+<p class="src"><span>Source: <a href="https://www.dgca.gov.in/digigov-portal/" target="_blank" rel="noopener">DGCA, Government of India</a>, monthly domestic traffic reports (<a class="lastrep" href="#" target="_blank" rel="noopener">latest report, PDF</a>; <a href="#reports">all reports</a>). Data as of <span class="asof">Sep 2026</span>.</span></p>
 </section>
 
 <section class="card" id="share" aria-labelledby="h2c">
@@ -185,8 +182,7 @@ carries it, and how full the planes are. Every figure comes from DGCA's own tabl
 <div id="c2" class="chart" role="img" aria-label="Stacked area chart of monthly domestic market share by airline group since January 2023, with numbered markers for mergers and exits."></div>
 <ul class="ev" id="events" aria-label="Events marked on the chart"></ul>
 <details class="tbl"><summary>Show the data as a table</summary><div class="scroll" tabindex="0" role="region" aria-label="Market share by airline group by month, scrollable table"><table id="tb2"></table></div></details>
-<p class="src"><span>Source: DGCA, Government of India, "Market share of scheduled domestic airlines" table in each monthly report (<a class="lastrep" href="#" target="_blank" rel="noopener">latest, PDF</a>). Air India Group = Air India, Air India Express, AIX Connect and Vistara in every month. Data as of <span class="asof">Sep 2026</span>.</span>
-<span><a class="dl" href="data/market_share_grouped.csv" download>&darr; CSV (groups)</a> <a class="dl" href="data/market_share_by_carrier.csv" download>&darr; CSV (as reported)</a></span></p>
+<p class="src"><span>Source: DGCA, Government of India, "Market share of scheduled domestic airlines" table in each monthly report (<a class="lastrep" href="#" target="_blank" rel="noopener">latest, PDF</a>). Air India Group = Air India, Air India Express, AIX Connect and Vistara in every month. Data as of <span class="asof">Sep 2026</span>.</span></p>
 </section>
 
 <section class="card" id="plf" aria-labelledby="h3c">
@@ -195,8 +191,7 @@ carries it, and how full the planes are. Every figure comes from DGCA's own tabl
 <div id="c3" class="chart" role="img" aria-label="Heatmap of monthly passenger load factor in percent for each domestic airline since January 2023."></div>
 <p class="hint">* Air India until December 2024 (DGCA's figure includes Air India Express); Air India Group from January 2025. Blank cells mean the airline was not in DGCA's table that month. Rows are ordered by passengers carried.</p>
 <details class="tbl"><summary>Show the latest month as a table</summary><div class="scroll" tabindex="0" role="region" aria-label="Load factor by airline for the latest month, scrollable table"><table id="tb3"></table></div></details>
-<p class="src"><span>Source: DGCA, Government of India, Table 1 "Month-wise seat factor of scheduled operators" in each monthly report (<a class="lastrep" href="#" target="_blank" rel="noopener">latest, PDF</a>). Carriers are shown as DGCA reports them. Data as of <span class="asof">Sep 2026</span>.</span>
-<a class="dl" href="data/plf_by_carrier.csv" download>&darr; CSV</a></p>
+<p class="src"><span>Source: DGCA, Government of India, Table 1 "Month-wise seat factor of scheduled operators" in each monthly report (<a class="lastrep" href="#" target="_blank" rel="noopener">latest, PDF</a>). Carriers are shown as DGCA reports them. Data as of <span class="asof">Sep 2026</span>.</span></p>
 </section>
 
 <section class="card" id="capacity" aria-labelledby="h4c">
@@ -216,8 +211,7 @@ direction: the takeaway above states which way both are moving in the latest mon
 <details class="tbl"><summary>Show how each airline changed over the year</summary><div class="scroll" tabindex="0" role="region" aria-label="Passenger and implied seat change by airline, scrollable table"><table id="tb4c"></table></div></details>
 <p class="src"><span>Derived by Strategic Bearing from DGCA, Government of India: monthly passengers
 by airline and Table 1 seat factor (<a class="lastrep" href="#" target="_blank" rel="noopener">latest, PDF</a>).
-Data as of <span class="asof">Sep 2026</span>.</span>
-<a class="dl" href="data/implied_capacity.csv" download>&darr; CSV</a></p>
+Data as of <span class="asof">Sep 2026</span>.</span></p>
 </section>
 
 <section class="card" id="method" aria-labelledby="h5c">

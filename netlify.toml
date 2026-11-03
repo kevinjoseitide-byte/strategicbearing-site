@@ -36,6 +36,47 @@
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
 
+# The CSVs stay in the repository because pipeline/export_site.py reads them
+# to build dgca_domestic.json — they are the record everything else is derived
+# from. They are no longer offered for download, so they should not be
+# reachable either: without this, removing the links would hide a URL that
+# still served the whole dataset to anyone who guessed it. The page needs
+# nothing from them; every chart and table reads the JSON.
+#
+# Listed one by one on purpose. Netlify's splat matches a trailing path, not a
+# glob, so "data/*.csv" would match nothing and quietly leave them served.
+# force = true is what lets a rule win against a file that really exists.
+
+[[redirects]]
+  from = "/tools/domestic-traffic/data/national_monthly_domestic.csv"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tools/domestic-traffic/data/market_share_by_carrier.csv"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tools/domestic-traffic/data/market_share_grouped.csv"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tools/domestic-traffic/data/plf_by_carrier.csv"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tools/domestic-traffic/data/implied_capacity.csv"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # The vendored chart library and the data never change within a deploy, and
 # both are fingerprint-free, so a day is as far as this should go.
 [[headers]]

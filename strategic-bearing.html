@@ -51,10 +51,13 @@
   --grad-hero:linear-gradient(124deg,
      #082E63 0%, #0A3C88 30%, #0F55B0 58%, #1861C2 74%,
      #5FEADB 85%, #B9FFF6 88.5%, #45FBE6 92%, #15D1BB 100%);
-  /* Narrow viewports: the seam moves off to the right so copy never meets it. */
+  /* Narrow viewports: the seam moves off to the right so copy never meets it.
+     Kept to the last 2%: at phone width the hero is tall, and any earlier and
+     the mint climbs into the bottom-right corner under the closing lines of
+     the bio, where #E3EEFB cannot hold 4.5:1. */
   --grad-hero-narrow:linear-gradient(124deg,
-     #082E63 0%, #0A3C88 38%, #0F55B0 66%, #1861C2 84%,
-     #5FEADB 94%, #9DF4E8 100%);
+     #082E63 0%, #0A3C88 42%, #0F55B0 72%, #1861C2 92%,
+     #2E8FD4 98%, #5FEADB 100%);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -151,10 +154,21 @@ footer a:hover{color:var(--accent-soft)}
 .hero-sub{color:#E3EEFB; font-size:17px; max-width:60ch; margin-bottom:26px}
 .engine{position:absolute; top:0; right:0; bottom:0; width:52%; max-width:880px;
   background:url('/engine-hero.jpg') center center / cover no-repeat;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44%,#000 100%);
-  mask-image:linear-gradient(90deg,transparent 0,#000 44%,#000 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,transparent 30%,#000 72%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0,transparent 30%,#000 72%,#000 100%);
   z-index:1; pointer-events:none}
-@media (max-width:900px){ .engine{display:none} }
+@media (max-width:1023px){
+  .engine{top:0; right:0; left:0; bottom:auto; width:auto; max-width:none;
+    height:330px;
+    background:
+      linear-gradient(180deg,rgba(6,26,62,0) 0%,rgba(6,26,62,.20) 30%,
+                      rgba(6,26,62,.58) 52%,rgba(6,26,62,.84) 74%,
+                      rgba(6,26,62,.94) 100%),
+      url('/engine-hero.jpg') 58% 44% / cover no-repeat;
+    -webkit-mask-image:linear-gradient(180deg,#000 0,#000 46%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 0,#000 46%,transparent 100%)}
+  .hero .wrap{padding-top:206px}
+}
 
 /* ---------- pillar filter ---------- */
 .tabs{display:flex; gap:8px; flex-wrap:wrap; padding-bottom:4px}
@@ -336,7 +350,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2026-07-ksa-fleet-airbus-production-capacity-is-now-a/">
           <div class="pd-date">Jul 2026</div>
-          <div class="pd-title">KSA fleet | Airbus production capacity is now a potential national…<span class="sub">KSA fleet | Airbus production capacity is now a potential national aviation capacity constraint for Saudi Arabia - that may be…</span></div>
+          <div class="pd-title">KSA fleet: Airbus production is now a potential national capacity constraint<span class="sub">KSA fleet | Airbus production capacity is now a potential national aviation capacity constraint for Saudi Arabia - that may be…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -368,7 +382,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="capital">
         <a class="post-head" href="/writing/2026-07-beyond-politics-a-flavour-of-india-economic-playbook/">
           <div class="pd-date">Jul 2026</div>
-          <div class="pd-title">Beyond politics - A flavour of India&#x27;s economic playbook during the…<span class="sub">Beyond politics - A flavour of India&#x27;s economic playbook during the Gulf Conflict. In posts since the war began, we discussed…</span></div>
+          <div class="pd-title">Beyond politics: India’s economic playbook during the Gulf conflict<span class="sub">Beyond politics - A flavour of India&#x27;s economic playbook during the Gulf Conflict. In posts since the war began, we discussed…</span></div>
           <div class="pd-tag">Capital</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -376,7 +390,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="capital">
         <a class="post-head" href="/writing/2026-06-jet-fuel-prices-are-retreating-airspace-is-reopening/">
           <div class="pd-date">Jun 2026</div>
-          <div class="pd-title">Jet fuel prices are retreating, airspace is reopening, and the Strait…<span class="sub">Jet fuel prices are retreating, airspace is reopening, and the Strait of Hormuz is (hopefully) returning to normal. The…</span></div>
+          <div class="pd-title">Jet fuel retreats and Hormuz reopens: the end of a 16-week fuel shock<span class="sub">Jet fuel prices are retreating, airspace is reopening, and the Strait of Hormuz is (hopefully) returning to normal. The…</span></div>
           <div class="pd-tag">Capital</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -424,7 +438,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="capital">
         <a class="post-head" href="/writing/2026-04-i-wrote-this-piece-in-2016-during-my/">
           <div class="pd-date">Apr 2026</div>
-          <div class="pd-title">I wrote this piece in 2016, during my time at Reuters, at the trough of…<span class="sub">I wrote this piece in 2016, during my time at Reuters, at the trough of the last oil cycle (ex-COVID). Just two years earlier…</span></div>
+          <div class="pd-title">A 2016 piece from the Reuters desk, at the trough of the last oil cycle<span class="sub">I wrote this piece in 2016, during my time at Reuters, at the trough of the last oil cycle (ex-COVID). Just two years earlier…</span></div>
           <div class="pd-tag">Capital</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -432,7 +446,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2026-02-dipip-series-part-1-unlocking-airport-capacity-by/">
           <div class="pd-date">Feb 2026</div>
-          <div class="pd-title">DIPIP Series | Part 1 - Unlocking Airport Capacity by Rethinking…<span class="sub">DIPIP Series | Part 1 - Unlocking Airport Capacity by Rethinking Domestic - International Segregation Airports around the world…</span></div>
+          <div class="pd-title">DIPIP Part 1: unlocking airport capacity by rethinking domestic–international segregation<span class="sub">DIPIP Series | Part 1 - Unlocking Airport Capacity by Rethinking Domestic - International Segregation Airports around the world…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -464,7 +478,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2025-12-the-kingdom-dual-hub-strategy-envisaged-under-nas/">
           <div class="pd-date">Dec 2025</div>
-          <div class="pd-title">The Kingdom’s dual-hub strategy, envisaged under NAS is now becoming a…<span class="sub">The Kingdom’s dual-hub strategy, envisaged under NAS is now becoming a reality as Riyadh Air inches closer to its &quot;true&quot;…</span></div>
+          <div class="pd-title">The Kingdom’s dual-hub strategy and Riyadh’s long-haul reality<span class="sub">The Kingdom’s dual-hub strategy, envisaged under NAS is now becoming a reality as Riyadh Air inches closer to its &quot;true&quot;…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -480,7 +494,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="wisdom">
         <a class="post-head" href="/writing/2025-11-incredibly-grateful-for-the-opportunity-to-be-on/">
           <div class="pd-date">Nov 2025</div>
-          <div class="pd-title">Incredibly grateful for the opportunity to be on stage at the Dubai…<span class="sub">Incredibly grateful for the opportunity to be on stage at the Dubai Airshow last week, across two conversations that touched…</span></div>
+          <div class="pd-title">On stage at the Dubai Airshow 2025: airports of tomorrow<span class="sub">Incredibly grateful for the opportunity to be on stage at the Dubai Airshow last week, across two conversations that touched…</span></div>
           <div class="pd-tag">Wisdom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -488,7 +502,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="boardroom">
         <a class="post-head" href="/writing/2025-11-airasia-restructuring-is-in-it-final-lap-and/">
           <div class="pd-date">Nov 2025</div>
-          <div class="pd-title">AirAsia’s restructuring is in it&#x27;s final lap, and its Middle East push…<span class="sub">AirAsia’s restructuring is in it&#x27;s final lap, and its Middle East push is gaining pace. It was a pleasure reconnecting with…</span></div>
+          <div class="pd-title">AirAsia’s restructuring enters its final lap, and its Middle East push gains pace<span class="sub">AirAsia’s restructuring is in it&#x27;s final lap, and its Middle East push is gaining pace. It was a pleasure reconnecting with…</span></div>
           <div class="pd-tag">Boardroom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -536,7 +550,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2025-10-challenging-some-narratives-on-indian-aviation-growth-trajecto/">
           <div class="pd-date">Oct 2025</div>
-          <div class="pd-title">Challenging some narratives on Indian aviation&#x27;s growth trajectory in…<span class="sub">Challenging some narratives on Indian aviation&#x27;s growth trajectory in this edition of Rail to Runway – Tracking India’s…</span></div>
+          <div class="pd-title">Rail to Runway: challenging the narratives on India’s aviation growth<span class="sub">Challenging some narratives on Indian aviation&#x27;s growth trajectory in this edition of Rail to Runway – Tracking India’s…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -576,7 +590,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="boardroom">
         <a class="post-head" href="/writing/2025-08-an-injustice-corrected-india-kuwait-bilaterals-get-first/">
           <div class="pd-date">Aug 2025</div>
-          <div class="pd-title">An Injustice Corrected: India-Kuwait Bilaterals Get First Revision in…<span class="sub">An Injustice Corrected: India-Kuwait Bilaterals Get First Revision in Two Decades Those who have followed my work know this is…</span></div>
+          <div class="pd-title">An injustice corrected: India–Kuwait bilaterals get their first revision in two decades<span class="sub">An Injustice Corrected: India-Kuwait Bilaterals Get First Revision in Two Decades Those who have followed my work know this is…</span></div>
           <div class="pd-tag">Boardroom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -608,7 +622,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="capital">
         <a class="post-head" href="/writing/2025-07-at-least-some-of-you-might-be-surprised/">
           <div class="pd-date">Jul 2025</div>
-          <div class="pd-title">At least some of you might be surprised to learn that Flynas wasn’t the…<span class="sub">At least some of you might be surprised to learn that Flynas wasn’t the first scheduled commercial airline venture under the…</span></div>
+          <div class="pd-title">Before flynas: NasJet and the premium thread in the group’s DNA<span class="sub">At least some of you might be surprised to learn that Flynas wasn’t the first scheduled commercial airline venture under the…</span></div>
           <div class="pd-tag">Capital</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -632,7 +646,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="capital">
         <a class="post-head" href="/writing/2025-05-decoding-the-flynas-ipo-as-it-opens-the/">
           <div class="pd-date">May 2025</div>
-          <div class="pd-title">Decoding the Flynas IPO as it opens the door to a wealth of rich data…<span class="sub">Decoding the Flynas IPO as it opens the door to a wealth of rich data on Saudi Arabia’s aviation landscape, far beyond what…</span></div>
+          <div class="pd-title">Decoding the flynas IPO: what the prospectus reveals<span class="sub">Decoding the Flynas IPO as it opens the door to a wealth of rich data on Saudi Arabia’s aviation landscape, far beyond what…</span></div>
           <div class="pd-tag">Capital</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -656,7 +670,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2025-04-wizz-air-needs-to-return-to-the-drawing/">
           <div class="pd-date">Apr 2025</div>
-          <div class="pd-title">Wizz Air needs to return to the drawing board to get its Saudi play…<span class="sub">Wizz Air needs to return to the drawing board to get its Saudi play right. One size doesn’t fit all, and the airline&#x27;s Saudi…</span></div>
+          <div class="pd-title">Wizz Air needs to rethink its Saudi play<span class="sub">Wizz Air needs to return to the drawing board to get its Saudi play right. One size doesn’t fit all, and the airline&#x27;s Saudi…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -728,7 +742,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2025-01-whilst-it-is-easy-to-announce-grand-plans/">
           <div class="pd-date">Jan 2025</div>
-          <div class="pd-title">Whilst it is easy to announce grand plans and new investments, Riyadh…<span class="sub">Whilst it is easy to announce grand plans and new investments, Riyadh Airport is delivering excellence already.” Willy’s words…</span></div>
+          <div class="pd-title">KKIA is the world’s most punctual airport: 86.65% on-time departures<span class="sub">“Whilst it is easy to announce grand plans and new investments, Riyadh Airport is delivering excellence already.” Willy’s words…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -736,7 +750,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2024-12-jed-ruh-jeddah-riyadh-emerged-as-the-world/">
           <div class="pd-date">Dec 2024</div>
-          <div class="pd-title">JED-RUH (Jeddah-Riyadh) emerged as the world&#x27;s fastest-growing domestic…<span class="sub">🇸🇦🇮🇳 JED-RUH (Jeddah-Riyadh) emerged as the world&#x27;s fastest-growing domestic route this year with a 10% increase in seat…</span></div>
+          <div class="pd-title">JED–RUH: the world’s fastest-growing domestic route of 2024<span class="sub">🇸🇦🇮🇳 JED-RUH (Jeddah-Riyadh) emerged as the world&#x27;s fastest-growing domestic route this year with a 10% increase in seat…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -744,7 +758,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="capital">
         <a class="post-head" href="/writing/2024-12-a-deep-dive-into-the-4-8-billion/">
           <div class="pd-date">Dec 2024</div>
-          <div class="pd-title">A deep dive into the $4.8 Billion Heathrow Stake Sale &amp; PIF’s Grand…<span class="sub">A deep dive into the $4.8 Billion Heathrow Stake Sale &amp; PIF’s Grand Entry into global airport infrastructure. &lt;AirportM&amp;A&gt; 🌎…</span></div>
+          <div class="pd-title">The $4.8 billion Heathrow stake sale and PIF’s entry into airport infrastructure<span class="sub">A deep dive into the $4.8 Billion Heathrow Stake Sale &amp; PIF’s Grand Entry into global airport infrastructure. &lt;AirportM&amp;A&gt; 🌎…</span></div>
           <div class="pd-tag">Capital</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -752,7 +766,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="boardroom">
         <a class="post-head" href="/writing/2024-12-aeropolitics-should-be-driven-by-the-principle-of/">
           <div class="pd-date">Dec 2024</div>
-          <div class="pd-title">Aeropolitics should be driven by the principle of public welfare…<span class="sub">Aeropolitics should be driven by the principle of public welfare, ensuring aviation serves as a unifying force. But is it? I…</span></div>
+          <div class="pd-title">Aeropolitics should serve public welfare: closing the GCC–India bilaterals series<span class="sub">Aeropolitics should be driven by the principle of public welfare, ensuring aviation serves as a unifying force. But is it? I…</span></div>
           <div class="pd-tag">Boardroom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -776,7 +790,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="boardroom">
         <a class="post-head" href="/writing/2024-12-representing-riyadh-airports-at-matarat-inaugural-strategy-sum/">
           <div class="pd-date">Dec 2024</div>
-          <div class="pd-title">Representing Riyadh Airports at Matarat&#x27;s inaugural strategy summit was…<span class="sub">Representing Riyadh Airports at Matarat&#x27;s inaugural strategy summit was an incredible honour. The Hold Co and Op Cos came…</span></div>
+          <div class="pd-title">Riyadh Airports at Matarat’s inaugural strategy summit<span class="sub">Representing Riyadh Airports at Matarat&#x27;s inaugural strategy summit was an incredible honour. The Hold Co and Op Cos came…</span></div>
           <div class="pd-tag">Boardroom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -784,7 +798,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2024-11-the-need-for-a-comprehensive-public-transit-system/">
           <div class="pd-date">Nov 2024</div>
-          <div class="pd-title">The need for a comprehensive public transit system in Riyadh…<span class="sub">🇸🇦 The need for a comprehensive public transit system in Riyadh, especially one connecting key nodes like King Khalid…</span></div>
+          <div class="pd-title">The Riyadh Metro opens: 176 km, six lines, and a link to KKIA<span class="sub">🇸🇦 The need for a comprehensive public transit system in Riyadh, especially one connecting key nodes like King Khalid…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -832,7 +846,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2024-10-checkout-saudi-arabia-first-arrival-duty-free-shop/">
           <div class="pd-date">Oct 2024</div>
-          <div class="pd-title">Checkout Saudi Arabia&#x27;s 🇸🇦 first arrival duty-free shop at Riyadh&#x27;s…<span class="sub">Checkout Saudi Arabia&#x27;s 🇸🇦 first arrival duty-free shop at Riyadh&#x27;s KKIA! It&#x27;s a watershed moment for KSA’s travel retail…</span></div>
+          <div class="pd-title">Saudi Arabia’s first arrival duty-free shop opens at Riyadh’s KKIA<span class="sub">Checkout Saudi Arabia&#x27;s 🇸🇦 first arrival duty-free shop at Riyadh&#x27;s KKIA! It&#x27;s a watershed moment for KSA’s travel retail…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -856,7 +870,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2024-10-the-india-gcc-trade-relationship-is-a-cornerstone/">
           <div class="pd-date">Oct 2024</div>
-          <div class="pd-title">The India-GCC trade relationship is a cornerstone of India&#x27;s foreign…<span class="sub">The India-GCC trade relationship is a cornerstone of India&#x27;s foreign trade. The GCC is India&#x27;s largest regional trading…</span></div>
+          <div class="pd-title">India–GCC trade: the Gulf is India’s largest regional trading partner<span class="sub">The India-GCC trade relationship is a cornerstone of India&#x27;s foreign trade. The GCC is India&#x27;s largest regional trading…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -864,7 +878,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2024-09-like-manna-from-heaven-the-economist-famously-described/">
           <div class="pd-date">Sep 2024</div>
-          <div class="pd-title">Like manna from heaven,&quot; The Economist famously described the…<span class="sub">Like manna from heaven,&quot; The Economist famously described the remittances from the Gulf to India, particularly Kerala. India is…</span></div>
+          <div class="pd-title">Like manna from heaven: Gulf remittances and India’s aviation market<span class="sub">“Like manna from heaven,&quot; The Economist famously described the remittances from the Gulf to India, particularly Kerala. India…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -872,7 +886,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="boardroom">
         <a class="post-head" href="/writing/2024-09-gcc-india-bilateral-air-service-agreements/">
           <div class="pd-date">Sep 2024</div>
-          <div class="pd-title">GCC-India Bilateral Air Service Agreements<span class="sub">GCC-India Bilateral Air Service Agreements: A Case for Equitable Revision&quot; This series will follow an approach of piecing…</span></div>
+          <div class="pd-title">GCC–India bilateral air service agreements (series intro)<span class="sub">“GCC-India Bilateral Air Service Agreements: A Case for Equitable Revision&quot; This series will follow an approach of piecing…</span></div>
           <div class="pd-tag">Boardroom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -880,7 +894,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="boardroom">
         <a class="post-head" href="/writing/2024-09-some-unsettling-numbers-that-deserve-serious-attention-regardi/">
           <div class="pd-date">Sep 2024</div>
-          <div class="pd-title">Some unsettling numbers that deserve serious attention regarding air…<span class="sub">Some unsettling numbers that deserve serious attention regarding air connectivity between India and the Gulf Cooperation…</span></div>
+          <div class="pd-title">India–GCC air connectivity: the gap between entitlements and capacity<span class="sub">Some unsettling numbers that deserve serious attention regarding air connectivity between India and the Gulf Cooperation…</span></div>
           <div class="pd-tag">Boardroom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -920,7 +934,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2024-04-saudi-arabia-aviation-and-tourism-targets-for-2030/">
           <div class="pd-date">Apr 2024</div>
-          <div class="pd-title">Saudi Arabia&#x27;s aviation and tourism targets for 2030 are ambitious, but…<span class="sub">Saudi Arabia&#x27;s aviation and tourism targets for 2030 are ambitious, but the Kingdom is making huge strides towards achieving…</span></div>
+          <div class="pd-title">Saudi Arabia’s 2030 aviation and tourism targets, against 2023 actuals<span class="sub">Saudi Arabia&#x27;s aviation and tourism targets for 2030 are ambitious, but the Kingdom is making huge strides towards achieving…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -936,7 +950,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="wisdom">
         <a class="post-head" href="/writing/2024-03-as-my-time-with-flynas-comes-to-an/">
           <div class="pd-date">Mar 2024</div>
-          <div class="pd-title">As my time with Flynas comes to an end, I reflect on the incredible…<span class="sub">As my time with Flynas comes to an end, I reflect on the incredible strides the team made in the last two years. ‣Doubled the…</span></div>
+          <div class="pd-title">Leaving flynas: reflections on an incredible journey<span class="sub">As my time with Flynas comes to an end, I reflect on the incredible strides the team made in the last two years. ‣Doubled the…</span></div>
           <div class="pd-tag">Wisdom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -944,7 +958,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2024-01-a-ready-reckoner-on-commercial-aviation-in-saudi/">
           <div class="pd-date">Jan 2024</div>
-          <div class="pd-title">A ready reckoner on commercial aviation in Saudi Arabia and a recap of…<span class="sub">A ready reckoner on commercial aviation in Saudi Arabia and a recap of the series in this edition of “Aviation in Saudi: Past…</span></div>
+          <div class="pd-title">A ready reckoner on commercial aviation in Saudi Arabia<span class="sub">A ready reckoner on commercial aviation in Saudi Arabia and a recap of the series in this edition of “Aviation in Saudi: Past…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -952,7 +966,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="boardroom">
         <a class="post-head" href="/writing/2023-11-as-saudi-arabia-opens-up-to-the-world/">
           <div class="pd-date">Nov 2023</div>
-          <div class="pd-title">As Saudi Arabia opens up to the world, aviation is firmly in the…<span class="sub">As Saudi Arabia opens up to the world, aviation is firmly in the spotlight as one of the most powerful enablers of Vision 2030…</span></div>
+          <div class="pd-title">Saudia’s six decades as a monopoly, and the carriers that ended it<span class="sub">As Saudi Arabia opens up to the world, aviation is firmly in the spotlight as one of the most powerful enablers of Vision 2030…</span></div>
           <div class="pd-tag">Boardroom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -960,7 +974,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="boardroom">
         <a class="post-head" href="/writing/2023-10-traditionally-airports-worldwide-including-saudi-arabia-have-b/">
           <div class="pd-date">Oct 2023</div>
-          <div class="pd-title">Traditionally, airports worldwide, including Saudi Arabia, have been…<span class="sub">Traditionally, airports worldwide, including Saudi Arabia, have been owned and operated by governments. &quot;Airports that are…</span></div>
+          <div class="pd-title">Corporatising Saudi Arabia’s airports: from state operator to regulator<span class="sub">Traditionally, airports worldwide, including Saudi Arabia, have been owned and operated by governments. &quot;Airports that are…</span></div>
           <div class="pd-tag">Boardroom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -976,7 +990,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2023-10-did-you-know-saudia-is-gcc-first-flag/">
           <div class="pd-date">Oct 2023</div>
-          <div class="pd-title">Did you know Saudia is GCC&#x27;s first flag carrier<span class="sub">Did you know Saudia is GCC&#x27;s first flag carrier? SV&#x27;s brand refresh calls for a rejig in the order of topics being discussed in…</span></div>
+          <div class="pd-title">Did you know Saudia is the GCC’s first flag carrier?<span class="sub">Did you know Saudia is GCC&#x27;s first flag carrier? SV&#x27;s brand refresh calls for a rejig in the order of topics being discussed in…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -992,7 +1006,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2023-09-saudi-arabia-has-a-glitzy-future-in-aviation/">
           <div class="pd-date">Sep 2023</div>
-          <div class="pd-title">Saudi Arabia has a glitzy future in aviation but it also had an…<span class="sub">Saudi Arabia has a glitzy future in aviation but it also had an incredible past. Join me in this series &quot;Aviation in Saudi…</span></div>
+          <div class="pd-title">Saudi Arabia has a glitzy future in aviation — and an incredible past<span class="sub">Saudi Arabia has a glitzy future in aviation but it also had an incredible past. Join me in this series &quot;Aviation in Saudi…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -1008,7 +1022,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2023-03-here-is-a-sneak-peek-into-the-vital/">
           <div class="pd-date">Mar 2023</div>
-          <div class="pd-title">Here is a sneak peek into the vital traffic flows for Sri Lankan…<span class="sub">Here is a sneak peek into the vital traffic flows for Sri Lankan Airlines and the Emerald Isle&#x27;s key source markets for…</span></div>
+          <div class="pd-title">SriLankan Airlines: a sneak peek at its vital traffic flows<span class="sub">Here is a sneak peek into the vital traffic flows for Sri Lankan Airlines and the Emerald Isle&#x27;s key source markets for…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -1024,7 +1038,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="flightpath">
         <a class="post-head" href="/writing/2022-03-to-translate-all-the-zealous-talk-about-creating/">
           <div class="pd-date">Mar 2022</div>
-          <div class="pd-title">To translate all the zealous talk about creating an aviation hub in…<span class="sub">To translate all the zealous talk about creating an aviation hub in India and launching more long haul flights - into action…</span></div>
+          <div class="pd-title">To become an aviation hub, India needs widebodies<span class="sub">To translate all the zealous talk about creating an aviation hub in India and launching more long haul flights - into action…</span></div>
           <div class="pd-tag">Flightpath</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
@@ -1032,7 +1046,7 @@ footer a:hover{color:var(--accent-soft)}
       <div class="post linked" data-cat="wisdom">
         <a class="post-head" href="/writing/2021-06-a-piece-on-vj-kurian-ias-the-visionary/">
           <div class="pd-date">Jun 2021</div>
-          <div class="pd-title">A piece on VJ Kurian IAS, the visionary who steered the Cochin…<span class="sub">A piece on VJ Kurian IAS, the visionary who steered the Cochin International Airport for 19 years, right from it&#x27;s inception…</span></div>
+          <div class="pd-title">VJ Kurian IAS: the visionary who steered Cochin airport for 19 years<span class="sub">A piece on VJ Kurian IAS, the visionary who steered the Cochin International Airport for 19 years, right from it&#x27;s inception…</span></div>
           <div class="pd-tag">Wisdom</div>
           <div class="pd-chevron">&rarr;</div>
         </a>
