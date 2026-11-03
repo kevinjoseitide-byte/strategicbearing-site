@@ -161,14 +161,6 @@ footer a:hover{color:var(--accent-soft)}
 .hero-main{position:relative}
 .hero .wrap{position:relative; z-index:2; padding-top:100px; padding-bottom:104px; max-width:var(--wrap)}
 .hero-copy{max-width:640px}
-/* The name and the face read as one unit, the way a byline does; the bio
-   stays full width underneath. Deliberately small: the engine is the hero
-   image, and two photographs competing at the top would cheapen both. */
-.hero-id{display:flex; align-items:center; gap:22px; margin-bottom:16px}
-.mug{width:80px; height:80px; border-radius:50%; display:block; flex:none;
-  margin-bottom:16px;
-  box-shadow:0 0 0 1px rgba(255,255,255,.3), 0 6px 20px rgba(4,26,58,.34)}
-.hero-id h1{margin-bottom:0}
 .hero h1{color:#fff; margin-bottom:16px}
 .hero-role{font-size:19.5px; font-weight:500; color:#FFFFFF; margin-bottom:18px; opacity:.92}
 .hero-sub{font-size:17.5px; line-height:1.68; color:#E3EEFB; max-width:58ch; margin-bottom:0}
@@ -178,8 +170,8 @@ footer a:hover{color:var(--accent-soft)}
    sit under the copy. */
 .engine{position:absolute; top:0; right:0; bottom:0; width:52%; max-width:960px;
   background:url('/engine-hero.jpg') center center / cover no-repeat;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,transparent 30%,#000 72%,#000 100%);
-  mask-image:linear-gradient(90deg,transparent 0,transparent 30%,#000 72%,#000 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 50%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 50%,#000 100%);
   z-index:1; pointer-events:none}
 /* Below 1024 the engine turns from a right-hand panel into a band across the
    top: same photograph, same fade into the gradient, rotated a quarter turn
@@ -202,7 +194,10 @@ footer a:hover{color:var(--accent-soft)}
   .hero .wrap{padding-top:176px}
 }
 
-/* facts rail under the hero, no caps, no middle dots */
+/* facts rail under the hero, no caps, no middle dots.
+   A translucent scrim, not a flat bar: the engine and the gradient carry on
+   underneath it, which is what keeps the rail part of the hero rather than a
+   lid shut on it. */
 .facts{border-top:0; position:relative; z-index:3;
   background:linear-gradient(180deg,rgba(4,20,52,.62) 0%,rgba(4,20,52,.86) 100%)}
 .facts::before{content:""; position:absolute; left:0; right:0; top:0; height:2px;
@@ -310,16 +305,7 @@ footer a:hover{color:var(--accent-soft)}
    hero drops below about 810px. Switch to the narrow field well before that. */
 @media (max-width:1023px){
   .hero-main{background:var(--grad-hero-narrow)}
-  .hero-id{gap:15px}
-  .mug{width:64px; height:64px}
   .hero-sub{max-width:none}
-}
-/* Below 640 the role line wraps to three lines, and centring the avatar
-   against that block drops it level with the role rather than the name.
-   Stacked, it reads as a byline at any wrap. */
-@media (max-width:640px){
-  .hero-id{flex-direction:column-reverse; align-items:flex-start; gap:14px}
-  .mug{margin-bottom:0}
 }
 @media (max-width:760px){
   .hero .wrap{padding-top:176px; padding-bottom:132px}
@@ -337,7 +323,15 @@ footer a:hover{color:var(--accent-soft)}
 @media (max-width:520px){
   .lenses{grid-template-columns:1fr}
 }
+.foot-links,.sitefoot .fl,footer .fl{flex-wrap:wrap}
 </style>
+<!-- ADSENSE:BEGIN -->
+<!-- Google AdSense. Inert until a publisher ID is set: see build/adsense.py.
+     Do not edit this by hand in out/ — it is regenerated on every build.
+<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+<!-- ADSENSE:END -->
 </head>
 <body>
 <nav class="nav">
@@ -360,11 +354,7 @@ footer a:hover{color:var(--accent-soft)}
   <div class="hero-main">
   <div class="wrap">
     <div class="hero-copy">
-      <div class="hero-id">
-        <h1>Kevin Jose</h1>
-        <img class="mug" src="/kevin-jose.jpg" alt="Kevin Jose" width="80" height="80"
-             fetchpriority="high" decoding="async">
-      </div>
+      <h1>Kevin Jose</h1>
       <div class="hero-role">Airlines, airports, and the economics underneath both</div>
       <p class="hero-sub">Seven years across airports, airlines and advisory, after an earlier
       career on the Reuters markets desk. At Riyadh Airports I lead corporate strategy and
@@ -626,7 +616,11 @@ footer a:hover{color:var(--accent-soft)}
       <a href="https://www.linkedin.com/in/kevinjv" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://strategicbearing.substack.com" target="_blank" rel="noopener">Newsletter</a>
       <a href="/tools/">Tools</a>
-    </div>
+    
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+<a href="/privacy/">Privacy</a>
+</div>
   </div>
 </footer>
 </body>

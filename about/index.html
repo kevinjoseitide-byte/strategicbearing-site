@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Strategic Bearing</title>
+<meta name="description" content="Kevin Jose writes on airlines, airports and the economics underneath both, from inside the airline, inside the airport and from the advisory side.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Strategic Bearing">
+<meta property="og:title" content="About — Strategic Bearing">
+<meta property="og:description" content="Kevin Jose writes on airlines, airports and the economics underneath both, from inside the airline, inside the airport and from the advisory side.">
+<meta property="og:url" content="https://strategicbearing.in/about/">
+<meta property="og:image" content="https://strategicbearing.in/og-home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://strategicbearing.in/about/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* royal blue, taken from the Strategic Bearing deck */
+  --ink:#082E63; --navy:#0F55B0; --navy-lift:#2171D6;
+  --royal:#2171D6; --royal-deep:#0A3C88;
+  /* mint, sampled from the deck's own accent (#15D1BB). Three steps, because
+     one mint cannot serve both a navy nav bar and white paper:
+       --mint       marks and fills on blue        3.1:1 on royal — rules, not text
+       --mint-soft  text and hover on dark         4.6:1 on the lightest point
+                                                   of the hero gradient, 6.5:1
+                                                   on the nav, 10.2:1 on ink
+       --mint-deep  marks and text on light paper  5.1:1 on paper, 5.7:1 on white */
+  --mint:#15D1BB; --mint-soft:#45FBE6; --mint-deep:#0C7468;
+  --teal:var(--mint-deep);   /* accent text on light surfaces */
+  --accent:var(--mint); --accent-soft:var(--mint-soft);
+  --paper:#EEF4FD; --white:#FFFFFF;
+  --text:#102A52; --muted:#53688A;
+  --line:#DCE7F5; --line-on-dark:rgba(255,255,255,.16);
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --wrap:1080px;
+
+  /* Hero field. The colour axis sits at 124deg, measured perpendicular to a
+     luminous seam running 33.7deg off vertical. Mint occupies the last 15%,
+     where nothing reaches 4.5:1 against white, so no text may sit there. */
+  --grad-hero:linear-gradient(124deg,
+     #082E63 0%, #0A3C88 30%, #0F55B0 58%, #1861C2 74%,
+     #5FEADB 85%, #B9FFF6 88.5%, #45FBE6 92%, #15D1BB 100%);
+  /* Narrow viewports: the seam moves off to the right so copy never meets it.
+     Kept to the last 2%: at phone width the hero is tall, and any earlier and
+     the mint climbs into the bottom-right corner under the closing lines of
+     the bio, where #E3EEFB cannot hold 4.5:1. */
+  --grad-hero-narrow:linear-gradient(124deg,
+     #082E63 0%, #0A3C88 42%, #0F55B0 72%, #1861C2 92%,
+     #2E8FD4 98%, #5FEADB 100%);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--white); color:var(--text);
+  font-family:var(--sans); font-size:16.5px; line-height:1.65;
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+img{max-width:100%; height:auto}
+a{color:inherit}
+h1,h2,h3{margin:0; font-weight:700; line-height:1.12; letter-spacing:-.028em}
+h1{font-size:clamp(40px,6vw,66px)}
+h2{font-size:clamp(26px,3.4vw,38px); letter-spacing:-.025em}
+h3{font-size:19px; letter-spacing:-.015em}
+p{margin:0 0 18px}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 28px}
+.measure{max-width:62ch}
+
+/* section rhythm — one place, so nothing cancels out */
+.band{padding:88px 0}
+.band--paper{background:var(--paper)}
+.band--white{background:var(--white)}
+.band--dark{background:var(--ink); color:#DCE9FA}
+
+/* quiet category marker: a bearing tick plus a sentence-case label */
+.marker{display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  font-size:13px; font-weight:600; color:var(--muted); letter-spacing:0}
+.marker::before{content:""; width:18px; height:2px; border-radius:2px;
+  background:var(--mint-deep); flex:none}
+.band--dark .marker{color:#A9C8EC}
+.band--dark .marker::before{background:var(--mint)}
+.lede{font-size:18px; color:var(--muted); margin:14px 0 0; max-width:60ch}
+
+/* buttons — label says what happens, no arrow glyph */
+.btn{display:inline-flex; align-items:center; justify-content:center;
+  font-family:inherit; font-size:15px; font-weight:600; letter-spacing:-.01em;
+  padding:13px 22px; border-radius:9px; text-decoration:none;
+  border:1px solid transparent; cursor:pointer;
+  transition:background-color .16s ease, border-color .16s ease, color .16s ease}
+.btn--solid{background:var(--accent); color:#17244A}
+.btn--solid:hover{background:var(--mint-soft)}
+.btn--ghost{border-color:rgba(255,255,255,.3); color:#fff}
+.btn--ghost:hover{border-color:var(--accent-soft); color:var(--accent-soft)}
+.btn--dark{background:var(--navy); color:#fff}
+.btn--dark:hover{background:var(--navy-lift)}
+.btn:focus-visible{outline:2px solid var(--accent-soft); outline-offset:3px}
+
+/* nav */
+.nav{position:sticky; top:0; z-index:100; background:rgba(14,74,156,.95);
+  backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line-on-dark)}
+.nav .wrap{display:flex; align-items:center; justify-content:space-between; height:68px; gap:18px}
+.nav-brand{display:flex; align-items:center; text-decoration:none}
+.nav-brand img{height:32px; width:auto; display:block}
+.nav-links{display:flex; gap:28px; list-style:none; margin:0; padding:0}
+.nav-links a{font-size:14.5px; font-weight:500; color:rgba(255,255,255,.78);
+  text-decoration:none; transition:color .15s ease}
+.nav-links a:hover,.nav-links a[aria-current]{color:var(--accent-soft)}
+.nav-links a:focus-visible{outline:2px solid var(--accent-soft); outline-offset:4px; border-radius:3px}
+
+/* footer */
+footer{background:var(--ink); color:rgba(255,255,255,.62); padding:40px 0; font-size:14px}
+footer .wrap{display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:14px}
+.foot-links{display:flex; gap:24px}
+footer a{color:rgba(255,255,255,.78); text-decoration:none}
+footer a:hover{color:var(--accent-soft)}
+
+@media (max-width:760px){
+  .band{padding:60px 0}
+  .nav .wrap{height:60px}
+  .nav-links{gap:18px}
+  .nav-links a{font-size:13.5px}
+}
+/* phones: stack the bar rather than hiding navigation altogether */
+@media (max-width:560px){
+  .nav .wrap{flex-direction:column; height:auto; gap:0; padding-top:12px; padding-bottom:4px}
+  .nav-links{width:100%; gap:18px; overflow-x:auto; padding:10px 0 12px;
+    scrollbar-width:none; -webkit-overflow-scrolling:touch}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{white-space:nowrap}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important; animation-iteration-count:1 !important;
+    transition-duration:.01ms !important}
+}
+
+/* A standing page is one column of prose on paper. No hero: these pages are
+   read, not landed on, and a gradient band would make them look like pitches. */
+.page-head{background:var(--ink); color:#fff; padding:68px 0 56px}
+.page-head h1{color:#fff; font-size:clamp(34px,4.6vw,50px); margin-bottom:12px}
+.page-head p{color:#C6DCF6; font-size:17px; margin:0; max-width:62ch}
+.doc{padding:60px 0 76px}
+/* The measure is set on the prose, not on the wrap. Narrowing the wrap would
+   centre the column and leave the h1 above it hanging to the left; everywhere
+   else on this site the copy starts at the wrap's own edge. */
+.doc h2,.doc p,.doc .rows,.doc .stamp{max-width:68ch}
+.doc h2{font-size:23px; letter-spacing:-.018em; margin:38px 0 14px; color:var(--text)}
+.doc h2:first-of-type{margin-top:0}
+.doc p{color:var(--muted); font-size:16.5px; line-height:1.72}
+.doc a{color:var(--teal); text-decoration:underline; text-underline-offset:2px}
+.doc a:hover{text-decoration:none}
+.stamp{font-size:14px; color:var(--muted); margin-bottom:34px}
+/* contact rows: label and value, not a bulleted list */
+.rows{border-top:1px solid var(--line); margin:0 0 30px}
+.row{display:grid; grid-template-columns:150px 1fr; gap:18px;
+  padding:16px 0; border-bottom:1px solid var(--line)}
+.row dt{font-size:13px; font-weight:500; color:var(--muted); padding-top:2px}
+.row dd{margin:0; font-size:16.5px; font-weight:600; color:var(--text)}
+.row dd a{font-weight:600}
+@media (max-width:620px){
+  .row{grid-template-columns:1fr; gap:4px; padding:14px 0}
+}
+.foot-links,.sitefoot .fl,footer .fl{flex-wrap:wrap}
+</style>
+<!-- ADSENSE:BEGIN -->
+<!-- Google AdSense. Inert until a publisher ID is set: see build/adsense.py.
+     Do not edit this by hand in out/ — it is regenerated on every build.
+<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+<!-- ADSENSE:END -->
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="nav-brand">
+      <img src="/logo.png" alt="Strategic Bearing" width="140" height="32">
+    </a>
+    <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="strategic-bearing.html">Writing</a></li>
+    <li><a href="/tools/">Tools</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<header class="page-head">
+  <div class="wrap">
+    <h1>About</h1>
+    <p>Airlines, airports, and the economics underneath both — written from
+    inside the airline, inside the airport, and from the advisory side of
+    the table.</p>
+  </div>
+</header>
+<main class="doc">
+  <div class="wrap">
+    <p>Strategic Bearing is the personal site of Kevin Jose. It covers airlines,
+    airports and the economics underneath both, written across four lenses:
+    <a href="/strategic-bearing.html#flightpath">Flightpath</a>,
+    <a href="/strategic-bearing.html#boardroom">Boardroom</a>,
+    <a href="/strategic-bearing.html#capital">Capital</a> and
+    <a href="/strategic-bearing.html#wisdom">Wisdom</a>. Alongside the writing
+    there are <a href="/tools/">free tools</a> built from public regulatory
+    documents.</p>
+
+    <p>A landing charge is revenue on one side of the table and a cost line on
+    the other. I have sat on both sides, and advised from outside them. At CAPA
+    that meant privatisation bids and tariff cases for airport operators, and
+    network, fleet and cost plans for airlines. flynas put me inside the
+    airline. Riyadh Airports put me back on the infrastructure side, working on
+    corporate strategy for King Khalid International. Before any of it, I was a
+    journalist at Reuters, covering oil and commodities.</p>
+
+    <p>Most pieces here first appeared on LinkedIn and have been lightly edited
+    for the web. Each one keeps a link back to the original.</p>
+
+    <h2>Disclosure</h2>
+    <p>Everything on this site is written in a personal capacity. The views are
+    my own. They do not represent the views of my employer, any past employer,
+    or any organisation I am associated with.</p>
+
+    <p>Figures and charts are compiled from public sources: regulators&rsquo;
+    publications, company filings and disclosures, and published industry data.
+    Sources are named in each piece where possible. Nothing here is investment,
+    legal or financial advice.</p>
+
+    <p>If you spot an error, <a href="/contact/">tell me</a> and I will
+    correct it.</p>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <small>&copy; 2026 Strategic Bearing &middot; Kevin Jose</small>
+    <div class="foot-links">
+      <a href="mailto:josek@tcd.ie">Email</a>
+      <a href="https://www.linkedin.com/in/kevinjv" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://strategicbearing.substack.com" target="_blank" rel="noopener">Newsletter</a>
+      <a href="/tools/">Tools</a>
+    
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+<a href="/privacy/">Privacy</a>
+</div>
+  </div>
+</footer>
+</body>
+</html>

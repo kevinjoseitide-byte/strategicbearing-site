@@ -1,0 +1,6 @@
+# ads.txt for strategicbearing.in
+# Inert until the AdSense publisher ID is known. Google reads this file to
+# confirm who is authorised to sell this site's inventory; an empty or absent
+# file is not an error, but a wrong one costs you fill.
+# To arm: python3 build/adsense.py --publisher pub-1234567890123456
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
